@@ -45,7 +45,7 @@ public class Avanzar : MonoBehaviour {
     {
         isMoving = false;
 
-        var horizontal = Input.GetAxisRaw("Horizontal"); //Para que no sea un movimiento suave, sino absolutos de unos y ceros
+        var horizontal = Input.GetAxisRaw("Horizontal"); //Raw es para que no sea un movimiento suave, sino absolutos de unos y ceros. Así no se desliza si tiene mucha velocidad.
         var vertical = Input.GetAxisRaw("Vertical");
 
         if (horizontal < 0 || horizontal > 0 || vertical < 0 || vertical > 0)
@@ -54,7 +54,7 @@ public class Avanzar : MonoBehaviour {
 
             if (!boxCollider.IsTouchingLayers(Physics2D.AllLayers)) //Si no esta tocando alguna capa
             {
-                lastDirection = rigidbody.velocity;
+                lastDirection = rigidbody.velocity; //Esto se hace así porque el motor de físicas de Unity, pone a 0 la velocidad cuando se encuentra con un objeto, entonces no me vale para el last position.
             }
 
             
