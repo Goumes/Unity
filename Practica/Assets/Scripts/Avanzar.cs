@@ -13,6 +13,7 @@ public class Avanzar : MonoBehaviour {
     private Rigidbody2D rigidbody;
     private Vector2 lastDirection;
     private BoxCollider2D boxCollider;
+    private GameObject player;
     private bool isMoving;
 
     void Awake()
@@ -36,6 +37,22 @@ public class Avanzar : MonoBehaviour {
         CheckInput();
 
         SendAnimInfo();
+
+        //MIRAR ESTO, IMPORTANTE PARA QUE EL PERSONAJE CAMBIE DE LAYER DINÁMICAMENTE
+
+        /* 
+        if (player.isAbove == false)
+        {
+            AddSortingOrder = bridge.sortingOrder;
+            player.sortingOrder = AddSortingOrder + player.sortingOrder;
+            player.isAbove = false;
+        }
+        else
+        {
+            AddSortingOrder = 0;
+            player.isAbove = true;
+        }
+        */
     }
 
     /// <summary>
@@ -57,6 +74,33 @@ public class Avanzar : MonoBehaviour {
                 lastDirection = rigidbody.velocity; //Esto se hace así porque el motor de físicas de Unity, pone a 0 la velocidad cuando se encuentra con un objeto, entonces no me vale para el last position.
             }
 
+            if (horizontal != 0 && vertical != 0)
+            {
+                if (horizontal > 0 && vertical > 0)
+                {
+                    horizontal = 0.7f;
+                    vertical = 0.7f;
+                }
+
+                else if (horizontal > 0 && vertical < 0)
+                {
+                    horizontal = 0.7f;
+                    vertical = -0.7f;
+                }
+
+                else if (horizontal < 0 && vertical < 0)
+                {
+                    horizontal = -0.7f;
+                    vertical = -0.7f;
+                }
+
+                else
+                {
+                    horizontal = -0.7f;
+                    vertical = 0.7f;
+                }
+
+            }
             
             //Debug.Log("isMoving = "+isMoving);
         }
