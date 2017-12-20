@@ -78,7 +78,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\BlobController.cs" />
     <Compile Include="Assets\Scripts\Avanzar.cs" />
+    <Compile Include="Assets\Scripts\TriggerBlob.cs" />
+    <Compile Include="Assets\TriggerBlob.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

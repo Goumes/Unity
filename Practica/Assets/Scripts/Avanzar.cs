@@ -14,13 +14,21 @@ public class Avanzar : MonoBehaviour {
     private Vector2 lastDirection;
     private BoxCollider2D boxCollider;
     private GameObject player;
+    //private SpriteRenderer spriteJugador;
+    //private SpriteRenderer spriteBlob;
     private bool isMoving;
+   // private GameObject blob;
+    //private BoxCollider2D blobCollider;
 
     void Awake()
     {
         animator = GetComponent<Animator>();
         rigidbody = GetComponent<Rigidbody2D>();
         boxCollider = GetComponent<BoxCollider2D>();
+       // spriteJugador = GetComponent<SpriteRenderer>();
+        //spriteBlob = blob.GetComponent<SpriteRenderer>();
+        //blob = GameObject.Find("Blob_00002");
+       // blobCollider = blob.GetComponent<BoxCollider2D>();
     }
 
     // Use this for initialization
@@ -38,6 +46,8 @@ public class Avanzar : MonoBehaviour {
 
         SendAnimInfo();
 
+        //changeLayerBlob();
+
         //MIRAR ESTO, IMPORTANTE PARA QUE EL PERSONAJE CAMBIE DE LAYER DINÁMICAMENTE
 
         /* 
@@ -54,6 +64,23 @@ public class Avanzar : MonoBehaviour {
         }
         */
     }
+
+    /*
+    private void changeLayerBlob()
+    {
+        if (blobCollider.isTrigger)
+        {
+            spriteJugador.sortingOrder = 3;
+            spriteBlob.sortingOrder = 2;
+        }
+
+        else
+        {
+            spriteJugador.sortingOrder = 2;
+            spriteBlob.sortingOrder = 3;
+        }
+    }
+    */
 
     /// <summary>
     /// Esta es la funcion donde leemos los input del jugador.
