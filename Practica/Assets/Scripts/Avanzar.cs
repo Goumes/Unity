@@ -27,7 +27,7 @@ public class Avanzar : MonoBehaviour {
         boxCollider = GetComponent<BoxCollider2D>();
        // spriteJugador = GetComponent<SpriteRenderer>();
         //spriteBlob = blob.GetComponent<SpriteRenderer>();
-        blob = GameObject.Find("Blob_00002");
+        blob = GameObject.Find("Blob");
         blobCollider = blob.GetComponent<BoxCollider2D>();
     }
 

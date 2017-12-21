@@ -21,13 +21,15 @@ public class BlobTrigger : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        spriteJugador.sortingOrder = 4;
-        spriteBlob.sortingOrder = 3;
+        spriteJugador.sortingOrder = 2;
+        spriteBlob.sortingOrder = 1;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        spriteJugador.sortingOrder = 3;
-        spriteBlob.sortingOrder = 4;
+        spriteJugador.sortingOrder = 1;
+        spriteBlob.sortingOrder = 2;
+
+        //Cambiar el collider de las paredes, que las esquinas no estan en su respectivo objeto
     }
 }
