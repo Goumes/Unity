@@ -17,8 +17,8 @@ public class Avanzar : MonoBehaviour {
     //private SpriteRenderer spriteJugador;
     //private SpriteRenderer spriteBlob;
     private bool isMoving;
-   // private GameObject blob;
-    //private BoxCollider2D blobCollider;
+    private GameObject blob;
+    private BoxCollider2D blobCollider;
 
     void Awake()
     {
@@ -27,8 +27,8 @@ public class Avanzar : MonoBehaviour {
         boxCollider = GetComponent<BoxCollider2D>();
        // spriteJugador = GetComponent<SpriteRenderer>();
         //spriteBlob = blob.GetComponent<SpriteRenderer>();
-        //blob = GameObject.Find("Blob_00002");
-       // blobCollider = blob.GetComponent<BoxCollider2D>();
+        blob = GameObject.Find("Blob_00002");
+        blobCollider = blob.GetComponent<BoxCollider2D>();
     }
 
     // Use this for initialization
@@ -45,42 +45,7 @@ public class Avanzar : MonoBehaviour {
         CheckInput();
 
         SendAnimInfo();
-
-        //changeLayerBlob();
-
-        //MIRAR ESTO, IMPORTANTE PARA QUE EL PERSONAJE CAMBIE DE LAYER DINÁMICAMENTE
-
-        /* 
-        if (player.isAbove == false)
-        {
-            AddSortingOrder = bridge.sortingOrder;
-            player.sortingOrder = AddSortingOrder + player.sortingOrder;
-            player.isAbove = false;
-        }
-        else
-        {
-            AddSortingOrder = 0;
-            player.isAbove = true;
-        }
-        */
     }
-
-    /*
-    private void changeLayerBlob()
-    {
-        if (blobCollider.isTrigger)
-        {
-            spriteJugador.sortingOrder = 3;
-            spriteBlob.sortingOrder = 2;
-        }
-
-        else
-        {
-            spriteJugador.sortingOrder = 2;
-            spriteBlob.sortingOrder = 3;
-        }
-    }
-    */
 
     /// <summary>
     /// Esta es la funcion donde leemos los input del jugador.
@@ -96,7 +61,7 @@ public class Avanzar : MonoBehaviour {
         {
             isMoving = true;
 
-            if (!boxCollider.IsTouchingLayers(Physics2D.AllLayers)) //Si no esta tocando alguna capa
+            if (boxCollider.IsTouching (blobCollider) || !boxCollider.IsTouchingLayers(Physics2D.AllLayers)) //Si no esta tocando alguna capa
             {
                 lastDirection = rigidbody.velocity; //Esto se hace así porque el motor de físicas de Unity, pone a 0 la velocidad cuando se encuentra con un objeto, entonces no me vale para el last position.
             }

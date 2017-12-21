@@ -21,13 +21,13 @@ public class BlobTrigger : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        spriteJugador.sortingOrder = 3;
-        spriteBlob.sortingOrder = 2;
+        spriteJugador.sortingOrder = 4;
+        spriteBlob.sortingOrder = 3;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        spriteJugador.sortingOrder = 2;
-        spriteBlob.sortingOrder = 3;
+        spriteJugador.sortingOrder = 3;
+        spriteBlob.sortingOrder = 4;
     }
 }
