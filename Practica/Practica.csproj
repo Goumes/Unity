@@ -285,6 +285,7 @@
     <Compile Include="Assets\BlobController.cs" />
     <Compile Include="Assets\Scripts\Avanzar.cs" />
     <Compile Include="Assets\Scripts\BlobTrigger.cs" />
+    <Compile Include="Assets\Scripts\Spikes.cs" />
     <Compile Include="Assets\TriggerBlob.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
