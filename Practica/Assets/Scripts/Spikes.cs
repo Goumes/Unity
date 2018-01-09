@@ -37,14 +37,14 @@ public class Spikes : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        spriteJugador.sortingOrder = 2;
-        sprite.sortingOrder = 1;
+        spriteJugador.sortingOrder = 1;
+        sprite.sortingOrder = 2;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         spriteJugador.sortingOrder = 1;
-        sprite.sortingOrder = 2;
+        sprite.sortingOrder = 0;
 
         //Cambiar el collider de las paredes, que las esquinas no estan en su respectivo objeto
     }
