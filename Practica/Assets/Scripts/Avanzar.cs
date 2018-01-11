@@ -19,6 +19,7 @@ public class Avanzar : MonoBehaviour {
     private bool isMoving;
     private GameObject blob;
     private BoxCollider2D blobCollider;
+    private bool tocandoTrigger;
 
     void Awake()
     {
@@ -29,6 +30,7 @@ public class Avanzar : MonoBehaviour {
         //spriteBlob = blob.GetComponent<SpriteRenderer>();
         blob = GameObject.Find("Blob");
         blobCollider = blob.GetComponent<BoxCollider2D>();
+        tocandoTrigger = false;
     }
 
     // Use this for initialization
@@ -61,7 +63,7 @@ public class Avanzar : MonoBehaviour {
         {
             isMoving = true;
 
-            if (boxCollider.IsTouching (blobCollider) || !boxCollider.IsTouchingLayers(Physics2D.AllLayers)) //Si no esta tocando alguna capa
+            if (/*tocandoTrigger || */!boxCollider.IsTouchingLayers(Physics2D.AllLayers)) //Si no esta tocando alguna capa
             {
                 lastDirection = rigidbody.velocity; //Esto se hace así porque el motor de físicas de Unity, pone a 0 la velocidad cuando se encuentra con un objeto, entonces no me vale para el last position.
             }
@@ -125,5 +127,22 @@ public class Avanzar : MonoBehaviour {
         animator.SetFloat("LastY", lastDirection.y);
 
         animator.SetBool("IsMoving", isMoving);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Respawn")
+        {
+            
+            tocandoTrigger = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag == "Respawn")
+        {
+            tocandoTrigger = false;
+        }
     }
 }

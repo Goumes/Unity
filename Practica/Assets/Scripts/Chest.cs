@@ -2,36 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spikes : MonoBehaviour {
-    private PolygonCollider2D collider;
+public class Chest : MonoBehaviour {
+
     private SpriteRenderer sprite;
     private SpriteRenderer spriteJugador;
-    private bool changed;
 
-	// Use this for initialization
-	void Start () {
-        collider = GetComponent<PolygonCollider2D>();
+    // Use this for initialization
+    void Start () {
         sprite = GetComponent<SpriteRenderer>();
         spriteJugador = GetComponent<SpriteRenderer>();
-        changed = false;
-        collider.enabled = !collider.enabled;
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {
-
-        if (sprite.sprite.name == "spikes 2" && !changed)
-        {
-            collider.enabled = !collider.enabled;
-            changed = true;
-        }
-
-        else if (sprite.sprite.name == "spikes 1" && changed)
-        {
-            collider.enabled = !collider.enabled;
-            changed = !changed;
-        }
-
+		
 	}
 
     private void OnTriggerEnter2D(Collider2D collision)
