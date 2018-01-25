@@ -63,7 +63,7 @@ public class Avanzar : MonoBehaviour {
         {
             isMoving = true;
 
-            if (/*tocandoTrigger || */!boxCollider.IsTouchingLayers(Physics2D.AllLayers)) //Si no esta tocando alguna capa
+            if (!boxCollider.IsTouchingLayers(LayerMask.GetMask("Object"))) //Si no esta tocando alguna capa
             {
                 lastDirection = rigidbody.velocity; //Esto se hace así porque el motor de físicas de Unity, pone a 0 la velocidad cuando se encuentra con un objeto, entonces no me vale para el last position.
             }
