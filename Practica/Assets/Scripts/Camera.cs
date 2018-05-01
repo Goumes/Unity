@@ -20,7 +20,7 @@ public class Camera : MonoBehaviour {
         Vector3 delta = player.position - lastPosition;
         //Sumarle esta diferencia a la camara
         /*this.transform.position += delta;*/
-        if (/*habitacion2 && */lastPosition.y < 27.39 && lastPosition.y > 17.83)
+        if (habitacion2 && lastPosition.y < 27.39 && lastPosition.y > 17.83)
         {
             Debug.Log(this.transform.position.y);
             this.transform.position += new Vector3(0, delta.y, 0);
