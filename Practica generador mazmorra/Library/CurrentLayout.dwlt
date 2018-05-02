@@ -108,10 +108,10 @@ MonoBehaviour:
     y: 30
     width: 2560
     height: 987
-  m_MinSize: {x: 917, y: 442}
-  m_MaxSize: {x: 22012, y: 10021}
+  m_MinSize: {x: 911, y: 442}
+  m_MaxSize: {x: 22006, y: 10021}
   vertical: 0
-  controlID: 8992
+  controlID: 28
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -135,7 +135,7 @@ MonoBehaviour:
   m_MinSize: {x: 202, y: 442}
   m_MaxSize: {x: 4002, y: 8042}
   vertical: 1
-  controlID: 8993
+  controlID: 29
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -181,8 +181,8 @@ MonoBehaviour:
     y: 507
     width: 1056
     height: 480
-  m_MinSize: {x: 202, y: 221}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 12}
   m_Panes:
   - {fileID: 12}
@@ -206,8 +206,8 @@ MonoBehaviour:
     y: 0
     width: 360
     height: 987
-  m_MinSize: {x: 204, y: 221}
-  m_MaxSize: {x: 4004, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 16}
   m_Panes:
   - {fileID: 16}
@@ -256,8 +256,8 @@ MonoBehaviour:
     y: 0
     width: 369
     height: 987
-  m_MinSize: {x: 277, y: 71}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 18}
   m_Panes:
   - {fileID: 18}
@@ -362,8 +362,8 @@ MonoBehaviour:
   m_DepthBufferBits: 32
   m_Pos:
     serializedVersion: 2
-    x: -32000
-    y: -31951
+    x: 0
+    y: 92
     width: 1054
     height: 486
   m_PersistentViewDataDictionary: {fileID: 0}
@@ -518,9 +518,9 @@ MonoBehaviour:
   m_PersistentViewDataDictionary: {fileID: 0}
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: c47de6ff
-    m_LastClickedID: -1671740
-    m_ExpandedIDs: c87de6ffb285e6ffc233e9ffc83ae9ff06f9ebffa6ffebffacffebff2200ecff1cd5efff22d5efff283bf0ffb23df0ffc46ff0ffca6ff0ff3e19f1ff4419f1ffb62cf1ffbc2cf1fffa41f2ff1042f2ff489bf2ff5eddf3ff74ddf3ff566cf4ff9291f4ff44e2f4ff52e6f4ffb4eff4ff181ff6ff0e21f6fffe22f6ffca4df6ff2c50f6ff3252f6ff2461f6ffd671f6ffa8ccf6ff82edf6ff68a5f8ff6ea5f8ff481bf9ffa464fcffaa64fcfff88bfefffe8bfeff3cd4ffff42d4ffff9efbffff0000000022290000
+    m_SelectedIDs: 1e080000
+    m_LastClickedID: 0
+    m_ExpandedIDs: 9efbffff00000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -582,19 +582,19 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/Prefabs
+    - Assets/Scripts
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Prefabs
+  - Assets/Scripts
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\aleja\Documents\GitHub\Unity\Practica generador mazmorra
   m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 9c270000
-    m_LastClickedID: 10140
-    m_ExpandedIDs: 000000006627000000ca9a3bffffff7f
+    m_SelectedIDs: b6270000
+    m_LastClickedID: 10166
+    m_ExpandedIDs: 000000006c27000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -622,7 +622,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000006627000000ca9a3bffffff7f
+    m_ExpandedIDs: 000000006c270000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 

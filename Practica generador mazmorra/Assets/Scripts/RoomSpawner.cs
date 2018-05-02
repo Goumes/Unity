@@ -12,23 +12,21 @@ public class RoomSpawner : MonoBehaviour {
     // 4 --> need right door
 
     private RoomTemplates templates;
+    private AddRoom room;
     private int rand;
-    private bool spawned = false;
-    private bool touchingTop = false;
-    private bool touchingBot = false;
-    private bool touchingLeft = false;
-    private bool touchingRight = false;
-
+    public bool spawned = false;
+    //private bool destroy = false;
 
     public float waitTime = 4f;
 
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
         Destroy(gameObject, waitTime);
         templates = GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomTemplates>();
+        room = GetComponentInParent<AddRoom>();
         
-        Invoke("Spawn", /*Random.Range(0.1f, 0.3f)*/0.1f); //Este random lo he puesto para que no se superpongan las habitaciones en casos especiales
+        Invoke("Spawn", Random.Range(0.1f, 0.3f)); //Este random lo he puesto para que no se superpongan las habitaciones en casos especiales
 	}
 
     // Update is called once per frame
@@ -50,7 +48,6 @@ public class RoomSpawner : MonoBehaviour {
                     // Need to spawn a room with a TOP door
                     rand = Random.Range(0, templates.topRooms.Length);
                     Instantiate(templates.topRooms[rand], transform.position, templates.topRooms[rand].transform.rotation);
-
                     break;
                 case 3:
                     // Need to spawn a room with a LEFT door
@@ -75,16 +72,39 @@ public class RoomSpawner : MonoBehaviour {
         {
             if (!other.GetComponent<RoomSpawner>().spawned && !spawned)
             {
-                Instantiate(templates.closedRoom, transform.position, Quaternion.identity);
+                Instantiate(templates.closedRoom, transform.position, templates.rightRooms[rand].transform.rotation);
+                Destroy(other.gameObject);
                 Destroy(gameObject);
             }  
 
             spawned = true;
         }
 
-        else if (other.CompareTag("Center"))
-        {
-            //Destroy(gameObject.transform.parent.gameObject);
-        }
+        //else if (other.CompareTag("Center"))
+        //{
+        //    Destroy(gameObject);
+        //    spawned = true;
+        //    room.counter++;
+
+        //    if (room.counter > 1)
+        //    {
+        //        //Destroy(gameObject.transform.parent.gameObject);
+        //        //destroy = true;
+        //        other.GetComponent<RoomSpawner>().spawned = false;
+        //        Destroy(gameObject.transform.parent.gameObject);
+        //    }
+        //}
     }
+
+    //private void OnTriggerStay2D(Collider2D collision)
+    //{
+    //    if (collision.CompareTag("SpawnPoint"))
+    //    {
+    //        if (destroy)
+    //        {
+    //            //collision.GetComponent<RoomSpawner>().spawned = false;
+    //            //Destroy(gameObject.transform.parent.gameObject);
+    //        }
+    //    }
+    //}
 }
