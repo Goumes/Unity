@@ -15,6 +15,7 @@ public class RoomSpawner : MonoBehaviour {
     private AddRoom room;
     private int rand;
     public bool spawned = false;
+    private GameObject newRoom;
     //private bool destroy = false;
 
     public float waitTime = 4f;
@@ -35,6 +36,7 @@ public class RoomSpawner : MonoBehaviour {
     }
     void Spawn ()
     {
+        
         if (!spawned)
         {
             switch (openingDirection)
@@ -42,22 +44,26 @@ public class RoomSpawner : MonoBehaviour {
                 case 1:
                     // Need to spawn a room with a BOTTOM door
                     rand = Random.Range(0, templates.bottomRooms.Length);
-                    Instantiate(templates.bottomRooms[rand], transform.position, templates.bottomRooms[rand].transform.rotation); //Lo de la rotación es para que spawnee con la rotación por defecto. Si no quiero ninguna rotación, tengo que poner Quaternion.identity
+                    newRoom = Instantiate(templates.bottomRooms[rand], transform.position, templates.bottomRooms[rand].transform.rotation); //Lo de la rotación es para que spawnee con la rotación por defecto. Si no quiero ninguna rotación, tengo que poner Quaternion.identity
+                    newRoom.GetComponent<AddRoom>().direction = 'b';
                     break;
                 case 2:
                     // Need to spawn a room with a TOP door
                     rand = Random.Range(0, templates.topRooms.Length);
-                    Instantiate(templates.topRooms[rand], transform.position, templates.topRooms[rand].transform.rotation);
+                    newRoom = Instantiate(templates.topRooms[rand], transform.position, templates.topRooms[rand].transform.rotation);
+                    newRoom.GetComponent<AddRoom>().direction = 't';
                     break;
                 case 3:
                     // Need to spawn a room with a LEFT door
                     rand = Random.Range(0, templates.leftRooms.Length);
-                    Instantiate(templates.leftRooms[rand], transform.position, templates.leftRooms[rand].transform.rotation);
+                    newRoom = Instantiate(templates.leftRooms[rand], transform.position, templates.leftRooms[rand].transform.rotation);
+                    newRoom.GetComponent<AddRoom>().direction = 'l';
                     break;
                 case 4:
                     // Need to spawn a room with a RIGHT door
                     rand = Random.Range(0, templates.rightRooms.Length);
-                    Instantiate(templates.rightRooms[rand], transform.position, templates.rightRooms[rand].transform.rotation);
+                    newRoom = Instantiate(templates.rightRooms[rand], transform.position, templates.rightRooms[rand].transform.rotation);
+                    newRoom.GetComponent<AddRoom>().direction = 'r';
                     break;
             }
 

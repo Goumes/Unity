@@ -7,6 +7,7 @@ public class AddRoom : MonoBehaviour {
     private RoomTemplates templates;
 
     public int counter = 0;
+    public char direction = ' ';
 
 
     private void Start()
