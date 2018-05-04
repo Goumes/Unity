@@ -1,0 +1,47 @@
+Todas las habitaciones tienen inicialmente todas las puertas cerradas.
+Una vez se instancia la primera habitación, esta genera un numero aleatorio de puertas, cada una en una de las 4 direcciones. Son excluyentes.
+
+Una vez se generan todas las puertas, se crea una nueva habitación con una sola puerta (se le pasa la dirección de la que viene por parámetros) en esa dirección, y se repite el proceso.
+
+En esta situación:
+
+ ________   ________
+|	 | |	    |
+|   1    |     4    |
+|        |  	    |
+|___  ___| |___  ___|
+ ___  ___   ___  ___
+|	 | |	    |
+|   2          3    |
+|	    	    |
+|________| |___  ___|
+
+Antes de generar la habitación detrás de la puerta necesaria, hace una comprobación de centros. Es decir, si esa puerta está colisionando con algún centro, en vez de crear una nueva habitación, le hace una puerta a la que ya existe. Por lo que la situación continuaría así:
+
+ ________   ________
+|	 | |	    |
+|   1          4    |
+|           	    |
+|___  ___| |___  ___|
+ ___  ___   ___  ___
+|	 | |	    |
+|   2          3    |
+|	    	    |
+|________| |___  ___|
+	    ___  ___
+	   |	    |
+	   |   5    |
+   	   |	    |
+	   |________|
+
+Problema de la simultaneidad. Si se generan las cuatro direcciones por igual, puede surgir el problema de que colisionen dos generaciones de habitación a la vez en el mismo sitio. Esto se puede solucionar obligando a que una dirección acabe de generarse para que la otra comience.
+
+Si una rama llega a una habitación sin puertas nuevas, significa que esta acaba ahí y puede empezar a generarse otra.
+
+Si por otro lado, una rama se cruza con otra, esta segunda acaba al generar la puerta nueva en la rama anterior. Si no ocurriera esto pueden surgir mazmorras enormes e injugables.
+
+
+
+
+
+
