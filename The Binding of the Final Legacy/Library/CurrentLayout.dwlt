@@ -20,7 +20,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 2}
-  m_MinSize: {x: 950, y: 492}
+  m_MinSize: {x: 950, y: 471}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &2
 MonoBehaviour:
@@ -43,7 +43,7 @@ MonoBehaviour:
     y: 0
     width: 2560
     height: 1037
-  m_MinSize: {x: 950, y: 492}
+  m_MinSize: {x: 950, y: 471}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &3
 MonoBehaviour:
@@ -108,10 +108,10 @@ MonoBehaviour:
     y: 30
     width: 2560
     height: 987
-  m_MinSize: {x: 957, y: 442}
+  m_MinSize: {x: 957, y: 421}
   m_MaxSize: {x: 22012, y: 10021}
   vertical: 0
-  controlID: 681
+  controlID: 5583
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -135,7 +135,7 @@ MonoBehaviour:
   m_MinSize: {x: 202, y: 421}
   m_MaxSize: {x: 4002, y: 8021}
   vertical: 1
-  controlID: 593
+  controlID: 5539
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -206,10 +206,10 @@ MonoBehaviour:
     y: 0
     width: 436
     height: 987
-  m_MinSize: {x: 244, y: 442}
-  m_MaxSize: {x: 4004, y: 8042}
+  m_MinSize: {x: 244, y: 421}
+  m_MaxSize: {x: 4004, y: 8021}
   vertical: 1
-  controlID: 615
+  controlID: 5633
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -416,9 +416,9 @@ MonoBehaviour:
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 293.22568, y: 231.9993, z: -13.25}
+    m_Target: {x: -4.03006, y: -1.1731602, z: 0.74609375}
     speed: 2
-    m_Value: {x: 293.22568, y: 231.9993, z: -13.25}
+    m_Value: {x: -4.03006, y: -1.1731602, z: 0.74609375}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -450,9 +450,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 590.42883
+    m_Target: 15.004644
     speed: 2
-    m_Value: 590.42883
+    m_Value: 15.004644
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -491,9 +491,9 @@ MonoBehaviour:
   m_PersistentViewDataDictionary: {fileID: 0}
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 6a320000
-    m_LastClickedID: 12906
-    m_ExpandedIDs: c8f6ffffcaf6ffffe8fbffffeafbffff00000000
+    m_SelectedIDs: d05e0000
+    m_LastClickedID: 0
+    m_ExpandedIDs: 6c79fcff7679fcff8479fcff667cfcff707cfcff7e7cfcff2e87fcff3887fcff3a87fcff6c8afcff768afcff788afcfff003fdfffc03fdff0a04fdffdc05fdffe805fdfff605fdff5846fdff6446fdff7246fdffdae5fdffe6e5fdfff4e5fdffc828feffd428feffe228feffcc6efeffd86efeffda6efeff90adfeff9cadfeff9eadfeff283bffff2a3bffff3acdffffced5ffff26e5ffff3ce5ffffa4e5ffff78efffff84efffff86efffffeafbffff00000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -545,7 +545,7 @@ MonoBehaviour:
     m_CachedPref: -50
     m_ControlHash: 510661707
     m_PrefName: Preview_TilemapBrushInspector
-  m_Palette: {fileID: 1102095349265002, guid: 40070ec1008b85248a5005afe18496c0, type: 2}
+  m_Palette: {fileID: 1658503904021946, guid: 29f840cb44c9d9f4192c75758c7a5a0e, type: 2}
   m_Target: {fileID: 0}
 --- !u!114 &18
 MonoBehaviour:
@@ -584,11 +584,11 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets
+    - Assets/Prefabs/Habitaciones
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets
+  - Assets/Prefabs/Habitaciones
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\aleja\Documents\GitHub\Unity\The Binding of the Final
     Legacy
@@ -596,9 +596,9 @@ MonoBehaviour:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 502a0000
-    m_LastClickedID: 10832
-    m_ExpandedIDs: 00000000502a0000902c00006c2d0000de2d00007a2e0000ae2e00005e2f000000ca9a3bffffff7f
+    m_SelectedIDs: ae2e0000
+    m_LastClickedID: 11950
+    m_ExpandedIDs: 00000000502a0000902c00006c2d0000de2d0000302e00007a2e0000ae2e00005e2f000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -626,7 +626,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000502a0000902c00006c2d0000de2d00007a2e0000ae2e00005e2f000000ca9a3bffffff7f
+    m_ExpandedIDs: 00000000502a0000902c00006c2d0000de2d0000302e00007a2e0000ae2e00005e2f000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 

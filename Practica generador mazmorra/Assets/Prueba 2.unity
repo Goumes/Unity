@@ -168,7 +168,7 @@ Prefab:
     - target: {fileID: 224678487098834420, guid: 827b1845ecd284d4bbccaeeffb9a0882,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -198.1
+      value: -188.7
       objectReference: {fileID: 0}
     - target: {fileID: 224678487098834420, guid: 827b1845ecd284d4bbccaeeffb9a0882,
         type: 2}
@@ -294,7 +294,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rooms: []
   minNumber: 5
-  maxNumber: 10
+  maxNumber: 15
   waitTime: 4
 --- !u!4 &63048881
 Transform:
@@ -561,7 +561,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -307.6, y: -198.1}
+  m_AnchoredPosition: {x: -307.6, y: -188.7}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &862471266
