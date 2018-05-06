@@ -5,8 +5,10 @@ using UnityEngine;
 public class MinimapGridScript : MonoBehaviour {
 
     public int globalCounter;
+
 	// Use this for initialization
-	void Start () {
+	void Start ()
+    {
         globalCounter = 0;
 	}
 	

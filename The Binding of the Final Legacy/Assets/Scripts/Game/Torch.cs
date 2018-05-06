@@ -20,11 +20,18 @@ public class Torch : MonoBehaviour {
         InvokeRepeating("changeLightning", 0f, lightSpeed);
 	}
 
+    /// <summary>
+    /// Method that calls the changeLightRoutine coroutine.
+    /// </summary>
     void changeLightning()
     {
         StartCoroutine("changeLightRoutine");
     }
 
+    /// <summary>
+    /// Coroutine that makes the light increase and decrease while blinking to create a torch effect
+    /// </summary>
+    /// <returns></returns>
     IEnumerator changeLightRoutine ()
     {
         int counter = 0;

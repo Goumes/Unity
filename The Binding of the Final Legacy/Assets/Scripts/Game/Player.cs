@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Avanzar : MonoBehaviour {
+public class Player : MonoBehaviour {
 
     public float speed = 2;
 
@@ -13,21 +13,13 @@ public class Avanzar : MonoBehaviour {
     private Rigidbody2D rigidbody;
     private Vector2 lastDirection;
     private BoxCollider2D boxCollider;
-    private GameObject player;
-    //private SpriteRenderer spriteJugador;
-    //private SpriteRenderer spriteBlob;
     private bool isMoving;
-    //private GameObject blob;
 
     void Awake()
     {
         animator = GetComponent<Animator>();
         rigidbody = GetComponent<Rigidbody2D>();
         boxCollider = GetComponent<BoxCollider2D>();
-       // spriteJugador = GetComponent<SpriteRenderer>();
-        //spriteBlob = blob.GetComponent<SpriteRenderer>();
-        //blob = GameObject.Find("Blob");
-        //blobCollider = blob.GetComponent<BoxCollider2D>();
     }
 
     // Use this for initialization
@@ -47,7 +39,7 @@ public class Avanzar : MonoBehaviour {
     }
 
     /// <summary>
-    /// Esta es la funcion donde leemos los input del jugador.
+    /// This method reads the user's input
     /// </summary>
     private void CheckInput()
     {
@@ -60,11 +52,12 @@ public class Avanzar : MonoBehaviour {
         {
             isMoving = true;
 
-            if (/*tocandoTrigger || */!boxCollider.IsTouchingLayers(Physics2D.AllLayers)) //Si no esta tocando alguna capa
-            {
-                lastDirection = rigidbody.velocity; //Esto se hace así porque el motor de físicas de Unity, pone a 0 la velocidad cuando se encuentra con un objeto, entonces no me vale para el last position.
-            }
-
+            //if (!boxCollider.IsTouchingLayers(Physics2D.AllLayers)) //Si no esta tocando alguna capa
+            //{
+            //    lastDirection = rigidbody.velocity; //Esto se hace así porque el motor de físicas de Unity, pone a 0 la velocidad cuando se encuentra con un objeto, entonces no me vale para el last position.
+            //    Corrección. Tras saber como funciona Unity puedo decir sin ningún miedo que el tio de este tutorial no tenía ni idea. Este if es una absurdez. La linea de abajo es la buena.
+            //}
+            lastDirection = new Vector2(horizontal, vertical);
             if (horizontal != 0 && vertical != 0)
             {
                 if (horizontal > 0 && vertical > 0)
@@ -92,8 +85,6 @@ public class Avanzar : MonoBehaviour {
                 }
 
             }
-            
-            //Debug.Log("isMoving = "+isMoving);
         }
 
         deltaForce = new Vector2(horizontal, vertical);
@@ -103,7 +94,7 @@ public class Avanzar : MonoBehaviour {
     }
 
     /// <summary>
-    /// Esta es la funciona donde añadimos fuerza al jugador.
+    /// This method adds force to the player so he can move
     /// </summary>
     /// <param name="playerForce"></param>
     private void CalculateMovement(Vector2 playerForce)
@@ -113,7 +104,7 @@ public class Avanzar : MonoBehaviour {
     }
 
     /// <summary>
-    /// Esta es la funcion donde enviaremos la informacion al animator
+    /// This method sends the info to the animator component
     /// </summary>
     private void SendAnimInfo()
     {

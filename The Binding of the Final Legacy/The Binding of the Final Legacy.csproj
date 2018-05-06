@@ -309,9 +309,9 @@
     <Compile Include="Assets\Scripts\Dungeon Generator\MinimapRoom.cs" />
     <Compile Include="Assets\Scripts\Dungeon Generator\MinimapSpawnPoint.cs" />
     <Compile Include="Assets\Scripts\Dungeon Generator\RoomArray.cs" />
-    <Compile Include="Assets\Scripts\Game\Avanzar.cs" />
-    <Compile Include="Assets\Scripts\Game\BlobTrigger.cs" />
+    <Compile Include="Assets\Scripts\Game\Blob.cs" />
     <Compile Include="Assets\Scripts\Game\Chest.cs" />
+    <Compile Include="Assets\Scripts\Game\Player.cs" />
     <Compile Include="Assets\Scripts\Game\Pot.cs" />
     <Compile Include="Assets\Scripts\Game\Teleporter.cs" />
     <Compile Include="Assets\Scripts\Game\Torch.cs" />

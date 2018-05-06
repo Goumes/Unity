@@ -29,17 +29,21 @@ public class Teleporter : MonoBehaviour
         //Esto es simplemente de prueba para comprobar que todo funciona bien
         if (collision.CompareTag("Player"))
         {
-
             StartCoroutine(fadeOut(collision));
         }
        
     }
 
+    /// <summary>
+    /// Method that destroys the current room and instantiates the new one, depending on the teleport the player goes in.
+    /// </summary>
+    /// <param name="collision"></param>
     void changeRoom(Collider2D collision)
     {
         Destroy(room.gameObject);
         switch (transform.name)
         {
+            //Cambiar esto por las habitaciones de verdad. Esto es una prueba simplemente.
             case "Teleporter Top":
                 player.transform.position = new Vector3(1.87f, -2.91f, 0);
                 Instantiate(Resources.Load("Rooms/TB/Default Room TB"));
@@ -61,6 +65,11 @@ public class Teleporter : MonoBehaviour
                 break;
         }
     }
+    /// <summary>
+    /// The screen fades out and calls the change room method
+    /// </summary>
+    /// <param name="collision"></param>
+    /// <returns></returns>
     IEnumerator fadeOut(Collider2D collision)
     {
         for (float i = 0f; i < 1f; i = i + 0.02f)
@@ -73,6 +82,10 @@ public class Teleporter : MonoBehaviour
         changeRoom(collision); //Si no lo hago de esta manera, el objeto se destruye a mitad de rutina y nunca se ejecuta.
     }
 
+    /// <summary>
+    /// The screen fades in with the new room
+    /// </summary>
+    /// <returns></returns>
     IEnumerator fadeIn()
     {
         for (float i = 1f; i >= 0f; i = i - 0.02f)
