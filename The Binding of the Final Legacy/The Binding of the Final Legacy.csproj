@@ -304,12 +304,18 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Avanzar.cs" />
-    <Compile Include="Assets\Scripts\BlobTrigger.cs" />
-    <Compile Include="Assets\Scripts\Chest.cs" />
-    <Compile Include="Assets\Scripts\MainMenu.cs" />
-    <Compile Include="Assets\Scripts\Pot.cs" />
-    <Compile Include="Assets\Scripts\Torch.cs" />
+    <Compile Include="Assets\Scripts\Dungeon Generator\CenterScript.cs" />
+    <Compile Include="Assets\Scripts\Dungeon Generator\GridScript.cs" />
+    <Compile Include="Assets\Scripts\Dungeon Generator\Room.cs" />
+    <Compile Include="Assets\Scripts\Dungeon Generator\RoomArray.cs" />
+    <Compile Include="Assets\Scripts\Dungeon Generator\SpawnPoint.cs" />
+    <Compile Include="Assets\Scripts\Game\Avanzar.cs" />
+    <Compile Include="Assets\Scripts\Game\BlobTrigger.cs" />
+    <Compile Include="Assets\Scripts\Game\Chest.cs" />
+    <Compile Include="Assets\Scripts\Game\Pot.cs" />
+    <Compile Include="Assets\Scripts\Game\Torch.cs" />
+    <Compile Include="Assets\Scripts\Menus\MainMenu.cs" />
+    <Compile Include="Assets\Scripts\Menus\Restart.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
