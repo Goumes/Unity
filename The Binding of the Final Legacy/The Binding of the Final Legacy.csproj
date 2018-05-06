@@ -304,15 +304,16 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Dungeon Generator\CenterScript.cs" />
-    <Compile Include="Assets\Scripts\Dungeon Generator\GridScript.cs" />
-    <Compile Include="Assets\Scripts\Dungeon Generator\Room.cs" />
+    <Compile Include="Assets\Scripts\Dungeon Generator\MinimapCenterScript.cs" />
+    <Compile Include="Assets\Scripts\Dungeon Generator\MinimapGridScript.cs" />
+    <Compile Include="Assets\Scripts\Dungeon Generator\MinimapRoom.cs" />
+    <Compile Include="Assets\Scripts\Dungeon Generator\MinimapSpawnPoint.cs" />
     <Compile Include="Assets\Scripts\Dungeon Generator\RoomArray.cs" />
-    <Compile Include="Assets\Scripts\Dungeon Generator\SpawnPoint.cs" />
     <Compile Include="Assets\Scripts\Game\Avanzar.cs" />
     <Compile Include="Assets\Scripts\Game\BlobTrigger.cs" />
     <Compile Include="Assets\Scripts\Game\Chest.cs" />
     <Compile Include="Assets\Scripts\Game\Pot.cs" />
+    <Compile Include="Assets\Scripts\Game\Teleporter.cs" />
     <Compile Include="Assets\Scripts\Game\Torch.cs" />
     <Compile Include="Assets\Scripts\Menus\MainMenu.cs" />
     <Compile Include="Assets\Scripts\Menus\Restart.cs" />

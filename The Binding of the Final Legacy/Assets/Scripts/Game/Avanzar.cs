@@ -18,7 +18,6 @@ public class Avanzar : MonoBehaviour {
     //private SpriteRenderer spriteBlob;
     private bool isMoving;
     //private GameObject blob;
-    private bool tocandoTrigger;
 
     void Awake()
     {
@@ -29,7 +28,6 @@ public class Avanzar : MonoBehaviour {
         //spriteBlob = blob.GetComponent<SpriteRenderer>();
         //blob = GameObject.Find("Blob");
         //blobCollider = blob.GetComponent<BoxCollider2D>();
-        tocandoTrigger = false;
     }
 
     // Use this for initialization
@@ -126,22 +124,5 @@ public class Avanzar : MonoBehaviour {
         animator.SetFloat("LastY", lastDirection.y);
 
         animator.SetBool("IsMoving", isMoving);
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.tag == "Respawn")
-        {
-            
-            tocandoTrigger = true;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.tag == "Respawn")
-        {
-            tocandoTrigger = false;
-        }
     }
 }

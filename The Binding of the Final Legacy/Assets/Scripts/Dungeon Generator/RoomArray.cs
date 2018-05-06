@@ -38,6 +38,7 @@ public class RoomArray : MonoBehaviour
                     spawnedBoss = true;
 
                     //Aqui se empieza a crear el array con las mazmorras de verdad
+                    createDungeon();
                 }
             }
         }
@@ -56,7 +57,12 @@ public class RoomArray : MonoBehaviour
         {
             //Debug.Log("minimo");
             lastRoom = minimapRooms[minimapRooms.Count - 1];
-            lastRoom.GetComponentInChildren<Room>().generate = true;
+            lastRoom.GetComponentInChildren<MinimapRoom>().generate = true;
         }
+    }
+
+    private void createDungeon()
+    {
+
     }
 }
