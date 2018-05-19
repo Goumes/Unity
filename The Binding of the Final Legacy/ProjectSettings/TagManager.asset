@@ -12,6 +12,7 @@ TagManager:
   - Teleporter
   - RootRoom
   - Fade
+  - LoadingScreen
   layers:
   - Default
   - TransparentFX

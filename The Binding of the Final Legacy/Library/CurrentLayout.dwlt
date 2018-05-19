@@ -111,7 +111,7 @@ MonoBehaviour:
   m_MinSize: {x: 957, y: 442}
   m_MaxSize: {x: 22012, y: 10021}
   vertical: 0
-  controlID: 163
+  controlID: 141
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -135,7 +135,7 @@ MonoBehaviour:
   m_MinSize: {x: 202, y: 442}
   m_MaxSize: {x: 4002, y: 8042}
   vertical: 1
-  controlID: 164
+  controlID: 105
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -209,7 +209,7 @@ MonoBehaviour:
   m_MinSize: {x: 244, y: 442}
   m_MaxSize: {x: 4004, y: 8042}
   vertical: 1
-  controlID: 41
+  controlID: 142
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -416,9 +416,9 @@ MonoBehaviour:
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 1937.4733, y: 0.43289304, z: -1.006654}
+    m_Target: {x: 423.44397, y: 281.3792, z: -6.2735505}
     speed: 2
-    m_Value: {x: 1937.4733, y: 0.43289304, z: -1.006654}
+    m_Value: {x: 423.44397, y: 281.3792, z: -6.2735505}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -450,9 +450,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 122.16543
+    m_Target: 638.83
     speed: 2
-    m_Value: 122.16543
+    m_Value: 638.83
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -491,23 +491,23 @@ MonoBehaviour:
   m_PersistentViewDataDictionary: {fileID: 0}
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 2250feff
-    m_LastClickedID: -110558
-    m_ExpandedIDs: 2650feffeafbffff00000000
+    m_SelectedIDs: 46f4fbff
+    m_LastClickedID: -265146
+    m_ExpandedIDs: 3ef6fbff4c58ffffeafbffff00000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: 
-      m_OriginalName: 
+      m_Name: Room Array
+      m_OriginalName: Room Array
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 0
+      m_UserData: -1048
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 11
+      m_OriginalEventType: 0
       m_IsRenamingFilename: 0
       m_ClientGUIView: {fileID: 10}
     m_SearchString: 
@@ -584,11 +584,11 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/Resources/Rooms
+    - Assets/Materials
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Resources/Rooms
+  - Assets/Materials
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\aleja\Documents\GitHub\Unity\The Binding of the Final
     Legacy
@@ -596,8 +596,8 @@ MonoBehaviour:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 482b0000
-    m_LastClickedID: 11080
+    m_SelectedIDs: a42c0000
+    m_LastClickedID: 11428
     m_ExpandedIDs: 00000000602a0000482b0000482d0000b62d00001c2e0000362f000006300000063100006032000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0

@@ -15,10 +15,21 @@ public class RoomArray : MonoBehaviour
     public List<GameObject> realRooms;
     public int roomCounter;
     bool created;
+    private GameObject fader;
+    private Color tmp;
+    GameObject loadingScreen;
+    GameObject player;
     // Use this for initialization
     void Start () {
         roomCounter = 0;
         created = false;
+        fader = GameObject.FindGameObjectWithTag("Fade");
+        tmp = fader.GetComponent<SpriteRenderer>().color;
+        tmp.a = 1f;
+        fader.GetComponent<SpriteRenderer>().color = tmp;
+        loadingScreen = GameObject.FindGameObjectWithTag("LoadingScreen");
+        player = GameObject.FindGameObjectWithTag("Player");
+        //player.SetActive(false);
         InvokeRepeating("checkEnd", 0f, 1f);
     }
 	
@@ -65,6 +76,8 @@ public class RoomArray : MonoBehaviour
         {
             createDungeon();
             created = true;
+            loadingScreen.SetActive(false);
+            player.transform.position = new Vector3(1.87f, -0.32f, 0f);
         }
     }
 
