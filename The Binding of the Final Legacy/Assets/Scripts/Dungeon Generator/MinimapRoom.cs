@@ -54,7 +54,7 @@ public class MinimapRoom : MonoBehaviour
         }
 
         InvokeRepeating("generateDoors", 0, Random.Range(0.1f, 0.4f)); //Hay que arreglar esto. Al introducir un minimo y un maximo de habitaciones todo se vuelve loco. ARREGLADO.
-        Invoke("deleteSpawnPoints", 2f);//Borrar todos los spawnpoints tras 2 segundos.
+        Invoke("deleteSpawnPoints", 10f);//Borrar todos los spawnpoints tras 2 segundos.
         //Invoke("generateDoors", 0.1f);
 
     }

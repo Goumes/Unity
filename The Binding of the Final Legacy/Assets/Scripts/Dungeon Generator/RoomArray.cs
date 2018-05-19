@@ -14,9 +14,12 @@ public class RoomArray : MonoBehaviour
     private Tilemap tilemap;
     public List<GameObject> realRooms;
     public int roomCounter;
+    bool created;
     // Use this for initialization
     void Start () {
         roomCounter = 0;
+        created = false;
+        InvokeRepeating("checkEnd", 0f, 1f);
     }
 	
 	// Update is called once per frame
@@ -24,28 +27,60 @@ public class RoomArray : MonoBehaviour
     {
         Invoke("checkArrayLength", 1f);
 
-        if (waitTime <= 0)
-        {
-            for (int i = 0; i < minimapRooms.Count && !spawnedBoss; i++)
-            {
-                if (i == minimapRooms.Count - 1)
-                {
-                    tilemap = minimapRooms[i].GetComponent<Tilemap>();
-                    //Cambiar esto por una habitación de boss real
-                    tilemap.SetTile(new Vector3Int(0, -3, 0), Resources.Load("Cuadrado") as Tile);
-                    tilemap.SetTile(new Vector3Int(1, -3, 0), Resources.Load("Cuadrado") as Tile);
-                    tilemap.SetTile(new Vector3Int(0, -2, 0), Resources.Load("Cuadrado") as Tile);
-                    tilemap.SetTile(new Vector3Int(1, -2, 0), Resources.Load("Cuadrado") as Tile);
-                    spawnedBoss = true;
+        //if (waitTime <= 0)
+        //{
+        //    for (int i = 0; i < minimapRooms.Count && !spawnedBoss; i++)
+        //    {
+        //        if (i == minimapRooms.Count - 1)
+        //        {
+        //            tilemap = minimapRooms[i].GetComponent<Tilemap>();
+        //            //Cambiar esto por una habitación de boss real
+        //            tilemap.SetTile(new Vector3Int(0, -3, 0), Resources.Load("Cuadrado") as Tile);
+        //            tilemap.SetTile(new Vector3Int(1, -3, 0), Resources.Load("Cuadrado") as Tile);
+        //            tilemap.SetTile(new Vector3Int(0, -2, 0), Resources.Load("Cuadrado") as Tile);
+        //            tilemap.SetTile(new Vector3Int(1, -2, 0), Resources.Load("Cuadrado") as Tile);
+        //            spawnedBoss = true;
 
-                    //Aqui se empieza a crear el array con las mazmorras de verdad
-                    createDungeon();
-                }
-            }
-        }
-        else
+        //            //Aqui se empieza a crear el array con las mazmorras de verdad
+        //            createDungeon();
+        //        }
+        //    }
+        //}
+        //else
+        //{
+        //    waitTime -= Time.deltaTime;
+        //}
+
+
+    }
+
+    private void checkEnd()
+    {
+        if (!spawnedBoss)
         {
-            waitTime -= Time.deltaTime;
+            StartCoroutine(waitRoutine());
+        }
+
+        if (!created && spawnedBoss)
+        {
+            createDungeon();
+            created = true;
+        }
+    }
+
+    IEnumerator waitRoutine()
+    {
+        var initLenght = 0;
+        initLenght = minimapRooms.Count;
+        yield return new WaitForSeconds(1f);
+        if (initLenght == minimapRooms.Count && initLenght >= minNumber)
+        {
+            tilemap = minimapRooms[minimapRooms.Count - 1].GetComponent<Tilemap>();
+            tilemap.SetTile(new Vector3Int(0, -3, 0), Resources.Load("Cuadrado") as Tile);
+            tilemap.SetTile(new Vector3Int(1, -3, 0), Resources.Load("Cuadrado") as Tile);
+            tilemap.SetTile(new Vector3Int(0, -2, 0), Resources.Load("Cuadrado") as Tile);
+            tilemap.SetTile(new Vector3Int(1, -2, 0), Resources.Load("Cuadrado") as Tile);
+            spawnedBoss = true;
         }
     }
 
