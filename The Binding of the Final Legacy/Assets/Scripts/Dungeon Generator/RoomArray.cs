@@ -13,9 +13,10 @@ public class RoomArray : MonoBehaviour
     private bool spawnedBoss;
     private Tilemap tilemap;
     public List<GameObject> realRooms;
+    public int roomCounter;
     // Use this for initialization
     void Start () {
-        
+        roomCounter = 0;
     }
 	
 	// Update is called once per frame
@@ -63,6 +64,152 @@ public class RoomArray : MonoBehaviour
 
     private void createDungeon()
     {
+        for (int i = 0; i < minimapRooms.Count; i++)
+        {
+            var script = minimapRooms[i].GetComponent<MinimapRoom>();
+            GameObject room = null;
 
+            if (!script.topDoor && script.bottomDoor && !script.leftDoor && !script.rightDoor)
+            {
+                room = (GameObject)Instantiate(Resources.Load("Rooms/B/Default Room B"));
+                room.GetComponent<RoomScript>().serialNumber = minimapRooms[i].GetComponent<MinimapRoom>().serialNumber;
+                realRooms.Add(room);
+            }
+
+            else if (!script.topDoor && script.bottomDoor && script.leftDoor && !script.rightDoor)
+            {
+                room = (GameObject)Instantiate(Resources.Load("Rooms/BL/Default Room BL"));
+                room.GetComponent<RoomScript>().serialNumber = minimapRooms[i].GetComponent<MinimapRoom>().serialNumber;
+                realRooms.Add(room);
+            }
+
+            else if (!script.topDoor && script.bottomDoor && script.leftDoor && script.rightDoor)
+            {
+                room = (GameObject)Instantiate(Resources.Load("Rooms/BLR/Default Room BLR"));
+                room.GetComponent<RoomScript>().serialNumber = minimapRooms[i].GetComponent<MinimapRoom>().serialNumber;
+                realRooms.Add(room);
+            }
+
+            else if (!script.topDoor && script.bottomDoor && !script.leftDoor && script.rightDoor)
+            {
+                room = (GameObject)Instantiate(Resources.Load("Rooms/BR/Default Room BR"));
+                room.GetComponent<RoomScript>().serialNumber = minimapRooms[i].GetComponent<MinimapRoom>().serialNumber;
+                realRooms.Add(room);
+            }
+
+            else if (!script.topDoor && !script.bottomDoor && script.leftDoor && !script.rightDoor)
+            {
+                room = (GameObject)Instantiate(Resources.Load("Rooms/L/Default Room L"));
+                room.GetComponent<RoomScript>().serialNumber = minimapRooms[i].GetComponent<MinimapRoom>().serialNumber;
+                realRooms.Add(room);
+            }
+
+            else if (!script.topDoor && !script.bottomDoor && script.leftDoor && script.rightDoor)
+            {
+                room = (GameObject)Instantiate(Resources.Load("Rooms/LR/Default Room LR"));
+                room.GetComponent<RoomScript>().serialNumber = minimapRooms[i].GetComponent<MinimapRoom>().serialNumber;
+                realRooms.Add(room);
+            }
+
+            else if (!script.topDoor && !script.bottomDoor && !script.leftDoor && script.rightDoor)
+            {
+                room = (GameObject)Instantiate(Resources.Load("Rooms/R/Default Room R"));
+                room.GetComponent<RoomScript>().serialNumber = minimapRooms[i].GetComponent<MinimapRoom>().serialNumber;
+                realRooms.Add(room);
+            }
+
+            else if (script.topDoor && !script.bottomDoor && !script.leftDoor && !script.rightDoor)
+            {
+                room = (GameObject)Instantiate(Resources.Load("Rooms/T/Default Room T"));
+                room.GetComponent<RoomScript>().serialNumber = minimapRooms[i].GetComponent<MinimapRoom>().serialNumber;
+                realRooms.Add(room);
+            }
+
+            else if (script.topDoor && script.bottomDoor && !script.leftDoor && !script.rightDoor)
+            {
+                room = (GameObject)Instantiate(Resources.Load("Rooms/TB/Default Room TB"));
+                room.GetComponent<RoomScript>().serialNumber = minimapRooms[i].GetComponent<MinimapRoom>().serialNumber;
+                realRooms.Add(room);
+            }
+
+            else if (script.topDoor && script.bottomDoor && script.leftDoor && !script.rightDoor)
+            {
+                room = (GameObject)Instantiate(Resources.Load("Rooms/TBL/Default Room TBL"));
+                room.GetComponent<RoomScript>().serialNumber = minimapRooms[i].GetComponent<MinimapRoom>().serialNumber;
+                realRooms.Add(room);
+            }
+
+            else if (script.topDoor && script.bottomDoor && script.leftDoor && script.rightDoor)
+            {
+                room = (GameObject)Instantiate(Resources.Load("Rooms/TBLR/Default Room TBLR"));
+                room.GetComponent<RoomScript>().serialNumber = minimapRooms[i].GetComponent<MinimapRoom>().serialNumber;
+                realRooms.Add(room);
+            }
+
+            else if (script.topDoor && script.bottomDoor && !script.leftDoor && script.rightDoor)
+            {
+                room = (GameObject)Instantiate(Resources.Load("Rooms/TBR/Default Room TBR"));
+                room.GetComponent<RoomScript>().serialNumber = minimapRooms[i].GetComponent<MinimapRoom>().serialNumber;
+                realRooms.Add(room);
+            }
+
+            else if (script.topDoor && !script.bottomDoor && script.leftDoor && !script.rightDoor)
+            {
+                room = (GameObject)Instantiate(Resources.Load("Rooms/TL/Default Room TL"));
+                room.GetComponent<RoomScript>().serialNumber = minimapRooms[i].GetComponent<MinimapRoom>().serialNumber;
+                realRooms.Add(room);
+            }
+
+            else if (script.topDoor && !script.bottomDoor && script.leftDoor && script.rightDoor)
+            {
+                room = (GameObject)Instantiate(Resources.Load("Rooms/TLR/Default Room TLR"));
+                room.GetComponent<RoomScript>().serialNumber = minimapRooms[i].GetComponent<MinimapRoom>().serialNumber;
+                realRooms.Add(room);
+            }
+
+            else if (script.topDoor && !script.bottomDoor && !script.leftDoor && script.rightDoor)
+            {
+                room = (GameObject)Instantiate(Resources.Load("Rooms/TR/Default Room TR"));
+                room.GetComponent<RoomScript>().serialNumber = minimapRooms[i].GetComponent<MinimapRoom>().serialNumber;
+                realRooms.Add(room);
+            }
+
+            if (i == 0)
+            {
+                room.SetActive(true);
+            }
+        }
+        //for (int i = 0; i < minimapRooms.Count; i++) {
+        //    foreach (KeyValuePair<string, int> pair in minimapRooms[i].GetComponentInChildren<MinimapRoom>().childPositions)
+        //    {
+        //        Debug.Log(minimapRooms[i].transform.parent.transform.name);
+        //        Debug.Log(pair.Key + " + " + pair.Value);
+        //    }
+        //}
+
+
+        //var x = (GameObject)Resources.Load("Rooms/TB/Default Room TB");
+        //for (int i = 0; i < x.GetComponentsInChildren<Teleporter>().Length; i++)
+        //{
+        //    x.GetComponentsInChildren<Teleporter>()[i].roomNumber = roomCounter;
+        //}
+        //realRooms.Add(x);
+        //Instantiate(x);
+        //roomCounter++;
+
+
+        //x = (GameObject)Resources.Load("Rooms/TB/Default Room TB");
+        //for (int i = 0; i < x.GetComponentsInChildren<Teleporter>().Length; i++)
+        //{
+        //    x.GetComponentsInChildren<Teleporter>()[i].roomNumber = roomCounter;
+        //}
+        //realRooms.Add(x);
+        //Instantiate(x);
+        //roomCounter++;
+
+
+        //realRooms.Add((GameObject)Resources.Load("Rooms/BL/Default Room BL"));
+        //realRooms.Add((GameObject)Resources.Load("Rooms/TLR/Default Room TLR"));
+        //realRooms.Add((GameObject)Resources.Load("Rooms/TR/Default Room TR"));
     }
 }

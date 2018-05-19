@@ -192,13 +192,14 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4979682412724510}
+  - component: {fileID: 114785626229671560}
   m_Layer: 0
   m_Name: Default Room TBR
   m_TagString: RootRoom
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1530803373215514
 GameObject:
   m_ObjectHideFlags: 1
@@ -1579,6 +1580,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bec74a4607c26fa40a3e150f5e6bd6e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114785626229671560
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1478560943635176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8e4c4fd528f7db459d278f22c65580c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serialNumber: 0
 --- !u!114 &114857861513948406
 MonoBehaviour:
   m_ObjectHideFlags: 1

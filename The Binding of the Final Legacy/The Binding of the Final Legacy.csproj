@@ -313,6 +313,7 @@
     <Compile Include="Assets\Scripts\Game\Chest.cs" />
     <Compile Include="Assets\Scripts\Game\Player.cs" />
     <Compile Include="Assets\Scripts\Game\Pot.cs" />
+    <Compile Include="Assets\Scripts\Game\RoomScript.cs" />
     <Compile Include="Assets\Scripts\Game\Teleporter.cs" />
     <Compile Include="Assets\Scripts\Game\Torch.cs" />
     <Compile Include="Assets\Scripts\Menus\MainMenu.cs" />

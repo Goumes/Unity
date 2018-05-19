@@ -17,9 +17,17 @@ public class Torch : MonoBehaviour {
 	void Start () {
         torchLight = GetComponent<Light>();
         torchTransform = GetComponent<Transform>();
-        InvokeRepeating("changeLightning", 0f, lightSpeed);
 	}
 
+    private void OnEnable()
+    {
+        InvokeRepeating("changeLightning", 0f, lightSpeed);
+    }
+
+    private void OnDisable()
+    {
+        CancelInvoke("changeLightning");
+    }
     /// <summary>
     /// Method that calls the changeLightRoutine coroutine.
     /// </summary>
