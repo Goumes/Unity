@@ -16,4 +16,14 @@ public class MinimapCenterScript : MonoBehaviour
     {
 		
 	}
+    private void OnTriggerEnter2D(Collision2D collision)
+    {
+        if (collision.transform.CompareTag("Center"))
+        {
+            if (collision.gameObject.transform.parent.GetComponentInChildren<MinimapRoom>().serialNumber > gameObject.transform.parent.GetComponentInChildren<MinimapRoom>().serialNumber)
+            {
+                Destroy(transform.parent.gameObject);
+            }
+        }
+    }
 }
