@@ -19,6 +19,7 @@ public class RoomArray : MonoBehaviour
     private Color tmp;
     GameObject loadingScreen;
     GameObject player;
+    GameObject minimap;
     // Use this for initialization
     void Start () {
         roomCounter = 0;
@@ -29,6 +30,8 @@ public class RoomArray : MonoBehaviour
         fader.GetComponent<SpriteRenderer>().color = tmp;
         loadingScreen = GameObject.FindGameObjectWithTag("LoadingScreen");
         player = GameObject.FindGameObjectWithTag("Player");
+        minimap = GameObject.FindGameObjectWithTag("Minimap");
+        minimap.SetActive(false);
         //player.SetActive(false);
         InvokeRepeating("checkEnd", 0f, 1f);
     }
@@ -78,6 +81,7 @@ public class RoomArray : MonoBehaviour
             created = true;
             loadingScreen.SetActive(false);
             player.transform.position = new Vector3(1.87f, -0.32f, 0f);
+            minimap.SetActive(true);
         }
     }
 

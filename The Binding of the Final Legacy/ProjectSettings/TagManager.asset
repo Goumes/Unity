@@ -13,6 +13,7 @@ TagManager:
   - RootRoom
   - Fade
   - LoadingScreen
+  - Minimap
   layers:
   - Default
   - TransparentFX
