@@ -311,6 +311,11 @@
     <Compile Include="Assets\Scripts\Dungeon Generator\RoomArray.cs" />
     <Compile Include="Assets\Scripts\Game\Characters\Blob.cs" />
     <Compile Include="Assets\Scripts\Game\Characters\Player.cs" />
+    <Compile Include="Assets\Scripts\Game\Combat\BackgroundScript.cs" />
+    <Compile Include="Assets\Scripts\Game\Combat\ButtonScript.cs" />
+    <Compile Include="Assets\Scripts\Game\Combat\GlobalButton.cs" />
+    <Compile Include="Assets\Scripts\Game\Combat\PointerScript.cs" />
+    <Compile Include="Assets\Scripts\Game\Management.cs" />
     <Compile Include="Assets\Scripts\Game\Objects\Chest.cs" />
     <Compile Include="Assets\Scripts\Game\Objects\Pot.cs" />
     <Compile Include="Assets\Scripts\Game\Objects\Torch.cs" />

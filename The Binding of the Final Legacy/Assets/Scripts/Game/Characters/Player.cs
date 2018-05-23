@@ -14,7 +14,7 @@ public class Player : MonoBehaviour {
     private Vector2 lastDirection;
     private BoxCollider2D boxCollider;
     private bool isMoving;
-
+    private Management management;
     void Awake()
     {
         animator = GetComponent<Animator>();
@@ -27,15 +27,20 @@ public class Player : MonoBehaviour {
     {
         rigidbody.gravityScale = 0;
         rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
+        management = GameObject.FindGameObjectWithTag("Management").GetComponent<Management>();
     }
 
     // Update is called once per frame
 
     void Update()
     {
-        CheckInput();
+        if (!management.inCombat)
+        {
+            CheckInput();
 
-        SendAnimInfo();
+            SendAnimInfo();
+        }
+        
     }
 
     /// <summary>
