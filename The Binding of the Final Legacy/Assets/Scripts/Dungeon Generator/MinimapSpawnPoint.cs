@@ -21,7 +21,7 @@ public class MinimapSpawnPoint : MonoBehaviour
         gridScript = GetComponentInParent<MinimapGridScript>();
         roomTileMap = ownRoomScript.transform.parent.GetComponent<Tilemap>();
         //generateRoom();
-        Invoke("generateRoom", Random.Range(0.1f, 0.4f));
+        Invoke("generateRoom", Random.Range(0.1f, 0.8f));
 	}
 
     /// <summary>

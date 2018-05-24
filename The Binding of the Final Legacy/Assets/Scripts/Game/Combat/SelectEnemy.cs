@@ -20,7 +20,7 @@ public class SelectEnemy : MonoBehaviour
 
     public void startBlinking()
     {
-        InvokeRepeating("selectEnemy", 0f, 2f);
+        InvokeRepeating("selectEnemy", 0f, 1.5f);
     }
 
     public void stopBlinking()
@@ -40,14 +40,14 @@ public class SelectEnemy : MonoBehaviour
     {
         DateTime before = DateTime.Now;
 
-        for (float i = 0f; i < 1f; i = i + 0.02f)
+        for (float i = 0f; i < 0.7f; i = i + 0.02f)
         {
             tmp.a = i;
             gameObject.GetComponent<SpriteRenderer>().color = tmp; //Hay que hacerlo así porque no es una variable y no se puede cambiar directamente
             yield return new WaitForSeconds(0.0001f);
         }
 
-        for (float i = 1f; i >= 0f; i = i - 0.02f)
+        for (float i = 0.7f; i >= 0f; i = i - 0.02f)
         {
             tmp.a = i;
             gameObject.GetComponent<SpriteRenderer>().color = tmp; //Hay que hacerlo así porque no es una variable y no se puede cambiar directamente

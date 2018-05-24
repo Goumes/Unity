@@ -19,6 +19,7 @@ public class GlobalButton : MonoBehaviour
     private GameObject pointer;
     public GameObject currentButton;
     private EventSystem myEventSystem;
+
     // Use this for initialization
     void Start () {
         management = GameObject.FindGameObjectWithTag("Management").GetComponent<Management>();
@@ -73,8 +74,14 @@ public class GlobalButton : MonoBehaviour
 
     private void OnEnable()
     {
+        StartCoroutine(management.fadeIn());
         //management.inCombat = true;
         //player.SetActive(false);
+    }
+
+    private void OnDisable()
+    {
+        management.inCombat = false;
     }
 
     // Update is called once per frame

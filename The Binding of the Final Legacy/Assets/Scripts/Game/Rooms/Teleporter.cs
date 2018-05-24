@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Teleporter : MonoBehaviour
 {
@@ -9,21 +10,23 @@ public class Teleporter : MonoBehaviour
     private GameObject fader;
     Color tmp;
     private RoomArray rooms;
+    private Management management;
     // Use this for initialization
     void Awake ()
     {
         room = transform.root.gameObject;
         player = GameObject.FindGameObjectWithTag("Player");
         fader = GameObject.FindGameObjectWithTag("Fade");
-        tmp = fader.GetComponent<SpriteRenderer>().color;
+        tmp = fader.GetComponent<RawImage>().color;
         rooms = GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomArray>();
+        management = GameObject.FindGameObjectWithTag("Management").GetComponent<Management>();
         //StartCoroutine(fadeOut());
         
     }
 
     private void OnEnable()
     {
-        StartCoroutine(fadeIn());
+        StartCoroutine(management.fadeIn());
     }
 
     private void OnDisable()
@@ -159,24 +162,10 @@ public class Teleporter : MonoBehaviour
         for (float i = 0f; i < 1f; i = i + 0.02f)
         {
             tmp.a = i;
-            fader.GetComponent<SpriteRenderer>().color = tmp; //Hay que hacerlo así porque no es una variable y no se puede cambiar directamente
+            fader.GetComponent<RawImage>().color = tmp; //Hay que hacerlo así porque no es una variable y no se puede cambiar directamente
             yield return new WaitForSeconds(0.0001f);
         }
 
         changeRoom(collision); //Si no lo hago de esta manera, el objeto se destruye a mitad de rutina y nunca se ejecuta.
-    }
-
-    /// <summary>
-    /// The screen fades in with the new room
-    /// </summary>
-    /// <returns></returns>
-    IEnumerator fadeIn()
-    {
-        for (float i = 1f; i >= 0f; i = i - 0.02f)
-        {
-            tmp.a = i;
-            fader.GetComponent<SpriteRenderer>().color = tmp;
-            yield return new WaitForSeconds(0.0001f);
-        }
     }
 }

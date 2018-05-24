@@ -25,6 +25,7 @@ TagManager:
   - Main Menu
   - Enemy Selected
   - UI Animations
+  - Combat
   layers:
   - Default
   - TransparentFX

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.UI;
 
 public class RoomArray : MonoBehaviour
 {
@@ -25,9 +26,9 @@ public class RoomArray : MonoBehaviour
         roomCounter = 0;
         created = false;
         fader = GameObject.FindGameObjectWithTag("Fade");
-        tmp = fader.GetComponent<SpriteRenderer>().color;
+        tmp = fader.GetComponent<RawImage>().color;
         tmp.a = 1f;
-        fader.GetComponent<SpriteRenderer>().color = tmp;
+        fader.GetComponent<RawImage>().color = tmp;
         loadingScreen = GameObject.FindGameObjectWithTag("LoadingScreen");
         player = GameObject.FindGameObjectWithTag("Player");
         minimap = GameObject.FindGameObjectWithTag("Minimap");

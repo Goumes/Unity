@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ButtonScript : MonoBehaviour, ISelectHandler
+public class ButtonScript : MonoBehaviour, ISelectHandler, IDeselectHandler
 {
     private GameObject pointer;
     private GameObject lvl2;
@@ -14,6 +14,7 @@ public class ButtonScript : MonoBehaviour, ISelectHandler
     private List <GameObject>  lvl3Background;
     private GameObject myEventSystem;
     private GameObject [] selectedEnemies;
+    private Management management;
 
     private void Start()
     {
@@ -25,6 +26,7 @@ public class ButtonScript : MonoBehaviour, ISelectHandler
         selectedEnemies = GameObject.FindGameObjectsWithTag("Enemy Selected");
         globalButton = GameObject.FindGameObjectWithTag("Global Button").GetComponent<GlobalButton>();
         myEventSystem = GameObject.Find("EventSystem");
+        management = GameObject.FindGameObjectWithTag("Management").GetComponent<Management>();
 
         for (int i = 0; i < lvl2.transform.childCount; i++)
         {
@@ -62,70 +64,51 @@ public class ButtonScript : MonoBehaviour, ISelectHandler
     public void OnSelect(BaseEventData eventData)
     {
         bool blinking = false;
+        Color tmp;
 
         switch (transform.name)
         {
             case "Fight":
                 pointer.gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector3(-900f, -349f, 0f);
-                pointer.SetActive(true);
-                globalButton.currentButton = gameObject;
-            
+
                 break;
 
             case "Defend":
 
                 pointer.gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector3(-900f, -473f, 0f);
-                pointer.SetActive(true);
-                globalButton.currentButton = gameObject;
 
                 break;
 
             case "Inventory":
 
                 pointer.gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector3(-558f, -349f, 0f);
-                pointer.SetActive(true);
-                globalButton.currentButton = gameObject;
 
                 break;
 
             case "Run Away":
 
                 pointer.gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector3(-558f, -473f, 0f);
-                pointer.SetActive(true);
-                globalButton.currentButton = gameObject;
 
                 break;
 
             case "Selected Item Sub Menu 1 - 1":
-                //Debug.Log(transform.name + " + " + pointer.transform.position);
                 pointer.gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector3(-816f, -171f, 0f);
-                pointer.SetActive(true);
-                globalButton.currentButton = gameObject;
                 break;
 
             case "Selected Item Sub Menu 1 - 2":
 
-                //Debug.Log(transform.name + " + " + pointer.transform.position);
                 pointer.gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector3(-816f, -247f, 0f);
-                pointer.SetActive(true);
-                globalButton.currentButton = gameObject;
 
                 break;
 
             case "Selected Item Sub Menu 1 - 3":
-                //Debug.Log(transform.name + " + " + pointer.transform.position);
 
                 pointer.gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector3(-816f, -334f, 0f);
-                pointer.SetActive(true);
-                globalButton.currentButton = gameObject;
 
                 break;
 
             case "Selected Item Sub Menu 2 - 1":
-                //Debug.Log(transform.name + " + " + pointer.transform.position);
                 pointer.gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector3(-531f, -48f, 0f);
-                pointer.SetActive(true);
-                globalButton.currentButton = gameObject;
 
                 for (int i = 0; i < selectedEnemies.Length; i++)
                 {
@@ -142,10 +125,7 @@ public class ButtonScript : MonoBehaviour, ISelectHandler
                 break;
 
             case "Selected Item Sub Menu 2 - 2":
-                //Debug.Log(transform.name + " + " + pointer.transform.position);
                 pointer.gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector3(-531f, -137f, 0f);
-                pointer.SetActive(true);
-                globalButton.currentButton = gameObject;
 
                 for (int i = 0; i < selectedEnemies.Length; i++)
                 {
@@ -164,10 +144,7 @@ public class ButtonScript : MonoBehaviour, ISelectHandler
                 break;
 
             case "Selected Item Sub Menu 2 - 3":
-                //Debug.Log(transform.name + " + " + pointer.transform.position);
                 pointer.gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector3(-531f, -226f, 0f);
-                pointer.SetActive(true);
-                globalButton.currentButton = gameObject;
 
                 for (int i = 0; i < selectedEnemies.Length; i++)
                 {
@@ -185,16 +162,161 @@ public class ButtonScript : MonoBehaviour, ISelectHandler
 
                 break;
         }
-        
+
+        pointer.SetActive(true);
+        globalButton.currentButton = gameObject;
+
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            tmp = transform.GetChild(i).GetComponent<Text>().color;
+            tmp.a = 1f;
+            transform.GetChild(i).GetComponent<Text>().color = tmp;
+        }
+
 
         //myEventSystem.GetComponent<EventSystem>().SetSelectedGameObject(null);
         //pointer.SetActive(true);
+    }
+
+    public void OnDeselect(BaseEventData baseEvent)
+    {
+        Color tmp;
+
+        switch (transform.name)
+        {
+            case "Fight":
+                if (!globalButton.subMenu1Active)
+                {
+                    for (int i = 0; i < transform.childCount; i++)
+                    {
+                        tmp = transform.GetChild(i).GetComponent<Text>().color;
+                        tmp.a = 0.58f;
+                        transform.GetChild(i).GetComponent<Text>().color = tmp;
+                    }
+                }
+                
+
+                break;
+
+            case "Defend":
+                if (!globalButton.subMenu1Active)
+                {
+                    for (int i = 0; i < transform.childCount; i++)
+                    {
+                        tmp = transform.GetChild(i).GetComponent<Text>().color;
+                        tmp.a = 0.58f;
+                        transform.GetChild(i).GetComponent<Text>().color = tmp;
+                    }
+                }
+
+                break;
+
+            case "Inventory":
+                if (!globalButton.subMenu1Active)
+                {
+                    for (int i = 0; i < transform.childCount; i++)
+                    {
+                        tmp = transform.GetChild(i).GetComponent<Text>().color;
+                        tmp.a = 0.58f;
+                        transform.GetChild(i).GetComponent<Text>().color = tmp;
+                    }
+                }
+
+                break;
+
+            case "Run Away":
+                if (!globalButton.subMenu1Active)
+                {
+                    for (int i = 0; i < transform.childCount; i++)
+                    {
+                        tmp = transform.GetChild(i).GetComponent<Text>().color;
+                        tmp.a = 0.58f;
+                        transform.GetChild(i).GetComponent<Text>().color = tmp;
+                    }
+                }
+
+                break;
+
+            case "Selected Item Sub Menu 1 - 1":
+                if (!globalButton.subMenu2Active)
+                {
+                    for (int i = 0; i < transform.childCount; i++)
+                    {
+                        tmp = transform.GetChild(i).GetComponent<Text>().color;
+                        tmp.a = 0.58f;
+                        transform.GetChild(i).GetComponent<Text>().color = tmp;
+                    }
+                }
+                break;
+
+            case "Selected Item Sub Menu 1 - 2":
+
+                if (!globalButton.subMenu2Active)
+                {
+                    for (int i = 0; i < transform.childCount; i++)
+                    {
+                        tmp = transform.GetChild(i).GetComponent<Text>().color;
+                        tmp.a = 0.58f;
+                        transform.GetChild(i).GetComponent<Text>().color = tmp;
+                    }
+                }
+
+                break;
+
+            case "Selected Item Sub Menu 1 - 3":
+
+                if (!globalButton.subMenu2Active)
+                {
+                    for (int i = 0; i < transform.childCount; i++)
+                    {
+                        tmp = transform.GetChild(i).GetComponent<Text>().color;
+                        tmp.a = 0.58f;
+                        transform.GetChild(i).GetComponent<Text>().color = tmp;
+                    }
+                }
+
+                break;
+
+            case "Selected Item Sub Menu 2 - 1":
+
+                for (int i = 0; i < transform.childCount; i++)
+                {
+                    tmp = transform.GetChild(i).GetComponent<Text>().color;
+                    tmp.a = 0.58f;
+                    transform.GetChild(i).GetComponent<Text>().color = tmp;
+                }
+
+                break;
+
+            case "Selected Item Sub Menu 2 - 2":
+
+                for (int i = 0; i < transform.childCount; i++)
+                {
+                    tmp = transform.GetChild(i).GetComponent<Text>().color;
+                    tmp.a = 0.58f;
+                    transform.GetChild(i).GetComponent<Text>().color = tmp;
+                }
+
+                break;
+
+            case "Selected Item Sub Menu 2 - 3":
+
+                for (int i = 0; i < transform.childCount; i++)
+                {
+                    tmp = transform.GetChild(i).GetComponent<Text>().color;
+                    tmp.a = 0.58f;
+                    transform.GetChild(i).GetComponent<Text>().color = tmp;
+                }
+
+                break;
+        }
     }
     public void clickButton()
     {
         switch (transform.name)
         {
             case "Fight":
+
                     for (int i = 0; i < lvl2Background.Count; i++)
                     {
                         if (lvl2Background[i].transform.name.Equals("Sub Menu 1"))
@@ -214,6 +336,7 @@ public class ButtonScript : MonoBehaviour, ISelectHandler
                             {
                                 if (lvl2Background[i].transform.GetChild(j).transform.name.Equals("Sub Menu 1"))
                                 {
+                                    globalButton.subMenu1Active = true;
                                     lvl2Background[i].transform.GetChild(j).GetChild(0).GetComponent<Button>().Select();
                                 }
                             }
@@ -226,80 +349,20 @@ public class ButtonScript : MonoBehaviour, ISelectHandler
                         transform.parent.GetChild(i).gameObject.GetComponent<Button>().interactable = false;
                     }
 
-                    globalButton.subMenu1Active = true;
+                    
 
                 break;
 
             case "Defend":
-                if (!globalButton.subMenu1Active)
-                { }
-
-                else
-                {
-                    for (int i = 0; i < lvl2Background.Count; i++)
-                    {
-                        if (lvl2Background[i].transform.name.Equals("Sub Menu 1"))
-                        {
-                            lvl2Background[i].SetActive(false);
-                        }
-
-                        else if (lvl2Background[i].transform.name.Equals("Buttons"))
-                        {
-                            lvl2Background[i].SetActive(false);
-                        }
-                    }
-
-                    globalButton.subMenu1Active = false;
-                }
 
                 break;
 
             case "Inventory":
-                if (!globalButton.subMenu1Active)
-                { }
-
-                else
-                {
-                    for (int i = 0; i < lvl2Background.Count; i++)
-                    {
-                        if (lvl2Background[i].transform.name.Equals("Sub Menu 1"))
-                        {
-                            lvl2Background[i].SetActive(false);
-                        }
-
-                        else if (lvl2Background[i].transform.name.Equals("Buttons"))
-                        {
-                            lvl2Background[i].SetActive(false);
-                        }
-                    }
-
-                    globalButton.subMenu1Active = false;
-                }
 
                 break;
 
             case "Run Away":
-                if (!globalButton.subMenu1Active)
-                { }
-
-                else
-                {
-                    for (int i = 0; i < lvl2Background.Count; i++)
-                    {
-                        if (lvl2Background[i].transform.name.Equals("Sub Menu 1"))
-                        {
-                            lvl2Background[i].SetActive(false);
-                        }
-
-                        else if (lvl2Background[i].transform.name.Equals("Buttons"))
-                        {
-                            lvl2Background[i].SetActive(false);
-                        }
-                    }
-
-                    globalButton.subMenu1Active = false;
-                }
-
+                management.EndCombat();
                 break;
 
             case "Selected Item Sub Menu 1 - 1":
@@ -323,6 +386,7 @@ public class ButtonScript : MonoBehaviour, ISelectHandler
                         {
                             if (lvl3Background[i].transform.GetChild(j).transform.name.Equals("Sub Menu 2"))
                             {
+                                globalButton.subMenu2Active = true;
                                 lvl3Background[i].transform.GetChild(j).GetChild(0).GetComponent<Button>().Select();
                             }
                         }
@@ -335,7 +399,7 @@ public class ButtonScript : MonoBehaviour, ISelectHandler
                     transform.parent.GetChild(i).gameObject.GetComponent<Button>().interactable = false;
                 }
 
-                globalButton.subMenu2Active = true;
+                
 
                 break;
 
@@ -360,6 +424,7 @@ public class ButtonScript : MonoBehaviour, ISelectHandler
                         {
                             if (lvl3Background[i].transform.GetChild(j).transform.name.Equals("Sub Menu 2"))
                             {
+                                globalButton.subMenu2Active = true;
                                 lvl3Background[i].transform.GetChild(j).GetChild(0).GetComponent<Button>().Select();
                             }
                         }
@@ -371,7 +436,7 @@ public class ButtonScript : MonoBehaviour, ISelectHandler
                     transform.parent.GetChild(i).gameObject.GetComponent<Button>().interactable = false;
                 }
 
-                globalButton.subMenu2Active = true;
+                
 
                 break;
 
@@ -396,6 +461,7 @@ public class ButtonScript : MonoBehaviour, ISelectHandler
                         {
                             if (lvl3Background[i].transform.GetChild(j).transform.name.Equals("Sub Menu 2"))
                             {
+                                globalButton.subMenu2Active = true;
                                 lvl3Background[i].transform.GetChild(j).GetChild(0).GetComponent<Button>().Select();
                             }
                         }
@@ -407,7 +473,7 @@ public class ButtonScript : MonoBehaviour, ISelectHandler
                     transform.parent.GetChild(i).gameObject.GetComponent<Button>().interactable = false;
                 }
 
-                globalButton.subMenu2Active = true;
+                
 
                 break;
     
