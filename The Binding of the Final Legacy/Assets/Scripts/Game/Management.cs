@@ -12,10 +12,11 @@ public class Management : MonoBehaviour {
     void Start () {
         inCombat = false;
         myEventSystem = GameObject.Find("EventSystem");
+        Cursor.lockState = CursorLockMode.Locked;
     }
 	
 	// Update is called once per frame
 	void Update () {
-        myEventSystem.GetComponent<EventSystem>().SetSelectedGameObject(null);
+        //myEventSystem.GetComponent<EventSystem>().SetSelectedGameObject(null);
     }
 }

@@ -20,6 +20,9 @@ TagManager:
   - Level 3
   - Global Button
   - Management
+  - Combat Button
+  - Level 1
+  - Main Menu
   layers:
   - Default
   - TransparentFX

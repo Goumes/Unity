@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-public class ButtonScript : MonoBehaviour, ISelectHandler, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
+public class ButtonScript : MonoBehaviour, ISelectHandler
 {
     private GameObject pointer;
     private GameObject lvl2;
@@ -47,93 +48,96 @@ public class ButtonScript : MonoBehaviour, ISelectHandler, IPointerEnterHandler,
         }
 
     }
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        
 
+    private void Update()
+    {
+        Invoke("Scape", 0.1f);
     }
 
+    private void Scape()
+    {
+        
+    }
     public void OnSelect(BaseEventData eventData)
     {
         switch (transform.name)
         {
             case "Fight":
-                if (!globalButton.subMenu1Active)
-                {
-                    pointer.transform.position = new Vector3(25.0f, 78.0f, 0f);
-                    pointer.SetActive(true);
-                }
 
+                pointer.transform.position = new Vector3(25.0f, 78.0f, 0f);
+                pointer.SetActive(true);
+                globalButton.currentButton = gameObject;
+            
                 break;
 
             case "Defend":
-                if (!globalButton.subMenu1Active)
-                {
-                    pointer.transform.position = new Vector3(25.0f, 27.4f, 0f);
-                    pointer.SetActive(true);
-                }
+
+                pointer.transform.position = new Vector3(25.0f, 27.4f, 0f);
+                pointer.SetActive(true);
+                globalButton.currentButton = gameObject;
+
                 break;
 
             case "Inventory":
-                if (!globalButton.subMenu1Active)
-                {
-                    pointer.transform.position = new Vector3(163.8f, 78.0f, 0f);
-                    pointer.SetActive(true);
-                }
+               
+                pointer.transform.position = new Vector3(163.8f, 78.0f, 0f);
+                pointer.SetActive(true);
+                globalButton.currentButton = gameObject;
+
                 break;
 
             case "Run Away":
 
-                if (!globalButton.subMenu1Active)
-                {
-                    pointer.transform.position = new Vector3(163.8f, 27.4f, 0f);
-                    pointer.SetActive(true);
-                }
+                pointer.transform.position = new Vector3(163.8f, 27.4f, 0f);
+                pointer.SetActive(true);
+                globalButton.currentButton = gameObject;
+
                 break;
 
             case "Selected Item Sub Menu 1 - 1":
-                if (!globalButton.subMenu2Active)
-                {
-                    //Debug.Log(transform.name + " + " + pointer.transform.position);
-                    pointer.transform.position = new Vector3(61.2f, 144.1f, 0f);
-                    pointer.SetActive(true);
-                }
+                //Debug.Log(transform.name + " + " + pointer.transform.position);
+                pointer.transform.position = new Vector3(61.2f, 144.1f, 0f);
+                pointer.SetActive(true);
+                globalButton.currentButton = gameObject;
                 break;
 
             case "Selected Item Sub Menu 1 - 2":
-                if (!globalButton.subMenu2Active)
-                {
+              
                     //Debug.Log(transform.name + " + " + pointer.transform.position);
                     pointer.transform.position = new Vector3(61.2f, 110.7f, 0f);
                     pointer.SetActive(true);
-                }
+                globalButton.currentButton = gameObject;
+
                 break;
 
             case "Selected Item Sub Menu 1 - 3":
                 //Debug.Log(transform.name + " + " + pointer.transform.position);
-                if (!globalButton.subMenu2Active)
-                {
+               
                     pointer.transform.position = new Vector3(61.2f, 77.2f, 0f);
                     pointer.SetActive(true);
-                }
+                globalButton.currentButton = gameObject;
+
                 break;
 
             case "Selected Item Sub Menu 2 - 1":
                 //Debug.Log(transform.name + " + " + pointer.transform.position);
                 pointer.transform.position = new Vector3(176.1f, 195.3f, 0f);
                 pointer.SetActive(true);
+                globalButton.currentButton = gameObject;
                 break;
 
             case "Selected Item Sub Menu 2 - 2":
                 //Debug.Log(transform.name + " + " + pointer.transform.position);
                 pointer.transform.position = new Vector3(176.1f, 157.8f, 0f);
                 pointer.SetActive(true);
+                globalButton.currentButton = gameObject;
                 break;
 
             case "Selected Item Sub Menu 2 - 3":
                 //Debug.Log(transform.name + " + " + pointer.transform.position);
                 pointer.transform.position = new Vector3(176.1f, 121.5f, 0f);
                 pointer.SetActive(true);
+                globalButton.currentButton = gameObject;
                 break;
         }
         
@@ -141,20 +145,11 @@ public class ButtonScript : MonoBehaviour, ISelectHandler, IPointerEnterHandler,
         //myEventSystem.GetComponent<EventSystem>().SetSelectedGameObject(null);
         //pointer.SetActive(true);
     }
-
-    public void OnPointerExit(PointerEventData eventData)
+    public void clickButton()
     {
-        pointer.SetActive(false);
-    }
-
-    public void OnPointerClick(PointerEventData eventData)
-    {
-
         switch (transform.name)
         {
             case "Fight":
-                if (!globalButton.subMenu1Active)
-                {
                     for (int i = 0; i < lvl2Background.Count; i++)
                     {
                         if (lvl2Background[i].transform.name.Equals("Sub Menu 1"))
@@ -169,29 +164,24 @@ public class ButtonScript : MonoBehaviour, ISelectHandler, IPointerEnterHandler,
                             //Debug.Log("Buttons" + lvl2Background[i].transform.position);
                             lvl2Background[i].transform.position = new Vector3(372.7f, 221.5f, 0f);
                             lvl2Background[i].SetActive(true);
+
+                            for (int j = 0; j < lvl2Background[i].transform.childCount; j++)
+                            {
+                                if (lvl2Background[i].transform.GetChild(j).transform.name.Equals("Sub Menu 1"))
+                                {
+                                    lvl2Background[i].transform.GetChild(j).GetChild(0).GetComponent<Button>().Select();
+                                }
+                            }
+                            
                         }
+                    }
+
+                    for (int i = 0; i < transform.parent.childCount; i++)
+                    {
+                        transform.parent.GetChild(i).gameObject.GetComponent<Button>().interactable = false;
                     }
 
                     globalButton.subMenu1Active = true;
-                }
-
-                else
-                {
-                    for (int i = 0; i < lvl2Background.Count; i++)
-                    {
-                        if (lvl2Background[i].transform.name.Equals("Sub Menu 1"))
-                        {
-                            lvl2Background[i].SetActive(false);
-                        }
-
-                        else if (lvl2Background[i].transform.name.Equals("Buttons"))
-                        {
-                            lvl2Background[i].SetActive(false);
-                        }
-                    }
-
-                    globalButton.subMenu1Active = false;
-                }
 
                 break;
 
@@ -269,177 +259,113 @@ public class ButtonScript : MonoBehaviour, ISelectHandler, IPointerEnterHandler,
 
             case "Selected Item Sub Menu 1 - 1":
 
-                if (!globalButton.subMenu2Active)
+                for (int i = 0; i < lvl3Background.Count; i++)
                 {
-                    for (int i = 0; i < lvl3Background.Count; i++)
+                    if (lvl3Background[i].transform.name.Equals("Sub Menu 2"))
                     {
-                        if (lvl3Background[i].transform.name.Equals("Sub Menu 2"))
-                        {
-                            //Debug.Log("Background" + lvl3Background[i].transform.position);
-                            lvl3Background[i].transform.position = new Vector3(568.2f, 202.1f, 0f);
-                            lvl3Background[i].SetActive(true);
-                        }
-
-                        else if (lvl3Background[i].transform.name.Equals("Buttons"))
-                        {
-                            //Debug.Log("Buttons" + lvl3Background[i].transform.position);
-                            lvl3Background[i].transform.position = new Vector3(359.9f, 210.8f, 0f);
-                            lvl3Background[i].SetActive(true);
-                        }
+                        //Debug.Log("Background" + lvl3Background[i].transform.position);
+                        lvl3Background[i].transform.position = new Vector3(568.2f, 202.1f, 0f);
+                        lvl3Background[i].SetActive(true);
                     }
 
-                    globalButton.subMenu2Active = true;
-                }
-
-                else
-                {
-                    for (int i = 0; i < lvl3Background.Count; i++)
+                    else if (lvl3Background[i].transform.name.Equals("Buttons"))
                     {
-                        if (lvl3Background[i].transform.name.Equals("Sub Menu 2"))
+                        //Debug.Log("Buttons" + lvl3Background[i].transform.position);
+                        lvl3Background[i].transform.position = new Vector3(359.9f, 210.8f, 0f);
+                        lvl3Background[i].SetActive(true);
+
+                        for (int j = 0; j < lvl3Background[i].transform.childCount; j++)
                         {
-                            lvl3Background[i].SetActive(false);
+                            if (lvl3Background[i].transform.GetChild(j).transform.name.Equals("Sub Menu 2"))
+                            {
+                                lvl3Background[i].transform.GetChild(j).GetChild(0).GetComponent<Button>().Select();
+                            }
                         }
 
-                        else if (lvl3Background[i].transform.name.Equals("Buttons"))
-                        {
-                            lvl3Background[i].SetActive(false);
-                        }
                     }
-
-                    globalButton.subMenu2Active = false;
                 }
+
+                for (int i = 0; i < transform.parent.childCount; i++)
+                {
+                    transform.parent.GetChild(i).gameObject.GetComponent<Button>().interactable = false;
+                }
+
+                globalButton.subMenu2Active = true;
 
                 break;
 
             case "Selected Item Sub Menu 1 - 2":
 
-                if (!globalButton.subMenu2Active)
+                for (int i = 0; i < lvl3Background.Count; i++)
                 {
-                    for (int i = 0; i < lvl3Background.Count; i++)
+                    if (lvl3Background[i].transform.name.Equals("Sub Menu 2"))
                     {
-                        if (lvl3Background[i].transform.name.Equals("Sub Menu 2"))
-                        {
-                            //Debug.Log("Background" + lvl3Background[i].transform.position);
-                            lvl3Background[i].transform.position = new Vector3(568.2f, 202.1f, 0f);
-                            lvl3Background[i].SetActive(true);
-                        }
-
-                        else if (lvl3Background[i].transform.name.Equals("Buttons"))
-                        {
-                            //Debug.Log("Buttons" + lvl3Background[i].transform.position);
-                            lvl3Background[i].transform.position = new Vector3(359.9f, 210.8f, 0f);
-                            lvl3Background[i].SetActive(true);
-                        }
+                        //Debug.Log("Background" + lvl3Background[i].transform.position);
+                        lvl3Background[i].transform.position = new Vector3(568.2f, 202.1f, 0f);
+                        lvl3Background[i].SetActive(true);
                     }
 
-                    globalButton.subMenu2Active = true;
-
-                }
-
-                else
-                {
-                    for (int i = 0; i < lvl3Background.Count; i++)
+                    else if (lvl3Background[i].transform.name.Equals("Buttons"))
                     {
-                        if (lvl3Background[i].transform.name.Equals("Sub Menu 2"))
-                        {
-                            lvl3Background[i].SetActive(false);
-                        }
+                        //Debug.Log("Buttons" + lvl3Background[i].transform.position);
+                        lvl3Background[i].transform.position = new Vector3(359.9f, 210.8f, 0f);
+                        lvl3Background[i].SetActive(true);
 
-                        else if (lvl3Background[i].transform.name.Equals("Buttons"))
+                        for (int j = 0; j < lvl3Background[i].transform.childCount; j++)
                         {
-                            lvl3Background[i].SetActive(false);
+                            if (lvl3Background[i].transform.GetChild(j).transform.name.Equals("Sub Menu 2"))
+                            {
+                                lvl3Background[i].transform.GetChild(j).GetChild(0).GetComponent<Button>().Select();
+                            }
                         }
                     }
-
-                    globalButton.subMenu2Active = false;
                 }
+
+                for (int i = 0; i < transform.parent.childCount; i++)
+                {
+                    transform.parent.GetChild(i).gameObject.GetComponent<Button>().interactable = false;
+                }
+
+                globalButton.subMenu2Active = true;
 
                 break;
 
             case "Selected Item Sub Menu 1 - 3":
 
-                if (!globalButton.subMenu2Active)
-                {
-                    for (int i = 0; i < lvl3Background.Count; i++)
-                    {
-                        if (lvl3Background[i].transform.name.Equals("Sub Menu 2"))
-                        {
-                            //Debug.Log("Background" + lvl3Background[i].transform.position);
-                            lvl3Background[i].transform.position = new Vector3(568.2f, 202.1f, 0f);
-                            lvl3Background[i].SetActive(true);
-                        }
-
-                        else if (lvl3Background[i].transform.name.Equals("Buttons"))
-                        {
-                            //Debug.Log("Buttons" + lvl3Background[i].transform.position);
-                            lvl3Background[i].transform.position = new Vector3(359.9f, 210.8f, 0f);
-                            lvl3Background[i].SetActive(true);
-                        }
-                    }
-
-                    globalButton.subMenu2Active = true;
-
-                }
-
-                else
-                {
-                    for (int i = 0; i < lvl3Background.Count; i++)
-                    {
-                        if (lvl3Background[i].transform.name.Equals("Sub Menu 2"))
-                        {
-                            lvl3Background[i].SetActive(false);
-                        }
-
-                        else if (lvl3Background[i].transform.name.Equals("Buttons"))
-                        {
-                            lvl3Background[i].SetActive(false);
-                        }
-                    }
-
-                    globalButton.subMenu2Active = false;
-                }
-
-                break;
-    
-    }
-
-        if (Input.GetButtonDown("Cancel"))
-        {
-            if (globalButton.subMenu2Active)
-            {
                 for (int i = 0; i < lvl3Background.Count; i++)
                 {
                     if (lvl3Background[i].transform.name.Equals("Sub Menu 2"))
                     {
-                        lvl3Background[i].SetActive(false);
+                        //Debug.Log("Background" + lvl3Background[i].transform.position);
+                        lvl3Background[i].transform.position = new Vector3(568.2f, 202.1f, 0f);
+                        lvl3Background[i].SetActive(true);
                     }
 
                     else if (lvl3Background[i].transform.name.Equals("Buttons"))
                     {
-                        lvl3Background[i].SetActive(false);
+                        //Debug.Log("Buttons" + lvl3Background[i].transform.position);
+                        lvl3Background[i].transform.position = new Vector3(359.9f, 210.8f, 0f);
+                        lvl3Background[i].SetActive(true);
+
+                        for (int j = 0; j < lvl3Background[i].transform.childCount; j++)
+                        {
+                            if (lvl3Background[i].transform.GetChild(j).transform.name.Equals("Sub Menu 2"))
+                            {
+                                lvl3Background[i].transform.GetChild(j).GetChild(0).GetComponent<Button>().Select();
+                            }
+                        }
                     }
                 }
 
-                globalButton.subMenu2Active = false;
-            }
-
-            else if (globalButton.subMenu1Active)
-            {
-                for (int i = 0; i < lvl2Background.Count; i++)
+                for (int i = 0; i < transform.parent.childCount; i++)
                 {
-                    if (lvl2Background[i].transform.name.Equals("Sub Menu 1"))
-                    {
-                        lvl2Background[i].SetActive(false);
-                    }
-
-                    else if (lvl2Background[i].transform.name.Equals("Buttons"))
-                    {
-                        lvl2Background[i].SetActive(false);
-                    }
+                    transform.parent.GetChild(i).gameObject.GetComponent<Button>().interactable = false;
                 }
 
-                globalButton.subMenu1Active = false;
-            }
+                globalButton.subMenu2Active = true;
+
+                break;
+    
         }
     }
 }
