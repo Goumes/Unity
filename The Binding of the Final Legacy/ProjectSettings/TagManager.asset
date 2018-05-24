@@ -23,6 +23,8 @@ TagManager:
   - Combat Button
   - Level 1
   - Main Menu
+  - Enemy Selected
+  - UI Animations
   layers:
   - Default
   - TransparentFX

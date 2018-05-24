@@ -13,6 +13,7 @@ public class ButtonScript : MonoBehaviour, ISelectHandler
     private List <GameObject> lvl2Background;
     private List <GameObject>  lvl3Background;
     private GameObject myEventSystem;
+    private GameObject [] selectedEnemies;
 
     private void Start()
     {
@@ -21,6 +22,7 @@ public class ButtonScript : MonoBehaviour, ISelectHandler
         lvl3 = GameObject.FindGameObjectWithTag("Level 3");
         lvl2Background = new List<GameObject>();
         lvl3Background = new List<GameObject> ();
+        selectedEnemies = GameObject.FindGameObjectsWithTag("Enemy Selected");
         globalButton = GameObject.FindGameObjectWithTag("Global Button").GetComponent<GlobalButton>();
         myEventSystem = GameObject.Find("EventSystem");
 
@@ -46,7 +48,6 @@ public class ButtonScript : MonoBehaviour, ISelectHandler
                 }
             }
         }
-
     }
 
     private void Update()
@@ -60,11 +61,12 @@ public class ButtonScript : MonoBehaviour, ISelectHandler
     }
     public void OnSelect(BaseEventData eventData)
     {
+        bool blinking = false;
+
         switch (transform.name)
         {
             case "Fight":
-
-                pointer.transform.position = new Vector3(25.0f, 78.0f, 0f);
+                pointer.gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector3(-900f, -349f, 0f);
                 pointer.SetActive(true);
                 globalButton.currentButton = gameObject;
             
@@ -72,15 +74,15 @@ public class ButtonScript : MonoBehaviour, ISelectHandler
 
             case "Defend":
 
-                pointer.transform.position = new Vector3(25.0f, 27.4f, 0f);
+                pointer.gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector3(-900f, -473f, 0f);
                 pointer.SetActive(true);
                 globalButton.currentButton = gameObject;
 
                 break;
 
             case "Inventory":
-               
-                pointer.transform.position = new Vector3(163.8f, 78.0f, 0f);
+
+                pointer.gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector3(-558f, -349f, 0f);
                 pointer.SetActive(true);
                 globalButton.currentButton = gameObject;
 
@@ -88,7 +90,7 @@ public class ButtonScript : MonoBehaviour, ISelectHandler
 
             case "Run Away":
 
-                pointer.transform.position = new Vector3(163.8f, 27.4f, 0f);
+                pointer.gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector3(-558f, -473f, 0f);
                 pointer.SetActive(true);
                 globalButton.currentButton = gameObject;
 
@@ -96,48 +98,91 @@ public class ButtonScript : MonoBehaviour, ISelectHandler
 
             case "Selected Item Sub Menu 1 - 1":
                 //Debug.Log(transform.name + " + " + pointer.transform.position);
-                pointer.transform.position = new Vector3(61.2f, 144.1f, 0f);
+                pointer.gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector3(-816f, -171f, 0f);
                 pointer.SetActive(true);
                 globalButton.currentButton = gameObject;
                 break;
 
             case "Selected Item Sub Menu 1 - 2":
-              
-                    //Debug.Log(transform.name + " + " + pointer.transform.position);
-                    pointer.transform.position = new Vector3(61.2f, 110.7f, 0f);
-                    pointer.SetActive(true);
+
+                //Debug.Log(transform.name + " + " + pointer.transform.position);
+                pointer.gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector3(-816f, -247f, 0f);
+                pointer.SetActive(true);
                 globalButton.currentButton = gameObject;
 
                 break;
 
             case "Selected Item Sub Menu 1 - 3":
                 //Debug.Log(transform.name + " + " + pointer.transform.position);
-               
-                    pointer.transform.position = new Vector3(61.2f, 77.2f, 0f);
-                    pointer.SetActive(true);
+
+                pointer.gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector3(-816f, -334f, 0f);
+                pointer.SetActive(true);
                 globalButton.currentButton = gameObject;
 
                 break;
 
             case "Selected Item Sub Menu 2 - 1":
                 //Debug.Log(transform.name + " + " + pointer.transform.position);
-                pointer.transform.position = new Vector3(176.1f, 195.3f, 0f);
+                pointer.gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector3(-531f, -48f, 0f);
                 pointer.SetActive(true);
                 globalButton.currentButton = gameObject;
+
+                for (int i = 0; i < selectedEnemies.Length; i++)
+                {
+                    selectedEnemies[i].GetComponent<SelectEnemy>().stopBlinking();
+                }
+
+                for (int i = 0; i < selectedEnemies.Length; i++)
+                {
+                    if (selectedEnemies[i].transform.name.Equals("Blob Combat In-Game Selected 1"))
+                    {
+                        selectedEnemies[i].GetComponent<SelectEnemy>().startBlinking();
+                    }
+                }
                 break;
 
             case "Selected Item Sub Menu 2 - 2":
                 //Debug.Log(transform.name + " + " + pointer.transform.position);
-                pointer.transform.position = new Vector3(176.1f, 157.8f, 0f);
+                pointer.gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector3(-531f, -137f, 0f);
                 pointer.SetActive(true);
                 globalButton.currentButton = gameObject;
+
+                for (int i = 0; i < selectedEnemies.Length; i++)
+                {
+                    selectedEnemies[i].GetComponent<SelectEnemy>().stopBlinking();
+                }
+
+                for (int i = 0; i < selectedEnemies.Length; i++)
+                {
+                    if (selectedEnemies[i].transform.name.Equals("Blob Combat In-Game Selected 2"))
+                    {
+                        selectedEnemies[i].GetComponent<SelectEnemy>().startBlinking();
+                    }
+                }
+
+
                 break;
 
             case "Selected Item Sub Menu 2 - 3":
                 //Debug.Log(transform.name + " + " + pointer.transform.position);
-                pointer.transform.position = new Vector3(176.1f, 121.5f, 0f);
+                pointer.gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector3(-531f, -226f, 0f);
                 pointer.SetActive(true);
                 globalButton.currentButton = gameObject;
+
+                for (int i = 0; i < selectedEnemies.Length; i++)
+                {
+                    selectedEnemies[i].GetComponent<SelectEnemy>().stopBlinking();
+                }
+
+                for (int i = 0; i < selectedEnemies.Length; i++)
+                {
+                    if (selectedEnemies[i].transform.name.Equals("Blob Combat In-Game Selected 3"))
+                    {
+                        selectedEnemies[i].GetComponent<SelectEnemy>().startBlinking();
+                    }
+                }
+
+
                 break;
         }
         
@@ -154,15 +199,15 @@ public class ButtonScript : MonoBehaviour, ISelectHandler
                     {
                         if (lvl2Background[i].transform.name.Equals("Sub Menu 1"))
                         {
-                            //Debug.Log("Background" + lvl2Background[i].transform.position);
-                            lvl2Background[i].transform.position = new Vector3(452.7f, 153.4f, 0f);
+                            //Debug.Log("Background" + gameObject.GetComponent<RectTransform>().anchoredPosition);
+                            lvl2Background[i].gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector3(137.9999f, -148, 0f);
                             lvl2Background[i].SetActive(true);
                         }
 
                         else if (lvl2Background[i].transform.name.Equals("Buttons"))
                         {
-                            //Debug.Log("Buttons" + lvl2Background[i].transform.position);
-                            lvl2Background[i].transform.position = new Vector3(372.7f, 221.5f, 0f);
+                            //Debug.Log("Buttons" + gameObject.GetComponent<RectTransform>().anchoredPosition);
+                            lvl2Background[i].gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector3(-57f, 18f, 0f);
                             lvl2Background[i].SetActive(true);
 
                             for (int j = 0; j < lvl2Background[i].transform.childCount; j++)
@@ -264,14 +309,14 @@ public class ButtonScript : MonoBehaviour, ISelectHandler
                     if (lvl3Background[i].transform.name.Equals("Sub Menu 2"))
                     {
                         //Debug.Log("Background" + lvl3Background[i].transform.position);
-                        lvl3Background[i].transform.position = new Vector3(568.2f, 202.1f, 0f);
+                        lvl3Background[i].gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector3(416.5f, -26.30003f, 0f);
                         lvl3Background[i].SetActive(true);
                     }
 
                     else if (lvl3Background[i].transform.name.Equals("Buttons"))
                     {
                         //Debug.Log("Buttons" + lvl3Background[i].transform.position);
-                        lvl3Background[i].transform.position = new Vector3(359.9f, 210.8f, 0f);
+                        lvl3Background[i].gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector3(-90.99998f, -5f, 0f);
                         lvl3Background[i].SetActive(true);
 
                         for (int j = 0; j < lvl3Background[i].transform.childCount; j++)
@@ -301,14 +346,14 @@ public class ButtonScript : MonoBehaviour, ISelectHandler
                     if (lvl3Background[i].transform.name.Equals("Sub Menu 2"))
                     {
                         //Debug.Log("Background" + lvl3Background[i].transform.position);
-                        lvl3Background[i].transform.position = new Vector3(568.2f, 202.1f, 0f);
+                        lvl3Background[i].gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector3(416.5f, -26.30003f, 0f);
                         lvl3Background[i].SetActive(true);
                     }
 
                     else if (lvl3Background[i].transform.name.Equals("Buttons"))
                     {
                         //Debug.Log("Buttons" + lvl3Background[i].transform.position);
-                        lvl3Background[i].transform.position = new Vector3(359.9f, 210.8f, 0f);
+                        lvl3Background[i].gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector3(-90.99998f, -5f, 0f);
                         lvl3Background[i].SetActive(true);
 
                         for (int j = 0; j < lvl3Background[i].transform.childCount; j++)
@@ -337,14 +382,14 @@ public class ButtonScript : MonoBehaviour, ISelectHandler
                     if (lvl3Background[i].transform.name.Equals("Sub Menu 2"))
                     {
                         //Debug.Log("Background" + lvl3Background[i].transform.position);
-                        lvl3Background[i].transform.position = new Vector3(568.2f, 202.1f, 0f);
+                        lvl3Background[i].gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector3(416.5f, -26.30003f, 0f);
                         lvl3Background[i].SetActive(true);
                     }
 
                     else if (lvl3Background[i].transform.name.Equals("Buttons"))
                     {
                         //Debug.Log("Buttons" + lvl3Background[i].transform.position);
-                        lvl3Background[i].transform.position = new Vector3(359.9f, 210.8f, 0f);
+                        lvl3Background[i].gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector3(-90.99998f, -5f, 0f);
                         lvl3Background[i].SetActive(true);
 
                         for (int j = 0; j < lvl3Background[i].transform.childCount; j++)
