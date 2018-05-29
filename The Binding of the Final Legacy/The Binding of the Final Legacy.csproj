@@ -308,6 +308,7 @@
     <Compile Include="Assets\Scripts\Dungeon Generator\MinimapGridScript.cs" />
     <Compile Include="Assets\Scripts\Dungeon Generator\MinimapRoom.cs" />
     <Compile Include="Assets\Scripts\Dungeon Generator\MinimapSpawnPoint.cs" />
+    <Compile Include="Assets\Scripts\Dungeon Generator\RandomElements.cs" />
     <Compile Include="Assets\Scripts\Dungeon Generator\RoomArray.cs" />
     <Compile Include="Assets\Scripts\Game\Characters\Blob.cs" />
     <Compile Include="Assets\Scripts\Game\Characters\Player.cs" />
@@ -322,6 +323,8 @@
     <Compile Include="Assets\Scripts\Game\Objects\Torch.cs" />
     <Compile Include="Assets\Scripts\Game\Rooms\RoomScript.cs" />
     <Compile Include="Assets\Scripts\Game\Rooms\Teleporter.cs" />
+    <Compile Include="Assets\Scripts\Game\UI\MinimapCamera.cs" />
+    <Compile Include="Assets\Scripts\Game\UI\MinimapUI.cs" />
     <Compile Include="Assets\Scripts\Menus\MainMenu.cs" />
     <Compile Include="Assets\Scripts\Menus\Restart.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />

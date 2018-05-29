@@ -20,7 +20,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 2}
-  m_MinSize: {x: 950, y: 492}
+  m_MinSize: {x: 950, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &2
 MonoBehaviour:
@@ -43,7 +43,7 @@ MonoBehaviour:
     y: 0
     width: 2560
     height: 1037
-  m_MinSize: {x: 950, y: 492}
+  m_MinSize: {x: 950, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &3
 MonoBehaviour:
@@ -111,7 +111,7 @@ MonoBehaviour:
   m_MinSize: {x: 957, y: 442}
   m_MaxSize: {x: 22012, y: 10021}
   vertical: 0
-  controlID: 10901
+  controlID: 102
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -135,7 +135,7 @@ MonoBehaviour:
   m_MinSize: {x: 202, y: 442}
   m_MaxSize: {x: 4002, y: 8042}
   vertical: 1
-  controlID: 11015
+  controlID: 126
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -207,10 +207,10 @@ MonoBehaviour:
     y: 0
     width: 436
     height: 987
-  m_MinSize: {x: 244, y: 421}
-  m_MaxSize: {x: 4004, y: 8021}
+  m_MinSize: {x: 244, y: 442}
+  m_MaxSize: {x: 4004, y: 8042}
   vertical: 1
-  controlID: 10902
+  controlID: 103
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -229,8 +229,8 @@ MonoBehaviour:
     y: 0
     width: 436
     height: 658
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 204, y: 221}
+  m_MaxSize: {x: 4004, y: 4021}
   m_ActualView: {fileID: 17}
   m_Panes:
   - {fileID: 17}
@@ -412,14 +412,14 @@ MonoBehaviour:
     height: 485
   m_PersistentViewDataDictionary: {fileID: 0}
   m_SceneLighting: 1
-  lastFramingTime: 8192.378732745645
+  lastFramingTime: 11182.423870735201
   m_2DMode: 1
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 945.3299, y: 750.8815, z: 5.2912884}
+    m_Target: {x: 372.3971, y: 99.98043, z: -1.2425267}
     speed: 2
-    m_Value: {x: 945.3299, y: 750.8815, z: 5.2912884}
+    m_Value: {x: 372.3971, y: 99.98043, z: -1.2425267}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -443,22 +443,22 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
     zGrid:
-      m_Target: 1
+      m_Target: 0
       speed: 2
-      m_Value: 1
+      m_Value: 0
   m_Rotation:
     m_Target: {x: 0, y: 0, z: 0, w: 1}
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 179.81984
+    m_Target: 704.8573
     speed: 2
-    m_Value: 179.81984
+    m_Value: 704.8573
   m_Ortho:
     m_Target: 1
     speed: 2
     m_Value: 1
-  m_ShowGlobalGrid: 1
+  m_ShowGlobalGrid: 0
   m_LastSceneViewRotation: {x: -0.08717229, y: 0.89959055, z: -0.21045254, w: -0.3726226}
   m_LastSceneViewOrtho: 0
   m_ReplacementShader: {fileID: 0}
@@ -602,9 +602,9 @@ MonoBehaviour:
   m_PersistentViewDataDictionary: {fileID: 0}
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 
+    m_SelectedIDs: 3a090000
     m_LastClickedID: 0
-    m_ExpandedIDs: 5204f6ff0805f6ffda06f6ffe806f6ff2e0bf6ffe40bf6ffb60df6ffc40df6ff3c12f6fff012f6ffc214f6ffd014f6ff8cc4f6ff40c5f6ff12c7f6ff20c7f6ffda26f7ff7c27f7ff4e29f7ff5c29f7ff6441f7ff0842f7ffda43f7ffe843f7ff005af7ff705cf7ff7461f7ff1e62f7fff063f7fffe63f7ff0c44f9ff4c44f9ff8c44f9ffcc44f9ff0c45f9ff82c6faff0887fbffe0fbffffeafbffff00000000cc35000008360000f8360000923700003a390000fe39000084f90100a6f9010036fb010026fc0100a00f0200d00f02006411020068120200e22b0200122c0200a62d0200aa2e02002e4d02003a4d0200ce4e0200fc4e0200
+    m_ExpandedIDs: 28aafaffe2fbffffeafbffff00000000cc350000083600004c3600008c370000d43700003038000092380000243900003a3900005e39000068390000c8390000063a0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -695,13 +695,11 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/TopDown Pixel Dungeon -TheGameAssetsMine-/Animated Elements/Enemy Blob
-      sequence
+    - Assets/Scripts/Game/Combat
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/TopDown Pixel Dungeon -TheGameAssetsMine-/Animated Elements/Enemy Blob
-    sequence
+  - Assets/Scripts/Game/Combat
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\aleja\Documents\GitHub\Unity\The Binding of the Final
     Legacy
@@ -709,9 +707,9 @@ MonoBehaviour:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 0c2f0000
-    m_LastClickedID: 12044
-    m_ExpandedIDs: 000000006c2a0000582b0000c22c0000742d00004c2e0000a62e00006c2f00008a2f00002c3000004a30000050310000b832000000ca9a3bffffff7f
+    m_SelectedIDs: 822d0000
+    m_LastClickedID: 11650
+    m_ExpandedIDs: 000000006c2a0000582b0000c22c0000742d00004c2e00006c2f00008a2f00004a30000050310000b832000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -739,7 +737,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000006c2a0000582b0000c22c0000742d00004c2e00006c2f00008a2f00002c3000004a30000050310000b832000000ca9a3bffffff7f
+    m_ExpandedIDs: 000000006c2a0000582b0000c22c0000742d00004c2e0000a62e00006c2f00008a2f00002c3000004a30000050310000b8320000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 

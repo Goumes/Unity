@@ -14,7 +14,7 @@ public class Teleporter : MonoBehaviour
     // Use this for initialization
     void Awake ()
     {
-        room = transform.root.gameObject;
+        room = transform.parent.gameObject.transform.parent.gameObject;
         player = GameObject.FindGameObjectWithTag("Player");
         fader = GameObject.FindGameObjectWithTag("Fade");
         tmp = fader.GetComponent<RawImage>().color;

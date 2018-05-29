@@ -15,12 +15,15 @@ public class RoomArray : MonoBehaviour
     private Tilemap tilemap;
     public List<GameObject> realRooms;
     public int roomCounter;
-    bool created;
+    public bool created;
     private GameObject fader;
     private Color tmp;
-    GameObject loadingScreen;
-    GameObject player;
-    GameObject minimap;
+    private GameObject loadingScreen;
+    private GameObject player;
+    private GameObject minimap;
+    private GameObject dungeon;
+    private Management management;
+    private GameObject grid;
     // Use this for initialization
     void Start () {
         roomCounter = 0;
@@ -32,7 +35,10 @@ public class RoomArray : MonoBehaviour
         loadingScreen = GameObject.FindGameObjectWithTag("LoadingScreen");
         player = GameObject.FindGameObjectWithTag("Player");
         minimap = GameObject.FindGameObjectWithTag("Minimap");
+        dungeon = GameObject.FindGameObjectWithTag("Dungeon");
         minimap.SetActive(false);
+        management = GameObject.FindGameObjectWithTag("Management").GetComponent<Management>();
+        grid = GameObject.FindGameObjectWithTag("Grid");
         //player.SetActive(false);
         InvokeRepeating("checkEnd", 0f, 1f);
     }
@@ -80,6 +86,9 @@ public class RoomArray : MonoBehaviour
         {
             createDungeon();
             created = true;
+
+            //adjustCamera(); //TO DO
+
             loadingScreen.SetActive(false);
             player.transform.position = new Vector3(1.87f, -0.32f, 0f);
             minimap.SetActive(true);
@@ -115,13 +124,55 @@ public class RoomArray : MonoBehaviour
         }
     }
 
+    private void adjustCamera()
+    {
+        float smallestX = 9999f;
+        float smallestY = 9999f;
+        float biggestX = 0f;
+        float biggestY = 0f;
+
+        for (int i = 0; i < grid.transform.childCount; i++)
+        {
+            var x = grid.transform.GetChild(i).transform.localPosition.x;
+            var y = grid.transform.GetChild(i).transform.localPosition.y;
+
+            Debug.Log(grid.transform.GetChild(i).transform.name + ": X = " + x + ", Y = " + y);
+
+            if (x > biggestX)
+            {
+                biggestX = x;
+            }
+
+            else if (x < smallestX)
+            {
+                smallestX = x;
+            }
+
+            if (y > biggestY)
+            {
+                biggestY = y;
+            }
+
+            else if (y < smallestX)
+            {
+                smallestY = y;
+            }
+        }
+
+        Debug.Log("Biggest X: " + biggestX + ", Smallest X: " + smallestX + ", Biggest Y: " + biggestY + ", Smallest Y: " + smallestY);
+    }
+
     private void createDungeon()
     {
+        bool shopGenerated = false;
+
         for (int i = 0; i < minimapRooms.Count; i++)
         {
+            bool tmpBool = false;
             var script = minimapRooms[i].GetComponent<MinimapRoom>();
             GameObject room = null;
 
+            
             if (!script.topDoor && script.bottomDoor && !script.leftDoor && !script.rightDoor)
             {
                 room = (GameObject)Instantiate(Resources.Load("Rooms/B/Default Room B"));
@@ -231,6 +282,15 @@ public class RoomArray : MonoBehaviour
             {
                 room.SetActive(true);
             }
+
+            if (!shopGenerated)
+            {
+                tmpBool = management.randomBoolean(0.9f);//Un 10% de que se genere una tienda
+                shopGenerated = true;
+                //Aquí se activa la tienda
+            }
+
+            room.transform.parent = dungeon.transform;
         }
         //for (int i = 0; i < minimapRooms.Count; i++) {
         //    foreach (KeyValuePair<string, int> pair in minimapRooms[i].GetComponentInChildren<MinimapRoom>().childPositions)

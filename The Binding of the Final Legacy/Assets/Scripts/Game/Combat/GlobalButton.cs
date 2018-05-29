@@ -74,6 +74,7 @@ public class GlobalButton : MonoBehaviour
 
     private void OnEnable()
     {
+        management = GameObject.FindGameObjectWithTag("Management").GetComponent<Management>();
         StartCoroutine(management.fadeIn());
         //management.inCombat = true;
         //player.SetActive(false);

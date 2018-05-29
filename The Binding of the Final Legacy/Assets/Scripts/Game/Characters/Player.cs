@@ -50,8 +50,8 @@ public class Player : MonoBehaviour {
     {
         isMoving = false;
 
-        var horizontal = Input.GetAxisRaw("Horizontal"); //Raw es para que no sea un movimiento suave, sino absolutos de unos y ceros. Así no se desliza si tiene mucha velocidad.
-        var vertical = Input.GetAxisRaw("Vertical");
+        var horizontal = Input.GetAxisRaw("Horizontal") * 1.5f; //Raw es para que no sea un movimiento suave, sino absolutos de unos y ceros. Así no se desliza si tiene mucha velocidad.
+        var vertical = Input.GetAxisRaw("Vertical") * 1.5f;
 
         if (horizontal < 0 || horizontal > 0 || vertical < 0 || vertical > 0)
         {
@@ -67,26 +67,26 @@ public class Player : MonoBehaviour {
             {
                 if (horizontal > 0 && vertical > 0)
                 {
-                    horizontal = 0.7f;
-                    vertical = 0.7f;
+                    horizontal = 1.06f;
+                    vertical = 1.06f;
                 }
 
                 else if (horizontal > 0 && vertical < 0)
                 {
-                    horizontal = 0.7f;
-                    vertical = -0.7f;
+                    horizontal = 1.06f;
+                    vertical = -1.06f;
                 }
 
                 else if (horizontal < 0 && vertical < 0)
                 {
-                    horizontal = -0.7f;
-                    vertical = -0.7f;
+                    horizontal = -1.06f;
+                    vertical = -1.06f;
                 }
 
                 else
                 {
-                    horizontal = -0.7f;
-                    vertical = 0.7f;
+                    horizontal = -1.06f;
+                    vertical = 1.06f;
                 }
 
             }

@@ -26,6 +26,7 @@ TagManager:
   - Enemy Selected
   - UI Animations
   - Combat
+  - Dungeon
   layers:
   - Default
   - TransparentFX

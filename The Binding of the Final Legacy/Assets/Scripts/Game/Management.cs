@@ -64,8 +64,24 @@ public class Management : MonoBehaviour {
         }
     }
 
-    // Update is called once per frame
-    void Update () {
+    public bool randomBoolean(float? chance)
+    {
+        bool resultado = false;
+
+        if (chance == 0f || chance == null)
+        {
+            chance = 0.5f;
+        }
+
+        if (Random.value >= chance)
+        {
+            resultado =  true;
+        }
+        return resultado;
+    }
+
+// Update is called once per frame
+void Update () {
         //myEventSystem.GetComponent<EventSystem>().SetSelectedGameObject(null);
     }
 }

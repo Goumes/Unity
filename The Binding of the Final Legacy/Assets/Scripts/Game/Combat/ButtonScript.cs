@@ -7,9 +7,11 @@ using UnityEngine.UI;
 public class ButtonScript : MonoBehaviour, ISelectHandler, IDeselectHandler
 {
     private GameObject pointer;
+    private GameObject lvl1;
     private GameObject lvl2;
     private GameObject lvl3;
     private GlobalButton globalButton;
+    private List<GameObject> lvl1Background;
     private List <GameObject> lvl2Background;
     private List <GameObject>  lvl3Background;
     private GameObject myEventSystem;
@@ -19,14 +21,27 @@ public class ButtonScript : MonoBehaviour, ISelectHandler, IDeselectHandler
     private void Start()
     {
         pointer = GameObject.FindGameObjectWithTag("Pointer");
+        lvl1 = GameObject.FindGameObjectWithTag("Level 1");
         lvl2 = GameObject.FindGameObjectWithTag("Level 2");
         lvl3 = GameObject.FindGameObjectWithTag("Level 3");
+        lvl1Background = new List<GameObject>();
         lvl2Background = new List<GameObject>();
         lvl3Background = new List<GameObject> ();
         selectedEnemies = GameObject.FindGameObjectsWithTag("Enemy Selected");
         globalButton = GameObject.FindGameObjectWithTag("Global Button").GetComponent<GlobalButton>();
         myEventSystem = GameObject.Find("EventSystem");
         management = GameObject.FindGameObjectWithTag("Management").GetComponent<Management>();
+
+        for (int i = 0; i < lvl1.transform.childCount; i++)
+        {
+            for (int j = 0; j < lvl1.transform.GetChild(i).childCount; j++)
+            {
+                if (lvl1.transform.GetChild(i).GetChild(j).CompareTag("Main Menu"))
+                {
+                    lvl1Background.Add(lvl1.transform.GetChild(i).GetChild(j).gameObject);
+                }
+            }
+        }
 
         for (int i = 0; i < lvl2.transform.childCount; i++)
         {
@@ -54,17 +69,17 @@ public class ButtonScript : MonoBehaviour, ISelectHandler, IDeselectHandler
 
     private void Update()
     {
-        Invoke("Scape", 0.1f);
+
     }
 
-    private void Scape()
-    {
-        
-    }
     public void OnSelect(BaseEventData eventData)
     {
-        bool blinking = false;
         Color tmp;
+
+        for (int i = 0; i < selectedEnemies.Length; i++)
+        {
+            selectedEnemies[i].GetComponent<SelectEnemy>().stopBlinking();
+        }
 
         switch (transform.name)
         {
@@ -112,11 +127,6 @@ public class ButtonScript : MonoBehaviour, ISelectHandler, IDeselectHandler
 
                 for (int i = 0; i < selectedEnemies.Length; i++)
                 {
-                    selectedEnemies[i].GetComponent<SelectEnemy>().stopBlinking();
-                }
-
-                for (int i = 0; i < selectedEnemies.Length; i++)
-                {
                     if (selectedEnemies[i].transform.name.Equals("Blob Combat In-Game Selected 1"))
                     {
                         selectedEnemies[i].GetComponent<SelectEnemy>().startBlinking();
@@ -126,11 +136,6 @@ public class ButtonScript : MonoBehaviour, ISelectHandler, IDeselectHandler
 
             case "Selected Item Sub Menu 2 - 2":
                 pointer.gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector3(-531f, -137f, 0f);
-
-                for (int i = 0; i < selectedEnemies.Length; i++)
-                {
-                    selectedEnemies[i].GetComponent<SelectEnemy>().stopBlinking();
-                }
 
                 for (int i = 0; i < selectedEnemies.Length; i++)
                 {
@@ -145,11 +150,6 @@ public class ButtonScript : MonoBehaviour, ISelectHandler, IDeselectHandler
 
             case "Selected Item Sub Menu 2 - 3":
                 pointer.gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector3(-531f, -226f, 0f);
-
-                for (int i = 0; i < selectedEnemies.Length; i++)
-                {
-                    selectedEnemies[i].GetComponent<SelectEnemy>().stopBlinking();
-                }
 
                 for (int i = 0; i < selectedEnemies.Length; i++)
                 {
@@ -362,6 +362,22 @@ public class ButtonScript : MonoBehaviour, ISelectHandler, IDeselectHandler
                 break;
 
             case "Run Away":
+                for (int j = 0; j < lvl1Background[0].transform.childCount; j++)
+                {
+                    if (lvl1Background[0].transform.GetChild(j).transform.name.Equals("Main Menu"))
+                    {
+                        for (int k = 0; k < lvl1Background[0].transform.GetChild(j).childCount; k++)
+                        {
+                            lvl1Background[0].transform.GetChild(j).GetChild(k).gameObject.GetComponent<Button>().interactable = true;
+
+                            if (k == 0)
+                            {
+                                lvl1Background[0].transform.GetChild(j).GetChild(k).GetComponent<Button>().Select();
+                            }
+                        }
+                    }
+                }
+
                 management.EndCombat();
                 break;
 
