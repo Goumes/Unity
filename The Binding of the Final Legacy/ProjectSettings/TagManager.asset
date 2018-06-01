@@ -27,6 +27,9 @@ TagManager:
   - UI Animations
   - Combat
   - Dungeon
+  - In-Game Enemy
+  - Chest
+  - Vase
   layers:
   - Default
   - TransparentFX
