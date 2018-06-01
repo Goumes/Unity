@@ -68,21 +68,21 @@ public class GlobalButton : MonoBehaviour
                 }
             }
         }
-        management.inCombat = true;
         //player.SetActive(false);
     }
 
     private void OnEnable()
     {
         management = GameObject.FindGameObjectWithTag("Management").GetComponent<Management>();
-        StartCoroutine(management.fadeIn());
-        //management.inCombat = true;
-        //player.SetActive(false);
+        StartCoroutine(management.fadeStartCombat());
     }
 
     private void OnDisable()
     {
-        management.inCombat = false;
+        //management.GetComponent<AudioManager>().stopMusic();
+        //management.backgroundMusic = Resources.Load<AudioClip>("Music/Normal Dungeon Music");
+        //management.GetComponent<AudioManager>().startMusic();
+        //management.inCombat = false;
     }
 
     // Update is called once per frame

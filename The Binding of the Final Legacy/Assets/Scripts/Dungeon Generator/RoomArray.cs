@@ -84,18 +84,8 @@ public class RoomArray : MonoBehaviour
             StartCoroutine(waitRoutine());
         }
 
-        if (!created && spawnedBoss)
-        {
-            createShop();
-            createDungeon();
-            created = true;
-
-            //adjustCamera(); //TO DO
-
-            loadingScreen.SetActive(false);
-            player.transform.position = new Vector3(1.87f, -0.32f, 0f);
-            minimap.SetActive(true);
-        }
+        Invoke("checkAndGenerateEverything", 0.1f);
+       
     }
 
     IEnumerator waitRoutine()
@@ -124,6 +114,22 @@ public class RoomArray : MonoBehaviour
             //Debug.Log("minimo");
             lastRoom = minimapRooms[minimapRooms.Count - 1];
             lastRoom.GetComponentInChildren<MinimapRoom>().generate = true;
+        }
+    }
+
+    private void checkAndGenerateEverything()
+    {
+        if (!created && spawnedBoss)
+        {
+            created = true;
+            createShop();
+            createDungeon();
+           
+            //adjustCamera(); //TO DO
+
+            loadingScreen.SetActive(false);
+            player.transform.position = new Vector3(1.87f, -0.32f, 0f);
+            minimap.SetActive(true);
         }
     }
 

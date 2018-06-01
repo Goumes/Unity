@@ -77,7 +77,7 @@ public class RoomScript : MonoBehaviour
     {
         for (int i = 0; i < chests.Count; i++)
         {
-            if (management.randomBoolean(0.5f) && !hasBoss)
+            if (management.randomBoolean(0.7f) && !hasBoss)
             {
                 chests[i].SetActive(false);
             }

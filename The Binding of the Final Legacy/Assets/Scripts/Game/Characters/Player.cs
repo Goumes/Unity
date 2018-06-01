@@ -40,6 +40,11 @@ public class Player : MonoBehaviour {
 
             SendAnimInfo();
         }
+
+        //if (Input.GetButton("Horizontal") || Input.GetButton("Vertical"))
+        //{
+        //    transform.GetComponent<AudioSource>().Play();
+        //}
         
     }
 
