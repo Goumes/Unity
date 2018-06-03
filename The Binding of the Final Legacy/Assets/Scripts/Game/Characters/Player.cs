@@ -34,7 +34,7 @@ public class Player : MonoBehaviour {
 
     void Update()
     {
-        if (!management.inCombat)
+        if (!management.inCombat && !management.inShop)
         {
             CheckInput();
 

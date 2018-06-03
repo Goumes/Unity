@@ -7,8 +7,10 @@ using UnityEngine.UI;
 public class Management : MonoBehaviour {
 
     public bool inCombat;
+    public bool inShop;
     private GameObject myEventSystem;
     public GameObject combat;
+    public GameObject shop;
     Color tmp;
     private GameObject fader;
     public bool playingMusic;
@@ -24,12 +26,13 @@ public class Management : MonoBehaviour {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         combat = GameObject.FindGameObjectWithTag("Combat");
+        shop = GameObject.FindGameObjectWithTag("Shop");
         fader = GameObject.FindGameObjectWithTag("Fade");
         tmp = fader.GetComponent<RawImage>().color;
-        backgroundMusic = Resources.Load<AudioClip>("Music/Normal Dungeon Music");
         audioManager = transform.GetComponent<AudioManager>();
         dungeon = GameObject.FindGameObjectWithTag("Dungeon");
         Invoke("DisableCombat", 0.2f);
+        Invoke("DisableShop", 0.2f);
     }
 
     private void DisableCombat()
@@ -37,9 +40,19 @@ public class Management : MonoBehaviour {
         combat.SetActive(false);
     }
 
+    private void DisableShop()
+    {
+        shop.SetActive(false);
+    }
+
     public void EndCombat()
     {
         StartCoroutine(fadeEndCombat());
+    }
+
+    public void EndShop()
+    {
+        StartCoroutine(fadeEndShop());
     }
 
     /// <summary>
@@ -67,6 +80,53 @@ public class Management : MonoBehaviour {
         {
             tmp.a = i;
             fader.GetComponent<RawImage>().color = tmp; //Hay que hacerlo así porque no es una variable y no se puede cambiar directamente
+            yield return new WaitForSeconds(0.0001f);
+        }
+    }
+
+    public IEnumerator fadeEndShop()
+    {
+        for (float i = 0f; i < 1f; i = i + 0.02f)
+        {
+            tmp.a = i;
+            fader.GetComponent<RawImage>().color = tmp; //Hay que hacerlo así porque no es una variable y no se puede cambiar directamente
+            yield return new WaitForSeconds(0.0001f);
+        }
+
+        shop.SetActive(false);
+        audioManager.stopMusic();
+        backgroundMusic = Resources.Load<AudioClip>("Music/Normal Dungeon Music");
+
+        yield return new WaitForSeconds(0.3f);
+
+        audioManager.startMusic();
+
+        inShop = false;
+
+        for (float i = 1f; i >= 0f; i = i - 0.02f)
+        {
+            tmp.a = i;
+            fader.GetComponent<RawImage>().color = tmp;
+            yield return new WaitForSeconds(0.0001f);
+        }
+
+    }
+
+    public IEnumerator fadeStartShop()
+    {
+
+        audioManager.stopMusic();
+        backgroundMusic = Resources.Load<AudioClip>("Music/Normal Fight Music");
+
+        yield return new WaitForSeconds(0.3f);
+
+        audioManager.startMusic();
+        inShop = true;
+
+        for (float i = 1f; i >= 0f; i = i - 0.02f)
+        {
+            tmp.a = i;
+            fader.GetComponent<RawImage>().color = tmp;
             yield return new WaitForSeconds(0.0001f);
         }
     }
@@ -145,6 +205,7 @@ public class Management : MonoBehaviour {
         if (dungeon.transform.childCount > 0 && !gameStarted)
         {
             gameStarted = true;
+            backgroundMusic = Resources.Load<AudioClip>("Music/Normal Dungeon Music");
             audioManager.startMusic();
         }
     }

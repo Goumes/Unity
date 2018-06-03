@@ -30,6 +30,13 @@ TagManager:
   - In-Game Enemy
   - Chest
   - Vase
+  - Shop Item
+  - Shop
+  - ShopPointer
+  - Shop Global Button
+  - Shop Item Buttons
+  - Shop Main Buttons
+  - Shop Items
   layers:
   - Default
   - TransparentFX
