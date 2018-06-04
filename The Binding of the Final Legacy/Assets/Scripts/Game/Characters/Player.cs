@@ -10,7 +10,7 @@ public class Player : MonoBehaviour {
     private Vector2 deltaForce;
 
     private Animator animator;
-    private Rigidbody2D rigidbody;
+    private Rigidbody2D myRigidbody;
     private Vector2 lastDirection;
     private BoxCollider2D boxCollider;
     private bool isMoving;
@@ -18,15 +18,15 @@ public class Player : MonoBehaviour {
     void Awake()
     {
         animator = GetComponent<Animator>();
-        rigidbody = GetComponent<Rigidbody2D>();
+        myRigidbody = GetComponent<Rigidbody2D>();
         boxCollider = GetComponent<BoxCollider2D>();
     }
 
     // Use this for initialization
     void Start ()
     {
-        rigidbody.gravityScale = 0;
-        rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
+        myRigidbody.gravityScale = 0;
+        myRigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
         management = GameObject.FindGameObjectWithTag("Management").GetComponent<Management>();
     }
 
@@ -34,10 +34,16 @@ public class Player : MonoBehaviour {
 
     void Update()
     {
-        if (!management.inCombat && !management.inShop)
+        if (!management.inCombat && !management.inShop && !management.inTransition)
         {
             CheckInput();
 
+            SendAnimInfo();
+        }
+        else
+        {
+            CalculateMovement(Vector2.zero);
+            isMoving = false;
             SendAnimInfo();
         }
 
@@ -109,8 +115,8 @@ public class Player : MonoBehaviour {
     /// <param name="playerForce"></param>
     private void CalculateMovement(Vector2 playerForce)
     {
-        rigidbody.velocity = Vector2.zero;
-        rigidbody.AddForce(playerForce, ForceMode2D.Impulse);
+        myRigidbody.velocity = Vector2.zero;
+        myRigidbody.AddForce(playerForce, ForceMode2D.Impulse);
     }
 
     /// <summary>
@@ -118,8 +124,8 @@ public class Player : MonoBehaviour {
     /// </summary>
     private void SendAnimInfo()
     {
-        animator.SetFloat("XSpeed", rigidbody.velocity.x);
-        animator.SetFloat("YSpeed", rigidbody.velocity.y);
+        animator.SetFloat("XSpeed", myRigidbody.velocity.x);
+        animator.SetFloat("YSpeed", myRigidbody.velocity.y);
 
         animator.SetFloat("LastX", lastDirection.x);
         animator.SetFloat("LastY", lastDirection.y);

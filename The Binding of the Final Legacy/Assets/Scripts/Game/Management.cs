@@ -8,6 +8,7 @@ public class Management : MonoBehaviour {
 
     public bool inCombat;
     public bool inShop;
+    public bool inTransition;
     private GameObject myEventSystem;
     public GameObject combat;
     public GameObject shop;

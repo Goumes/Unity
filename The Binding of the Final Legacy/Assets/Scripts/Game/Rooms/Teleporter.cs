@@ -159,6 +159,8 @@ public class Teleporter : MonoBehaviour
     /// <returns></returns>
     IEnumerator fadeOut(Collider2D collision)
     {
+        management.inTransition = true;
+
         for (float i = 0f; i < 1f; i = i + 0.02f)
         {
             tmp.a = i;
@@ -167,5 +169,6 @@ public class Teleporter : MonoBehaviour
         }
 
         changeRoom(collision); //Si no lo hago de esta manera, el objeto se destruye a mitad de rutina y nunca se ejecuta.
+        management.inTransition = false;
     }
 }

@@ -219,7 +219,7 @@ public class ShopButtonScript : MonoBehaviour, ISelectHandler, IDeselectHandler
 
             case "Leave":
 
-                mainButtons[0].GetComponent<Button>().Select();
+                //mainButtons[0].GetComponent<Button>().Select();
 
                 management.EndShop();
 

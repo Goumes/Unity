@@ -1,0 +1,26 @@
+{
+  "itemList": [
+	{
+	  "id": 0,
+	  "name": "Prueba",
+	  "description": "Descripcion to reshulona",
+	  "price": 111.1,
+	  "duration": 222.2,
+	  "attackModifier": 33.3,
+	  "defenseModifier": 44.4,
+	  "healthModifier": 55.55,
+	  "imageResourcePath": "Items/arrow"
+	},
+	{
+	  "id": 1,
+	  "name": "Prueba 1",
+	  "description": "Descripcion to reshulona 1",
+	  "price": 11111.1,
+	  "duration": 222222.2,
+	  "attackModifier": 333333.3,
+	  "defenseModifier": 444444.4,
+	  "healthModifier": 555555.55,
+	  "imageResourcePath": "Items/assaultRifle"
+	}
+ ]
+}

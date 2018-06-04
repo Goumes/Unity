@@ -37,6 +37,7 @@ TagManager:
   - Shop Item Buttons
   - Shop Main Buttons
   - Shop Items
+  - Item Pool
   layers:
   - Default
   - TransparentFX

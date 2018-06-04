@@ -66,6 +66,7 @@ public class Blob : MonoBehaviour {
     {
         if (collision.transform.CompareTag("Player"))
         {
+            management.GetComponent<Management>().inCombat = true;
             StartCoroutine(fadeOut());
         }
     }

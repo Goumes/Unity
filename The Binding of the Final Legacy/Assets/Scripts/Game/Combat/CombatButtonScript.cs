@@ -363,21 +363,21 @@ public class CombatButtonScript : MonoBehaviour, ISelectHandler, IDeselectHandle
 
             case "Run Away":
 
-                for (int j = 0; j < lvl1Background[0].transform.childCount; j++)
-                {
-                    if (lvl1Background[0].transform.GetChild(j).transform.name.Equals("Main Menu"))
-                    {
-                        for (int k = 0; k < lvl1Background[0].transform.GetChild(j).childCount; k++)
-                        {
-                            lvl1Background[0].transform.GetChild(j).GetChild(k).gameObject.GetComponent<Button>().interactable = true;
+                //for (int j = 0; j < lvl1Background[0].transform.childCount; j++)
+                //{
+                //    if (lvl1Background[0].transform.GetChild(j).transform.name.Equals("Main Menu"))
+                //    {
+                //        for (int k = 0; k < lvl1Background[0].transform.GetChild(j).childCount; k++)
+                //        {
+                //            lvl1Background[0].transform.GetChild(j).GetChild(k).gameObject.GetComponent<Button>().interactable = true;
 
-                            if (k == 0)
-                            {
-                                lvl1Background[0].transform.GetChild(j).GetChild(k).GetComponent<Button>().Select();
-                            }
-                        }
-                    }
-                }
+                //            if (k == 0)
+                //            {
+                //                lvl1Background[0].transform.GetChild(j).GetChild(k).GetComponent<Button>().Select();
+                //            }
+                //        }
+                //    }
+                //}
 
                 management.EndCombat();
                 break;

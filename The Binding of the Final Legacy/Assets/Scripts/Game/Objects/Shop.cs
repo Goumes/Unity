@@ -37,6 +37,7 @@ public class Shop : MonoBehaviour
     {
         if (collision.transform.CompareTag("Player"))
         {
+            management.GetComponent<Management>().inShop = true;
             StartCoroutine(fadeOut());
         }
     }
