@@ -25,6 +25,7 @@ public class RoomArray : MonoBehaviour
     private Management management;
     private GameObject grid;
     private int shopNumber;
+    private GameDataManager gameDataManager;
     // Use this for initialization
     void Start () {
         roomCounter = 0;
@@ -41,6 +42,7 @@ public class RoomArray : MonoBehaviour
         management = GameObject.FindGameObjectWithTag("Management").GetComponent<Management>();
         grid = GameObject.FindGameObjectWithTag("Grid");
         shopNumber = -1;
+        gameDataManager = GameObject.FindGameObjectWithTag("GameData").GetComponent<GameDataManager>();
         //player.SetActive(false);
         InvokeRepeating("checkEnd", 0f, 1f);
     }
@@ -119,16 +121,43 @@ public class RoomArray : MonoBehaviour
 
     private void checkAndGenerateEverything()
     {
+        GameSave save = null;
         if (!created && spawnedBoss)
         {
             created = true;
-            createShop();
+
+            if (!gameDataManager.hasSavedGame)
+            {
+                createShop();
+            }
+            else
+            {
+                save = gameDataManager.LoadGame("Prueba1");//Cambiar esto por variables en la clase de game data
+
+                for (int i = 0; i < save.dungeon.rooms.Count; i++)
+                {
+                    if (save.dungeon.rooms[i].hasShop)
+                    {
+                        shopNumber = save.dungeon.rooms[i].serial - 1;
+                    }
+                }
+            }
+            
             createDungeon();
            
             //adjustCamera(); //TO DO
 
             loadingScreen.SetActive(false);
-            player.transform.position = new Vector3(1.87f, -0.32f, 0f);
+
+            if (gameDataManager.hasSavedGame)
+            {
+                player.transform.position = new Vector3(save.player.x, save.player.y, 0f);
+            }
+            else
+            {
+                player.transform.position = new Vector3(1.87f, -0.32f, 0f);
+            }
+            
             minimap.SetActive(true);
         }
     }
@@ -450,10 +479,8 @@ public class RoomArray : MonoBehaviour
                 }
             }
 
-            if (i == 0)
-            {
-                room.SetActive(true);
-            }
+            StartCoroutine(SetEnabledRooms(room, i));
+
 
             if (i == minimapRooms.Count - 1)
             {
@@ -462,37 +489,17 @@ public class RoomArray : MonoBehaviour
 
             room.transform.parent = dungeon.transform;
         }
-        //for (int i = 0; i < minimapRooms.Count; i++) {
-        //    foreach (KeyValuePair<string, int> pair in minimapRooms[i].GetComponentInChildren<MinimapRoom>().childPositions)
-        //    {
-        //        Debug.Log(minimapRooms[i].transform.parent.transform.name);
-        //        Debug.Log(pair.Key + " + " + pair.Value);
-        //    }
-        //}
+    }
 
+    IEnumerator SetEnabledRooms(GameObject room, int i)
+    {
 
-        //var x = (GameObject)Resources.Load("Rooms/TB/Default Room TB");
-        //for (int i = 0; i < x.GetComponentsInChildren<Teleporter>().Length; i++)
-        //{
-        //    x.GetComponentsInChildren<Teleporter>()[i].roomNumber = roomCounter;
-        //}
-        //realRooms.Add(x);
-        //Instantiate(x);
-        //roomCounter++;
+        yield return new WaitForSeconds(0.01f);
+        room.SetActive(false);
 
-
-        //x = (GameObject)Resources.Load("Rooms/TB/Default Room TB");
-        //for (int i = 0; i < x.GetComponentsInChildren<Teleporter>().Length; i++)
-        //{
-        //    x.GetComponentsInChildren<Teleporter>()[i].roomNumber = roomCounter;
-        //}
-        //realRooms.Add(x);
-        //Instantiate(x);
-        //roomCounter++;
-
-
-        //realRooms.Add((GameObject)Resources.Load("Rooms/BL/Default Room BL"));
-        //realRooms.Add((GameObject)Resources.Load("Rooms/TLR/Default Room TLR"));
-        //realRooms.Add((GameObject)Resources.Load("Rooms/TR/Default Room TR"));
+        if (minimapRooms[i].GetComponent<MinimapRoom>().currentRoom)
+        {
+            room.SetActive(true);
+        }
     }
 }

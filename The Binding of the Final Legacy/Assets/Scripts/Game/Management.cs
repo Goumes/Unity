@@ -19,6 +19,7 @@ public class Management : MonoBehaviour {
     private AudioManager audioManager;
     private GameObject dungeon;
     private bool gameStarted;
+    private GameDataManager gameDataManager;
 
     // Use this for initialization
     void Start () {
@@ -32,6 +33,7 @@ public class Management : MonoBehaviour {
         tmp = fader.GetComponent<RawImage>().color;
         audioManager = transform.GetComponent<AudioManager>();
         dungeon = GameObject.FindGameObjectWithTag("Dungeon");
+        gameDataManager = GameObject.FindGameObjectWithTag("GameData").GetComponent<GameDataManager>();
         Invoke("DisableCombat", 0.2f);
         Invoke("DisableShop", 0.2f);
     }
@@ -199,6 +201,16 @@ public class Management : MonoBehaviour {
     void Update ()
     {
         Invoke("checkForStart", 0.1f);
+
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            gameDataManager.SaveGame();
+        }
+
+        else if (Input.GetKeyDown(KeyCode.L))
+        {
+            gameDataManager.LoadGame("Prueba1");
+        }
     }
 
     private void checkForStart()

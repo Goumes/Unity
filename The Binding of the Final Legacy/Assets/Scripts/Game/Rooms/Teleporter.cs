@@ -70,8 +70,9 @@ public class Teleporter : MonoBehaviour
                 {
                     if (rooms.minimapRooms[i].GetComponentInChildren<MinimapRoom>().currentRoom)
                     {
-                        rooms.minimapRooms[i].GetComponent<MinimapRoom>().childPositions.TryGetValue("T", out serial);
-                        rooms.realRooms[serial].SetActive(true);
+                        var script = rooms.minimapRooms[i].GetComponent<MinimapRoom>();
+                        script.childPositions.TryGetValue("T", out serial);
+                        rooms.realRooms[serial - 1].SetActive(true);
                         rooms.minimapRooms[i].GetComponentInChildren<MinimapRoom>().currentRoom = false;
                         i = -1;
                     }
@@ -94,7 +95,7 @@ public class Teleporter : MonoBehaviour
                     if (rooms.minimapRooms[i].GetComponentInChildren<MinimapRoom>().currentRoom)
                     {
                         rooms.minimapRooms[i].GetComponent<MinimapRoom>().childPositions.TryGetValue("R", out serial);
-                        rooms.realRooms[serial].SetActive(true);
+                        rooms.realRooms[serial - 1].SetActive(true);
                         rooms.minimapRooms[i].GetComponentInChildren<MinimapRoom>().currentRoom = false;
                         i = -1;
                     }
@@ -115,7 +116,7 @@ public class Teleporter : MonoBehaviour
                     if (rooms.minimapRooms[i].GetComponentInChildren<MinimapRoom>().currentRoom)
                     {
                         rooms.minimapRooms[i].GetComponent<MinimapRoom>().childPositions.TryGetValue("L", out serial);
-                        rooms.realRooms[serial].SetActive(true);
+                        rooms.realRooms[serial - 1].SetActive(true);
                         rooms.minimapRooms[i].GetComponentInChildren<MinimapRoom>().currentRoom = false;
                         i = -1;
                     }
@@ -138,7 +139,7 @@ public class Teleporter : MonoBehaviour
                     if (rooms.minimapRooms[i].GetComponentInChildren<MinimapRoom>().currentRoom)
                     {
                         rooms.minimapRooms[i].GetComponent<MinimapRoom>().childPositions.TryGetValue("B", out serial);
-                        rooms.realRooms[serial].SetActive(true);
+                        rooms.realRooms[serial - 1].SetActive(true);
                         rooms.minimapRooms[i].GetComponentInChildren<MinimapRoom>().currentRoom = false;
                         i = -1;
                     }

@@ -310,7 +310,9 @@
     <Compile Include="Assets\Scripts\Dungeon Generator\MinimapSpawnPoint.cs" />
     <Compile Include="Assets\Scripts\Dungeon Generator\RoomArray.cs" />
     <Compile Include="Assets\Scripts\Game\Characters\Blob.cs" />
+    <Compile Include="Assets\Scripts\Game\Characters\EnemyClass.cs" />
     <Compile Include="Assets\Scripts\Game\Characters\Player.cs" />
+    <Compile Include="Assets\Scripts\Game\Characters\PlayerClass.cs" />
     <Compile Include="Assets\Scripts\Game\Combat\BackgroundScript.cs" />
     <Compile Include="Assets\Scripts\Game\Combat\CombatButtonScript.cs" />
     <Compile Include="Assets\Scripts\Game\Combat\GlobalButton.cs" />
@@ -328,6 +330,13 @@
     <Compile Include="Assets\Scripts\Game\Rooms\AudioManager.cs" />
     <Compile Include="Assets\Scripts\Game\Rooms\RoomScript.cs" />
     <Compile Include="Assets\Scripts\Game\Rooms\Teleporter.cs" />
+    <Compile Include="Assets\Scripts\Game\Save\DungeonSave.cs" />
+    <Compile Include="Assets\Scripts\Game\Save\GameDataManager.cs" />
+    <Compile Include="Assets\Scripts\Game\Save\GameSave.cs" />
+    <Compile Include="Assets\Scripts\Game\Save\MinimapRoomSave.cs" />
+    <Compile Include="Assets\Scripts\Game\Save\MinimapSave.cs" />
+    <Compile Include="Assets\Scripts\Game\Save\PlayerSave.cs" />
+    <Compile Include="Assets\Scripts\Game\Save\RealRoomSave.cs" />
     <Compile Include="Assets\Scripts\Game\Shop\ShopButtonScript.cs" />
     <Compile Include="Assets\Scripts\Game\Shop\ShopGlobalButton.cs" />
     <Compile Include="Assets\Scripts\Game\UI\LoadingScreenScript.cs" />

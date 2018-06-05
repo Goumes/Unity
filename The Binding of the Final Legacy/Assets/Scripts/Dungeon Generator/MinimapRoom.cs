@@ -36,7 +36,7 @@ public class MinimapRoom : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
-        generate = true;
+        generate = false;
         //Se seleccionan puertas aleatoriamente de entre las 4 que hay.
         tilemap = GetComponent<Tilemap>();
         roomArray = GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomArray>();
@@ -46,22 +46,29 @@ public class MinimapRoom : MonoBehaviour
         //serialNumber = gridScript.globalCounter;
         transform.parent.transform.name = "Default Room " + serialNumber;
         //childPositions = new List<ChildDictionary>();
-        childPositions = new Dictionary<string, int>();
+        if (gridScript.canGenerate)
+        {
+            childPositions = new Dictionary<string, int>();
+        }
+        
+        Invoke("deleteSpawnPoints", 10f);
 
-        if (serialNumber == 0)
+        if (serialNumber == 1 && gridScript.canGenerate)
         {
             currentRoom = true;
         }
-
-        InvokeRepeating("generateDoors", 0, Random.Range(0.1f, 0.4f)); //Hay que arreglar esto. Al introducir un minimo y un maximo de habitaciones todo se vuelve loco. ARREGLADO.
-        Invoke("deleteSpawnPoints", 10f);//Borrar todos los spawnpoints tras 2 segundos.
-        //Invoke("generateDoors", 0.1f);
 
     }
 	// Update is called once per frame
 	void FixedUpdate ()
     {
         checkDoors();
+
+        if (gridScript.canGenerate)
+        {
+            //generate = true;
+            InvokeRepeating("generateDoors", 0.1f, Random.Range(0.1f, 0.4f));
+        }
 
         if (currentRoom && !created)
         {
@@ -159,11 +166,14 @@ public class MinimapRoom : MonoBehaviour
             {
                 for (int i = 0; i < roomArray.minimapRooms.Count; i++)
                 {
-                    foreach (KeyValuePair<string, int> pair in roomArray.minimapRooms[i].GetComponentInChildren<MinimapRoom>().childPositions)
+                    if (gridScript.canGenerate)
                     {
-                        if (pair.Value == serialNumber && pair.Key.Equals("B"))
+                        foreach (KeyValuePair<string, int> pair in roomArray.minimapRooms[i].GetComponentInChildren<MinimapRoom>().childPositions)
                         {
-                            childPositions.Add("T", roomArray.minimapRooms[i].GetComponent<MinimapRoom>().serialNumber);
+                            if (pair.Value == serialNumber && pair.Key.Equals("B"))
+                            {
+                                childPositions.Add("T", roomArray.minimapRooms[i].GetComponent<MinimapRoom>().serialNumber);
+                            }
                         }
                     }
                 }

@@ -15,6 +15,8 @@ public class Player : MonoBehaviour {
     private BoxCollider2D boxCollider;
     private bool isMoving;
     private Management management;
+    public PlayerClass playerStats;
+    GameDataManager gameDataManager;
     void Awake()
     {
         animator = GetComponent<Animator>();
@@ -28,6 +30,8 @@ public class Player : MonoBehaviour {
         myRigidbody.gravityScale = 0;
         myRigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
         management = GameObject.FindGameObjectWithTag("Management").GetComponent<Management>();
+        gameDataManager = GameObject.FindGameObjectWithTag("GameData").GetComponent<GameDataManager>();
+        playerStats = gameDataManager.LoadGame("Prueba1").player.playerDetails;
     }
 
     // Update is called once per frame

@@ -38,6 +38,7 @@ TagManager:
   - Shop Main Buttons
   - Shop Items
   - Item Pool
+  - GameData
   layers:
   - Default
   - TransparentFX

@@ -111,7 +111,7 @@ GameObject:
   - component: {fileID: 114726670049106902}
   - component: {fileID: 61727580589964398}
   m_Layer: 0
-  m_Name: Vase
+  m_Name: Vase 1
   m_TagString: Vase
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 114095103164596550}
   - component: {fileID: 61796206922875928}
   m_Layer: 0
-  m_Name: Blob
+  m_Name: Blob 3
   m_TagString: In-Game Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -232,7 +232,7 @@ GameObject:
   - component: {fileID: 60798471148254134}
   - component: {fileID: 61007765660776908}
   m_Layer: 0
-  m_Name: Chest
+  m_Name: Chest 1
   m_TagString: Chest
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -334,7 +334,7 @@ GameObject:
   - component: {fileID: 114116176544358026}
   - component: {fileID: 61611859796193936}
   m_Layer: 0
-  m_Name: Blob
+  m_Name: Blob 1
   m_TagString: In-Game Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -354,7 +354,7 @@ GameObject:
   - component: {fileID: 114973862132974682}
   - component: {fileID: 61093989810608750}
   m_Layer: 0
-  m_Name: Blob
+  m_Name: Blob 2
   m_TagString: In-Game Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -373,7 +373,7 @@ GameObject:
   - component: {fileID: 114951422104284742}
   - component: {fileID: 61138403414919820}
   m_Layer: 0
-  m_Name: Vase
+  m_Name: Vase 2
   m_TagString: Vase
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -412,7 +412,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1963472130421514
 GameObject:
   m_ObjectHideFlags: 1
