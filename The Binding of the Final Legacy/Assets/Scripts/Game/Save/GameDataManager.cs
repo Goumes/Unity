@@ -62,7 +62,6 @@ public class GameDataManager : MonoBehaviour
             itemPool = GameObject.FindGameObjectWithTag("Item Pool");
             minimapGrid = GameObject.FindGameObjectWithTag("Grid");
             roomArray = GameObject.FindGameObjectWithTag("Rooms");
-            player.GetComponent<Player>().playerStats = createdPlayer;
         }
 	}
 
@@ -162,6 +161,7 @@ public class GameDataManager : MonoBehaviour
         PlayerSave playerSave = new PlayerSave();
         playerSave.x = player.transform.position.x;
         playerSave.y = player.transform.position.y;
+        var stats = player.GetComponent<Player>().playerStats;
         playerSave.playerDetails = player.GetComponent<Player>().playerStats;
 
         save.player = playerSave;

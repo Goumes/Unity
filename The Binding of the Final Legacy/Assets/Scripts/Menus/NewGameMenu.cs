@@ -383,7 +383,7 @@ public class NewGameMenu : MonoBehaviour
     public void startButton()
     {
         var randomName = "Save " + UnityEngine.Random.Range(0, 99999999).ToString();
-        gameDataManager.createdPlayer = new PlayerClass(inputName.text.Substring(1), healthValue, defenseValue, attackValue, wealthValue, new List<GameObject>());//Aqui hay que multiplicar el valor del atributo por lo que sea
+        gameDataManager.createdPlayer = new PlayerClass(inputName.text, healthValue, defenseValue, attackValue, wealthValue, new List<GameObject>());//Aqui hay que multiplicar el valor del atributo por lo que sea
         gameDataManager.selectedSave = randomName;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }

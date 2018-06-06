@@ -8,7 +8,8 @@ public class Item : MonoBehaviour
 	// Use this for initialization
 	void Start () {
         itemDatabase = GameObject.FindGameObjectWithTag("Item Pool").GetComponent<ItemDatabase>();
-        transform.GetComponent<SpriteRenderer>().sprite = Resources.Load(itemDatabase.database.itemList[0].imageResourcePath, typeof(Sprite)) as Sprite;
+        Invoke("loadItem", 0.001f);
+        
     }
 	
 	// Update is called once per frame
@@ -16,4 +17,9 @@ public class Item : MonoBehaviour
     {
 		
 	}
+
+    private void loadItem()
+    {
+        transform.GetComponent<SpriteRenderer>().sprite = Resources.Load(itemDatabase.database.itemList[0].imageResourcePath, typeof(Sprite)) as Sprite;
+    }
 }
