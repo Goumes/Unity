@@ -3,15 +3,19 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameDataManager : MonoBehaviour
 {
+    public string selectedSave;
+    public PlayerClass createdPlayer;
     private GameObject player;
     private GameObject dungeon;
     private GameObject itemPool;
     private GameObject minimapGrid;
     private GameObject roomArray;
     public bool hasSavedGame;
+    private bool instantiated;
 
     //Singleton
     public static GameDataManager Instance;
@@ -20,14 +24,9 @@ public class GameDataManager : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
-        dungeon = GameObject.FindGameObjectWithTag("Dungeon");
-        itemPool = GameObject.FindGameObjectWithTag("Item Pool");
-        minimapGrid = GameObject.FindGameObjectWithTag("Grid");
-        roomArray = GameObject.FindGameObjectWithTag("Rooms");
         //hasSavedGame = true;
 
-        if (LoadGame("Prueba1") != null)
+        if (LoadGame() != null)
         {
             hasSavedGame = true;
         }
@@ -55,14 +54,23 @@ public class GameDataManager : MonoBehaviour
     // Update is called once per frame
     void Update ()
     {
-		
+        if (SceneManager.GetActiveScene().name.Equals("Juego") && !instantiated)
+        {
+            instantiated = true;
+            player = GameObject.FindGameObjectWithTag("Player");
+            dungeon = GameObject.FindGameObjectWithTag("Dungeon");
+            itemPool = GameObject.FindGameObjectWithTag("Item Pool");
+            minimapGrid = GameObject.FindGameObjectWithTag("Grid");
+            roomArray = GameObject.FindGameObjectWithTag("Rooms");
+            player.GetComponent<Player>().playerStats = createdPlayer;
+        }
 	}
 
     public void SaveGame()
     {
         GameSave save = new GameSave ();
-        save.saveGameName = "Prueba1";
-        //save.player = player;
+        save.saveGameName = selectedSave;
+
         //save.itemPool = itemPool;
 
         saveMinimap(save);
@@ -159,13 +167,13 @@ public class GameDataManager : MonoBehaviour
         save.player = playerSave;
     }
 
-    public GameSave LoadGame(string gameToLoad)
+    public GameSave LoadGame()
     {
         GameSave loadedGame = null;
-        if (File.Exists("C:/Savegames/" + gameToLoad + ".sav"))
+        if (File.Exists("C:/Savegames/" + selectedSave + ".sav"))
         {
             BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open("C:/Savegames/" + gameToLoad + ".sav", FileMode.Open);
+            FileStream file = File.Open("C:/Savegames/" + selectedSave + ".sav", FileMode.Open);
             loadedGame = (GameSave)bf.Deserialize(file);
             file.Close();
             Debug.Log("Loaded Game: " + loadedGame.saveGameName);

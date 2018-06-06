@@ -132,7 +132,7 @@ public class RoomArray : MonoBehaviour
             }
             else
             {
-                save = gameDataManager.LoadGame("Prueba1");//Cambiar esto por variables en la clase de game data
+                save = gameDataManager.LoadGame();//Cambiar esto por variables en la clase de game data
 
                 for (int i = 0; i < save.dungeon.rooms.Count; i++)
                 {

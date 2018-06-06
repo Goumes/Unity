@@ -84,7 +84,7 @@ public class RoomScript : MonoBehaviour
             else
             {
                 bool found = false;
-                var save = gameDataManager.LoadGame("Prueba1");
+                var save = gameDataManager.LoadGame();
 
                 for (int j = 0; j < save.dungeon.rooms[serialNumber - 1].enemies.Count; j++)
                 {
@@ -119,7 +119,7 @@ public class RoomScript : MonoBehaviour
             else
             {
                 bool found = false;
-                var save = gameDataManager.LoadGame("Prueba1");
+                var save = gameDataManager.LoadGame();
 
                 for (int j = 0; j < save.dungeon.rooms[serialNumber - 1].chests.Count; j++)
                 {
@@ -152,7 +152,7 @@ public class RoomScript : MonoBehaviour
             else
             {
                 bool found = false;
-                var save = gameDataManager.LoadGame("Prueba1");
+                var save = gameDataManager.LoadGame();
 
                 for (int j = 0; j < save.dungeon.rooms[serialNumber - 1].misc.Count; j++)
                 {

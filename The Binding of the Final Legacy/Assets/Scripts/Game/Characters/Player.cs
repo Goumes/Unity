@@ -31,7 +31,7 @@ public class Player : MonoBehaviour {
         myRigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
         management = GameObject.FindGameObjectWithTag("Management").GetComponent<Management>();
         gameDataManager = GameObject.FindGameObjectWithTag("GameData").GetComponent<GameDataManager>();
-        playerStats = gameDataManager.LoadGame("Prueba1").player.playerDetails;
+        playerStats = gameDataManager.LoadGame().player.playerDetails;
     }
 
     // Update is called once per frame

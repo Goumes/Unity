@@ -209,7 +209,7 @@ public class Management : MonoBehaviour {
 
         else if (Input.GetKeyDown(KeyCode.L))
         {
-            gameDataManager.LoadGame("Prueba1");
+            gameDataManager.LoadGame();
         }
     }
 

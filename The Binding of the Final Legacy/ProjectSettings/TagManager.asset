@@ -39,6 +39,14 @@ TagManager:
   - Shop Items
   - Item Pool
   - GameData
+  - AttackSlices
+  - DefenseSlices
+  - HealthSlices
+  - WealthSlices
+  - NewGameAlert
+  - InputName
+  - PointsLeft
+  - NewGameStartButton
   layers:
   - Default
   - TransparentFX

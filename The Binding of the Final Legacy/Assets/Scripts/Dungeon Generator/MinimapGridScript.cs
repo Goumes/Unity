@@ -34,7 +34,7 @@ public class MinimapGridScript : MonoBehaviour {
 
         else
         {
-            loadMinimap(gameDataManager.LoadGame("Prueba1"));
+            loadMinimap(gameDataManager.LoadGame());
         }
     }
 
