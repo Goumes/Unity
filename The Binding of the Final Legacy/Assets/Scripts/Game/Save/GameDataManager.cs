@@ -79,7 +79,12 @@ public class GameDataManager : MonoBehaviour
         savePlayer(save);
 
         BinaryFormatter bf = new BinaryFormatter();
-        FileStream file = File.Create("C:/Savegames/" + save.saveGameName + ".sav");
+        if (!Directory.Exists(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments) + "/The Binding of the Final Legacy/"))
+        {
+            Directory.CreateDirectory(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments) + "/The Binding of the Final Legacy/");
+
+        }
+        FileStream file = File.Create(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments) + "/The Binding of the Final Legacy/" + save.saveGameName + ".sav");
         bf.Serialize(file, save);
         file.Close();
         Debug.Log("Saved Game: " + save.saveGameName);
@@ -170,10 +175,10 @@ public class GameDataManager : MonoBehaviour
     public GameSave LoadGame()
     {
         GameSave loadedGame = null;
-        if (File.Exists("C:/Savegames/" + selectedSave + ".sav"))
+        if (File.Exists(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments) + "/The Binding of the Final Legacy/" + selectedSave + ".sav"))
         {
             BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open("C:/Savegames/" + selectedSave + ".sav", FileMode.Open);
+            FileStream file = File.Open(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments) + "/The Binding of the Final Legacy/" + selectedSave + ".sav", FileMode.Open);
             loadedGame = (GameSave)bf.Deserialize(file);
             file.Close();
             Debug.Log("Loaded Game: " + loadedGame.saveGameName);

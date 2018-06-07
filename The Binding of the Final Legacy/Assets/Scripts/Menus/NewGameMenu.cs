@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -23,7 +24,11 @@ public class NewGameMenu : MonoBehaviour
     private TextMeshProUGUI pointsLeftUI;
     private Color backUp;
     private GameDataManager gameDataManager;
-    private GameObject startButtonUI;
+    private GameObject[] attributeButtons;
+    private MenuGlobalButton globalButton;
+    private GameObject[] alertButtons;
+    private bool horizontalAxisPressed;
+    private EventSystem myEventSystem;
 
 	// Use this for initialization
 	void Start ()
@@ -37,9 +42,14 @@ public class NewGameMenu : MonoBehaviour
         inputName = GameObject.FindGameObjectWithTag("InputName").GetComponent<TextMeshProUGUI>();
         pointsLeftUI = GameObject.FindGameObjectWithTag("PointsLeft").GetComponent<TextMeshProUGUI>();
         gameDataManager = GameObject.FindGameObjectWithTag("GameData").GetComponent<GameDataManager>();
-        startButtonUI = GameObject.FindGameObjectWithTag("NewGameStartButton");
+        globalButton = GameObject.FindGameObjectWithTag("MenuGlobalButton").GetComponent<MenuGlobalButton>();
         pointsLeftUI.SetText(pointsLeft.ToString());
         backUp = pointsLeftUI.color;
+
+        attributeButtons = GameObject.FindGameObjectsWithTag("NewGameButton");
+        alertButtons = GameObject.FindGameObjectsWithTag("NewGameAlertButton");
+        myEventSystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
+
 
         alert.SetActive(false);
 
@@ -79,28 +89,14 @@ public class NewGameMenu : MonoBehaviour
                 wealthSlices.transform.GetChild(i).gameObject.SetActive(false);
             }
         }
-
-        //for (int i = 0; i < alert.transform.childCount; i++)
-        //{
-        //    if (alert.transform.GetChild(i).transform.CompareTag("InputName"))
-        //    {
-        //        var parent = alert.transform.GetChild(i).transform.GetChild(0);
-
-        //        for (int j = 0; j < parent.transform.childCount; j++)
-        //        {
-        //            if (parent.transform.GetChild(j).name.Equals("Text"))
-        //            {
-        //                inputName = parent.transform.GetChild(j).transform.GetComponent<TextMeshProUGUI>();
-        //            }
-        //        }
-                
-
-                
-        //    }
-        //}
     }
 
     private void OnEnable()
+    {
+        Invoke("firstSelected", 0.01f);
+    }
+
+    private void firstSelected()
     {
         pointsLeft = totalPoints;
         pointsLeftUI.SetText(pointsLeft.ToString());
@@ -141,6 +137,14 @@ public class NewGameMenu : MonoBehaviour
                 wealthSlices.transform.GetChild(i).gameObject.SetActive(false);
             }
         }
+
+        for (int i = 0; i < attributeButtons.Length; i++)
+        {
+            if (attributeButtons[i].transform.name.Equals("AttackButton"))
+            {
+                attributeButtons[i].GetComponent<Button>().Select();
+            }
+        }
     }
 
     // Update is called once per frame
@@ -149,15 +153,133 @@ public class NewGameMenu : MonoBehaviour
         //if (String.IsNullOrEmpty(inputName.text.Substring(1))) //Cambiar esto a si contiene algun numero, letra, la primera no es espacio, etc... Ahora no tengo tiempo
         if (inputName.text.Length < 2) //La longitud es 1 cuando no hay nada por alguna extraña razón...
         {
-            startButtonUI.GetComponent<Button>().interactable = false;
-            startButtonUI.transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = new Color(0.529f, 0.529f, 0.529f);
+            for (int i = 0; i < alertButtons.Length; i++)
+            {
+                if (alertButtons[i].transform.name.Equals("Start Button"))
+                {
+                    alertButtons[i].SetActive(false);
+                }
+                
+            }
+            for (int i = 0; i < alert.transform.childCount; i++)
+            {
+                if (alert.transform.GetChild(i).name.Equals("Start Background"))
+                {
+                    alert.transform.GetChild(i).gameObject.SetActive(false);
+                }
+            }
         }
         else
         {
-            startButtonUI.GetComponent<Button>().interactable = true;
-            startButtonUI.transform.GetChild(0).GetComponent<TextMeshProUGUI>().color = new Color(0.259f, 0.302f, 0.733f);
+            for (int i = 0; i < alertButtons.Length; i++)
+            {
+                if (alertButtons[i].transform.name.Equals("Start Button"))
+                {
+                    alertButtons[i].SetActive(true);
+                }
+
+            }
+
+            for (int i = 0; i < alert.transform.childCount; i++)
+            {
+                if (alert.transform.GetChild(i).name.Equals("Start Background"))
+                {
+                    alert.transform.GetChild(i).gameObject.SetActive(true);
+                }
+            }
+
         }
+
+        checkSelected(); //Se queda un poco atascado a veces, no se como arreglarlo porque no hay nada más rápido que el update
 	}
+
+    private void checkSelected()
+    {
+        if (Input.GetAxis("Horizontal") < 0)
+        {
+            if (!horizontalAxisPressed)
+            {
+                for (int i = 0; i < attributeButtons.Length; i++)
+                {
+                    if (attributeButtons[i].Equals(globalButton.currentButton))
+                    {
+                        switch (attributeButtons[i].transform.name)
+                        {
+                            case "AttackButton":
+                                attackArrowButton("left");
+                                break;
+                            case "DefenseButton":
+                                defenseArrowButton("left");
+                                break;
+                            case "HealthButton":
+                                healthArrowButton("left");
+                                break;
+                            case "WealthButton":
+                                wealthArrowButton("left");
+                                break;
+                        }
+                    }
+                }
+
+                horizontalAxisPressed = true;
+            }
+
+        }
+        else if (Input.GetAxis("Horizontal") > 0)
+        {
+
+            if (!horizontalAxisPressed)
+            {
+                for (int i = 0; i < attributeButtons.Length; i++)
+                {
+                    if (attributeButtons[i].Equals(globalButton.currentButton))
+                    {
+                        switch (attributeButtons[i].transform.name)
+                        {
+                            case "AttackButton":
+                                attackArrowButton("right");
+                                break;
+                            case "DefenseButton":
+                                defenseArrowButton("right");
+                                break;
+                            case "HealthButton":
+                                healthArrowButton("right");
+                                break;
+                            case "WealthButton":
+                                wealthArrowButton("right");
+                                break;
+                        }
+                    }
+                }
+
+                horizontalAxisPressed = true;
+            }
+        }
+        else if (Input.GetButtonDown("Submit"))
+        {
+            for (int i = 0; i < alertButtons.Length; i++)
+            {
+                if (alertButtons[i].transform.name.Equals("InputName"))
+                {
+                    if (myEventSystem.currentSelectedGameObject.Equals(alertButtons[i]))
+                    {
+                        for (int j = 0; j < alertButtons.Length; j++)
+                        {
+                            if (alertButtons[j].transform.name.Equals("Back Button 2"))
+                            {
+                                alertButtons[j].GetComponent<Button>().Select();
+                            }
+
+                        }
+                    }
+                }
+            }
+        }
+        else
+        {
+            horizontalAxisPressed = false;
+        }
+    }
 
     public void attackArrowButton(string direction)
     {
@@ -372,11 +494,40 @@ public class NewGameMenu : MonoBehaviour
             alert.SetActive(true);
             inputName.SetText(""); //No consigo arreglar esto, he probado a entrar al selection caret pero no viene nada y la documentación de esto es prácticamente inexistente
             Debug.Log("Text: " + inputName.text);
+
+            for (int i = 0; i < attributeButtons.Length; i++)
+            {
+                attributeButtons[i].GetComponent<Button>().interactable = false;
+            }
+
+            for (int i = 0; i < alertButtons.Length; i++)
+            {
+                if (alertButtons[i].transform.name.Equals("InputName"))
+                {
+                    alertButtons[i].GetComponent<TMP_InputField>().Select();
+                    globalButton.currentButton = alertButtons[i];
+                }
+                
+            }
+
         }
         else
         {
             StopCoroutine(notEnoughPoints());
             StartCoroutine(notEnoughPoints());
+        }
+    }
+
+    public void backButton()
+    {
+        for (int i = 0; i < attributeButtons.Length; i++)
+        {
+            attributeButtons[i].GetComponent<Button>().interactable = true;
+
+            if (attributeButtons[i].transform.name.Equals("AttackButton"))
+            {
+                attributeButtons[i].GetComponent<Button>().Select();
+            }
         }
     }
 

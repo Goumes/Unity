@@ -5,8 +5,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
-public class LoadMenuButton : MonoBehaviour, ISelectHandler, IDeselectHandler, IPointerEnterHandler, IPointerExitHandler
+public class LoadMenuButton : MonoBehaviour, ISelectHandler, IDeselectHandler
 {
     private GameObject empty;
     private GameObject notEmpty;
@@ -16,44 +17,56 @@ public class LoadMenuButton : MonoBehaviour, ISelectHandler, IDeselectHandler, I
     private LoadMenu loadMenu;
     private int saveNumber;
     private GameDataManager gameDataManager;
+    private GameObject pointer;
+    private MenuGlobalButton globalButton;
 	// Use this for initialization
 	void Start ()
     {
-        loadMenu = transform.GetComponentInParent<LoadMenu>();
-        saveNumber = Convert.ToInt32(transform.parent.transform.name.Substring(5));
-        gameDataManager = GameObject.FindGameObjectWithTag("GameData").GetComponent<GameDataManager>();
-
-        for (int i = 0; i < transform.parent.childCount; i++)
+        if (!transform.name.Equals("Back Button"))
         {
-            if (transform.parent.GetChild(i).transform.CompareTag("NotEmptySave"))
-            {
-                notEmpty = transform.parent.GetChild(i).gameObject;
-            }
-            else if (transform.parent.GetChild(i).CompareTag("EmptySave"))
-            {
-                empty = transform.parent.GetChild(i).gameObject;
-            }
-            else if (transform.parent.GetChild(i).CompareTag("LoadMenuSelected"))
-            {
-                selected = transform.parent.GetChild(i).gameObject;
-            }
+            loadMenu = transform.GetComponentInParent<LoadMenu>();
+            saveNumber = Convert.ToInt32(transform.parent.transform.name.Substring(5));
+            gameDataManager = GameObject.FindGameObjectWithTag("GameData").GetComponent<GameDataManager>();
         }
+        
+        pointer = GameObject.FindGameObjectWithTag("Pointer");
+        globalButton = GameObject.FindGameObjectWithTag("MenuGlobalButton").GetComponent<MenuGlobalButton>();
 
-        for (int i = 0; i < notEmpty.transform.childCount; i++)
+
+        if (!transform.name.Equals("Back Button"))
         {
-            if (notEmpty.transform.GetChild(i).CompareTag("LoadMenuName"))
+            for (int i = 0; i < transform.parent.childCount; i++)
             {
-                playerName = notEmpty.transform.GetChild(i).GetComponent<TextMeshProUGUI>();
+                if (transform.parent.GetChild(i).transform.CompareTag("NotEmptySave"))
+                {
+                    notEmpty = transform.parent.GetChild(i).gameObject;
+                }
+                else if (transform.parent.GetChild(i).CompareTag("EmptySave"))
+                {
+                    empty = transform.parent.GetChild(i).gameObject;
+                }
+                else if (transform.parent.GetChild(i).CompareTag("LoadMenuSelected"))
+                {
+                    selected = transform.parent.GetChild(i).gameObject;
+                }
             }
 
-            else if (notEmpty.transform.GetChild(i).CompareTag("LoadMenuAttributes"))
+            for (int i = 0; i < notEmpty.transform.childCount; i++)
             {
-                attributes = notEmpty.transform.GetChild(i).gameObject;
+                if (notEmpty.transform.GetChild(i).CompareTag("LoadMenuName"))
+                {
+                    playerName = notEmpty.transform.GetChild(i).GetComponent<TextMeshProUGUI>();
+                }
+
+                else if (notEmpty.transform.GetChild(i).CompareTag("LoadMenuAttributes"))
+                {
+                    attributes = notEmpty.transform.GetChild(i).gameObject;
+                }
             }
+
+            selected.SetActive(false);
+            Invoke("checkSavedGame", 0.001f);
         }
-
-        selected.SetActive(false);
-        Invoke("checkSavedGame", 0.001f);
 	}
 	
 	// Update is called once per frame
@@ -61,6 +74,17 @@ public class LoadMenuButton : MonoBehaviour, ISelectHandler, IDeselectHandler, I
     {
 		
 	}
+
+    private void OnEnable()
+    {
+        Invoke("ResetPointer", 0.01f);
+    }
+
+    private void ResetPointer()
+    {
+        pointer.gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector3(-1208f, -349f, 0f);
+    }
+
     private void checkSavedGame()
     {
         GameSave save = null;
@@ -102,29 +126,67 @@ public class LoadMenuButton : MonoBehaviour, ISelectHandler, IDeselectHandler, I
 
     public void OnSelect(BaseEventData eventData)
     {
-        selected.SetActive(true);
+        if (!transform.name.Equals("Back Button"))
+        {
+            selected.SetActive(true);
+        }
+        else
+        {
+            Color tmp;
+            pointer.gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector3(-154f, -475f, 0f);
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                tmp = transform.GetChild(i).GetComponent<Text>().color;
+                tmp.a = 1f;
+                transform.GetChild(i).GetComponent<Text>().color = tmp;
+            }
+        }
+
+        globalButton.currentButton = gameObject;
     }
 
     public void OnDeselect(BaseEventData eventData)
     {
-        selected.SetActive(false);
-    }
-
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        Debug.Log(selected.transform.name);
-        selected.SetActive(true);
-    }
-
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        selected.SetActive(false);
+        if (!transform.name.Equals("Back Button"))
+        {
+            selected.SetActive(false);
+        }
+        else
+        {
+            pointer.gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector3(-1208f, -349f, 0f);
+            Color tmp;
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                tmp = transform.GetChild(i).GetComponent<Text>().color;
+                tmp.a = 0.58f;
+                transform.GetChild(i).GetComponent<Text>().color = tmp;
+            }
+        }
     }
 
     public void OnClick()
     {
-        gameDataManager.selectedSave = loadMenu.fileNames[saveNumber - 1];
-        gameDataManager.hasSavedGame = true;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        if (!transform.name.Equals("Back Button"))
+        {
+            gameDataManager.selectedSave = loadMenu.fileNames[saveNumber - 1];
+            gameDataManager.hasSavedGame = true;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+        
+    }
+
+    private void OnDisable()
+    {
+        if (transform.name.Equals("Back Button"))
+        {
+            Color tmp;
+
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                tmp = transform.GetChild(i).GetComponent<Text>().color;
+                tmp.a = 0.58f;
+                transform.GetChild(i).GetComponent<Text>().color = tmp;
+            }
+        }
     }
 }

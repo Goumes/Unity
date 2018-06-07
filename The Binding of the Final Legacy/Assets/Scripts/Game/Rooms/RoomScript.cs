@@ -75,7 +75,7 @@ public class RoomScript : MonoBehaviour
         {
             if (created)
             {
-                if (management.randomBoolean(0.5f) || hasBoss)
+                if (management.randomBoolean(0.3f) || hasBoss)
                 {
                     Destroy(enemies[i].gameObject);
                 }
@@ -110,7 +110,7 @@ public class RoomScript : MonoBehaviour
         {
             if (created)
             {
-                if (management.randomBoolean(0.7f) || hasBoss)
+                if (management.randomBoolean(0.3f) || hasBoss)
                 {
                     Destroy(chests[i].gameObject);
                 }
@@ -143,7 +143,7 @@ public class RoomScript : MonoBehaviour
         {
             if (created)
             {
-                if (management.randomBoolean(0.5f) || hasBoss)
+                if (management.randomBoolean(0.3f) || hasBoss)
                 {
                     Destroy(misc[i].gameObject);
                 }

@@ -53,6 +53,15 @@ TagManager:
   - LoadMenuSelected
   - EmptySave
   - NotEmptySave
+  - MenuBlob
+  - MainMenuButton
+  - LoadMenuButton
+  - MenuGlobalButton
+  - NewGameSelected
+  - NewGameButton
+  - NewGameAlertButton
+  - OptionsMenuElement
+  - OptionsSelected
   layers:
   - Default
   - TransparentFX

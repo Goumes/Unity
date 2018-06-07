@@ -345,8 +345,13 @@
     <Compile Include="Assets\Scripts\Menus\LoadMenu.cs" />
     <Compile Include="Assets\Scripts\Menus\LoadMenuButton.cs" />
     <Compile Include="Assets\Scripts\Menus\MainMenu.cs" />
+    <Compile Include="Assets\Scripts\Menus\MainMenuButton.cs" />
+    <Compile Include="Assets\Scripts\Menus\MenuGlobalButton.cs" />
+    <Compile Include="Assets\Scripts\Menus\NewGameButton.cs" />
     <Compile Include="Assets\Scripts\Menus\NewGameMenu.cs" />
     <Compile Include="Assets\Scripts\Menus\OptionsMenu.cs" />
+    <Compile Include="Assets\Scripts\Menus\OptionsMenuButton.cs" />
+    <Compile Include="Assets\Scripts\Menus\PlayerMenu.cs" />
     <Compile Include="Assets\Scripts\Menus\Restart.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
