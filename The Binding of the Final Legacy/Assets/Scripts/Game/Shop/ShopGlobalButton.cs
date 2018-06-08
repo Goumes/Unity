@@ -15,25 +15,52 @@ public class ShopGlobalButton : MonoBehaviour
     private List<GameObject> itemButtons;
     private EventSystem myEventSystem;
     private Management management;
+    public GameObject[] allItems;
+    public GameObject[] allSoldTexts;
+    public GameObject[] allItemModels;
+    public List<string> soldItems;
+    private GameDataManager gameDataManager;
 
     // Use this for initialization
     void Start()
     {
+        gameDataManager = GameObject.FindGameObjectWithTag("GameData").GetComponent<GameDataManager>();
         mainMenu = GameObject.FindGameObjectWithTag("Shop Main Buttons");
         itemMenu = GameObject.FindGameObjectWithTag("Shop Item Buttons");
         mainButtons = new List<GameObject>();
         itemButtons = new List<GameObject>();
         myEventSystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
         management = GameObject.FindGameObjectWithTag("Management").GetComponent<Management>();
+        allItems = GameObject.FindGameObjectsWithTag("Shop Item");
+        allSoldTexts = GameObject.FindGameObjectsWithTag("ShopItemSold");
+        allItemModels = GameObject.FindGameObjectsWithTag("ShopItemModel");
+
+        if (gameDataManager.hasSavedGame)
+        {
+            soldItems = gameDataManager.LoadGame().items.soldItems; //Aqui va lo que sea que ponga de save
+        }
+
+        else
+        {
+            soldItems = new List<string>();
+        }
+        
 
         for (int i = 0; i < mainMenu.transform.childCount; i++)
         {
-            mainButtons.Add(mainMenu.transform.GetChild(i).gameObject);
+            if (!mainMenu.transform.GetChild(i).CompareTag("ShopItemDescription"))
+            {
+                mainButtons.Add(mainMenu.transform.GetChild(i).gameObject);
+            }
+
         }
 
         for (int i = 0; i < itemMenu.transform.childCount; i++)
         {
-            itemButtons.Add(itemMenu.transform.GetChild(i).gameObject);
+            if (!itemMenu.transform.GetChild(i).CompareTag("ShopItemDescription"))
+            {
+                itemButtons.Add(itemMenu.transform.GetChild(i).gameObject);
+            }
         }
     }
 

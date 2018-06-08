@@ -18,20 +18,7 @@ public class MinimapRoom : MonoBehaviour
     public IDictionary <string, int> childPositions;
     public bool currentRoom;
     public bool created;
-
-    //[System.Serializable]
-    //public struct ChildDictionary
-    //{
-    //    public string position;
-    //    public int serial;
-
-    //    public ChildDictionary(string position, int serial)
-    //    {
-    //        this.position = position;
-    //        this.serial = serial;
-    //    }
-    //}
-    //public List<ChildDictionary> childPositions;
+    public bool hasShop;
 
     // Use this for initialization
     void Start ()
@@ -51,7 +38,7 @@ public class MinimapRoom : MonoBehaviour
             childPositions = new Dictionary<string, int>();
         }
         
-        Invoke("deleteSpawnPoints", 10f);
+        Invoke("deleteSpawnPoints", 20f);
 
         if (serialNumber == 1 && gridScript.canGenerate)
         {
@@ -77,7 +64,15 @@ public class MinimapRoom : MonoBehaviour
         }
         else if (!currentRoom && created)
         {
-            tilemap.SetTile(new Vector3Int(0, -3, 0), null);
+            if (!hasShop)
+            {
+                tilemap.SetTile(new Vector3Int(0, -3, 0), null);
+            }
+            else
+            {
+                tilemap.SetTile(new Vector3Int(0, -3, 0), Resources.Load("CuadradoRojo") as Tile);
+            }
+            
             created = false;
         }
 	}

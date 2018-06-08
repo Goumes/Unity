@@ -7,22 +7,22 @@ public class GameSave
 {
     public string saveGameName;
     public PlayerSave player;
-    //public GameObject itemPool;
+    public ItemsSave items;
     public DungeonSave dungeon;
     public MinimapSave minimapGrid;
 
     public GameSave()
     {
         player = null;
-        //itemPool = null;
+        items = null;
         dungeon = null;
         minimapGrid = null;
     }
 
-    public GameSave(PlayerSave player, GameObject itemPool, DungeonSave dungeon, MinimapSave minimapGrid)
+    public GameSave(PlayerSave player, ItemsSave items, DungeonSave dungeon, MinimapSave minimapGrid)
     {
         this.player = player;
-        //this.itemPool = itemPool;
+        this.items = items;
         this.dungeon = dungeon;
         this.minimapGrid = minimapGrid;
     }

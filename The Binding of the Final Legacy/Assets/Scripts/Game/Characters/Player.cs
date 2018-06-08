@@ -16,7 +16,7 @@ public class Player : MonoBehaviour {
     private bool isMoving;
     private Management management;
     public PlayerClass playerStats;
-    GameDataManager gameDataManager;
+    private GameDataManager gameDataManager;
     void Awake()
     {
         animator = GetComponent<Animator>();
@@ -34,8 +34,7 @@ public class Player : MonoBehaviour {
 
         if (gameDataManager.hasSavedGame)
         {
-            var save = gameDataManager.LoadGame();
-            playerStats = save.player.playerDetails;
+            playerStats = gameDataManager.LoadGame().player.playerDetails;
         }
         else
         {
@@ -50,22 +49,40 @@ public class Player : MonoBehaviour {
     {
         if (!management.inCombat && !management.inShop && !management.inTransition)
         {
-            CheckInput();
+            if (!management.inPause)
+            {
+                CheckInput();
 
-            SendAnimInfo();
+                SendAnimInfo();
+            }
+           
+            CheckForMenu();
         }
+
         else
         {
             CalculateMovement(Vector2.zero);
             isMoving = false;
             SendAnimInfo();
         }
-
-        //if (Input.GetButton("Horizontal") || Input.GetButton("Vertical"))
-        //{
-        //    transform.GetComponent<AudioSource>().Play();
-        //}
         
+    }
+
+    private void CheckForMenu()
+    {
+        if (Input.GetButtonDown("Cancel"))
+        {
+            if (!management.inPause)
+            {
+                management.openPause();
+            }
+
+            else
+            {
+                management.closePause();
+            }
+            
+        }
     }
 
     /// <summary>

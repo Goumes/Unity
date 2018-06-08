@@ -10,9 +10,7 @@ public class PlayerClass
     public float defense;
     public float attack;
     public float gold;
-
-    [System.NonSerialized]
-    public List<GameObject> inventory;
+    public List<GenericItem> inventory;
 
     public PlayerClass()
     {
@@ -20,11 +18,11 @@ public class PlayerClass
         health = 100.0f;
         defense = 20.0f;
         attack = 40.0f;
-        gold = 100.0f;
-        inventory = new List<GameObject>();
+        gold = 99999.0f;
+        inventory = new List<GenericItem>();
     }
 
-    public PlayerClass(string name, float health, float defense, float attack, float gold, List<GameObject> inventory)
+    public PlayerClass(string name, float health, float defense, float attack, float gold, List<GenericItem> inventory)
     {
         this.name = name;
         this.health = health;

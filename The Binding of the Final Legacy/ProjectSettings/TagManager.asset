@@ -62,6 +62,13 @@ TagManager:
   - NewGameAlertButton
   - OptionsMenuElement
   - OptionsSelected
+  - ShopItemDescription
+  - ShopItemSold
+  - ShopItemModel
+  - PauseMenuButton
+  - PauseAlert
+  - PauseMenu
+  - PausePointer
   layers:
   - Default
   - TransparentFX

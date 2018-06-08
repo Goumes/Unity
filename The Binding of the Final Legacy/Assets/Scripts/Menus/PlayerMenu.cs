@@ -186,7 +186,7 @@ public class PlayerMenu : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
 
         collision.transform.GetComponent<SpriteRenderer>().sprite = chestSprite;
-        collision.transform.position = new Vector2(collision.transform.position.x, 373.54f);
+        //collision.transform.position = new Vector2(collision.transform.position.x, 373.54f);
 
         yield return new WaitForSeconds(0.3f);
 

@@ -142,6 +142,8 @@ public class RoomArray : MonoBehaviour
                     }
                 }
             }
+
+            markShopInMap();
             
             createDungeon();
            
@@ -159,6 +161,19 @@ public class RoomArray : MonoBehaviour
             }
             
             minimap.SetActive(true);
+        }
+    }
+
+    private void markShopInMap()
+    {
+        for (int i = 0; i < minimapRooms.Count; i++)
+        {
+            if (i == shopNumber)
+            {
+                minimapRooms[i].GetComponent<MinimapRoom>().hasShop = true;
+
+                minimapRooms[i].GetComponent<Tilemap>().SetTile(new Vector3Int(0, -3, 0), Resources.Load("CuadradoRojo") as Tile);
+            }
         }
     }
 

@@ -333,6 +333,7 @@
     <Compile Include="Assets\Scripts\Game\Save\DungeonSave.cs" />
     <Compile Include="Assets\Scripts\Game\Save\GameDataManager.cs" />
     <Compile Include="Assets\Scripts\Game\Save\GameSave.cs" />
+    <Compile Include="Assets\Scripts\Game\Save\ItemsSave.cs" />
     <Compile Include="Assets\Scripts\Game\Save\MinimapRoomSave.cs" />
     <Compile Include="Assets\Scripts\Game\Save\MinimapSave.cs" />
     <Compile Include="Assets\Scripts\Game\Save\PlayerSave.cs" />
@@ -351,6 +352,8 @@
     <Compile Include="Assets\Scripts\Menus\NewGameMenu.cs" />
     <Compile Include="Assets\Scripts\Menus\OptionsMenu.cs" />
     <Compile Include="Assets\Scripts\Menus\OptionsMenuButton.cs" />
+    <Compile Include="Assets\Scripts\Menus\PauseMenu.cs" />
+    <Compile Include="Assets\Scripts\Menus\PauseMenuButton.cs" />
     <Compile Include="Assets\Scripts\Menus\PlayerMenu.cs" />
     <Compile Include="Assets\Scripts\Menus\Restart.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />

@@ -14,8 +14,11 @@ public class GameDataManager : MonoBehaviour
     private GameObject itemPool;
     private GameObject minimapGrid;
     private GameObject roomArray;
+    private ItemDatabase itemDatabase;
+    private ShopGlobalButton shopGlobalButton;
     public bool hasSavedGame;
     private bool instantiated;
+    private bool menu;
 
     //Singleton
     public static GameDataManager Instance;
@@ -25,7 +28,6 @@ public class GameDataManager : MonoBehaviour
     void Start ()
     {
         //hasSavedGame = true;
-
         if (LoadGame() != null)
         {
             hasSavedGame = true;
@@ -54,23 +56,47 @@ public class GameDataManager : MonoBehaviour
     // Update is called once per frame
     void Update ()
     {
-        if (SceneManager.GetActiveScene().name.Equals("Juego") && !instantiated)
+        if (SceneManager.GetActiveScene().name.Equals("Game"))
         {
-            instantiated = true;
-            player = GameObject.FindGameObjectWithTag("Player");
-            dungeon = GameObject.FindGameObjectWithTag("Dungeon");
-            itemPool = GameObject.FindGameObjectWithTag("Item Pool");
-            minimapGrid = GameObject.FindGameObjectWithTag("Grid");
-            roomArray = GameObject.FindGameObjectWithTag("Rooms");
+            if (!instantiated)
+            {
+                instantiated = true;
+                player = GameObject.FindGameObjectWithTag("Player");
+                dungeon = GameObject.FindGameObjectWithTag("Dungeon");
+                itemPool = GameObject.FindGameObjectWithTag("Item Pool");
+                minimapGrid = GameObject.FindGameObjectWithTag("Grid");
+                roomArray = GameObject.FindGameObjectWithTag("Rooms");
+                shopGlobalButton = GameObject.FindGameObjectWithTag("Shop Global Button").GetComponent<ShopGlobalButton>();
+                itemDatabase = GameObject.FindGameObjectWithTag("Item Pool").GetComponent<ItemDatabase>();
+            }
+            else if (menu)
+            {
+                menu = false;
+            }
+        }
+        else if (SceneManager.GetActiveScene().name.Equals("Main Menu"))
+        {
+            if (!menu)
+            {
+                selectedSave = null;
+                hasSavedGame = false;
+                menu = true;
+            }
+            else if (instantiated)
+            {
+                instantiated = false;
+            }
         }
 	}
 
-    public void SaveGame()
+    public bool SaveGame()
     {
+        bool saved = false;
+
         GameSave save = new GameSave ();
         save.saveGameName = selectedSave;
 
-        //save.itemPool = itemPool;
+        saveItems(save);
 
         saveMinimap(save);
 
@@ -79,15 +105,19 @@ public class GameDataManager : MonoBehaviour
         savePlayer(save);
 
         BinaryFormatter bf = new BinaryFormatter();
+
         if (!Directory.Exists(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments) + "/The Binding of the Final Legacy/"))
         {
             Directory.CreateDirectory(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments) + "/The Binding of the Final Legacy/");
-
         }
+
         FileStream file = File.Create(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments) + "/The Binding of the Final Legacy/" + save.saveGameName + ".sav");
         bf.Serialize(file, save);
         file.Close();
+        saved = true;
         Debug.Log("Saved Game: " + save.saveGameName);
+
+        return saved;
     }
 
     private void saveMinimap(GameSave save)
@@ -170,6 +200,17 @@ public class GameDataManager : MonoBehaviour
         playerSave.playerDetails = player.GetComponent<Player>().playerStats;
 
         save.player = playerSave;
+    }
+
+    private void saveItems(GameSave save)
+    {
+        ItemsSave itemsSave = new ItemsSave();
+        itemsSave.database = itemDatabase.database;
+        itemsSave.shopPool = itemDatabase.shopPool;
+        itemsSave.soldItems = shopGlobalButton.soldItems;
+
+        save.items = itemsSave;
+
     }
 
     public GameSave LoadGame()

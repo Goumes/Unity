@@ -73,8 +73,11 @@ public class GlobalButton : MonoBehaviour
 
     private void OnEnable()
     {
-        management = GameObject.FindGameObjectWithTag("Management").GetComponent<Management>();
+        Invoke("firstEnable", 0.01f);
+    }
 
+    private void firstEnable()
+    {
         for (int j = 0; j < lvl1Background[0].transform.childCount; j++)
         {
             if (lvl1Background[0].transform.GetChild(j).transform.name.Equals("Main Menu"))
@@ -90,6 +93,7 @@ public class GlobalButton : MonoBehaviour
                 }
             }
         }
+
 
         StartCoroutine(management.fadeStartCombat());
     }

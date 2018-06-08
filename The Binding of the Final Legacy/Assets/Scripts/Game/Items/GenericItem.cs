@@ -3,14 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[Serializable]
+[System.Serializable]
 public class GenericItem
 {
     public int id;//{ get; set; }
     public string name;// { get; set; }
+    public string type;
     public string description;
     public float price; //{ get; set; }
-    public float duration; //{ get; set; }
+    public int duration; //In turns //{ get; set; } 
     public float attackModifier; //{ get; set; }
     public float defenseModifier; //{ get; set; }
     public float healthModifier; //{ get; set; }
@@ -20,19 +21,21 @@ public class GenericItem
     {
         id = 0;
         name = "Default";
+        type = "Default";
         description = "Nice description";
         price = 999.9f;
-        duration = 1.0f;
+        duration = 1;
         attackModifier = 10.0f;
         defenseModifier = 10.0f;
         healthModifier = 10.0f;
         imageResourcePath = "Items/torch";
     }
 
-    public GenericItem(int id, string name, string description, float price, float duration, float attackModifier, float defenseModifier, float healthModifier, string imageResourcePath)
+    public GenericItem(int id, string name, string type, string description, float price, int duration, float attackModifier, float defenseModifier, float healthModifier, string imageResourcePath)
     {
         this.id = id;
         this.name = name;
+        this.type = type;
         this.description = description;
         this.price = price;
         this.duration = duration;
