@@ -101,19 +101,19 @@ public class LoadMenuButton : MonoBehaviour, ISelectHandler, IDeselectHandler
             {
                 if (attributes.transform.GetChild(i).name.Equals("Attack Text"))
                 {
-                    attributes.transform.GetChild(i).GetComponent<TextMeshProUGUI>().SetText(save.player.playerDetails.attack.ToString());
+                    attributes.transform.GetChild(i).GetComponent<TextMeshProUGUI>().SetText(Mathf.Round(save.player.playerDetails.attack).ToString());
                 }
                 else if (attributes.transform.GetChild(i).name.Equals("Defense Text"))
                 {
-                    attributes.transform.GetChild(i).GetComponent<TextMeshProUGUI>().SetText(save.player.playerDetails.defense.ToString());
+                    attributes.transform.GetChild(i).GetComponent<TextMeshProUGUI>().SetText(Mathf.Round(save.player.playerDetails.defense).ToString());
                 }
                 else if (attributes.transform.GetChild(i).name.Equals("Health Text"))
                 {
-                    attributes.transform.GetChild(i).GetComponent<TextMeshProUGUI>().SetText(save.player.playerDetails.health.ToString());
+                    attributes.transform.GetChild(i).GetComponent<TextMeshProUGUI>().SetText(Mathf.Round(save.player.playerDetails.currentHealth).ToString());
                 }
                 else if (attributes.transform.GetChild(i).name.Equals("Wealth Text"))
                 {
-                    attributes.transform.GetChild(i).GetComponent<TextMeshProUGUI>().SetText(save.player.playerDetails.gold.ToString());
+                    attributes.transform.GetChild(i).GetComponent<TextMeshProUGUI>().SetText(Mathf.Round(save.player.playerDetails.gold).ToString());
                 }
             }
 

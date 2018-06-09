@@ -30,7 +30,7 @@ public class Blob : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player") && !management.GetComponent<Management>().inCombat)
         {
             spriteJugador.sortingOrder = 2;
             spriteBlob.sortingOrder = 1;
@@ -64,7 +64,7 @@ public class Blob : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.transform.CompareTag("Player"))
+        if (collision.transform.CompareTag("Player") && !management.GetComponent<Management>().inCombat)
         {
             management.GetComponent<Management>().inCombat = true;
             StartCoroutine(fadeOut());

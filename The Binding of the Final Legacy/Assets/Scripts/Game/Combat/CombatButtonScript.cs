@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -76,9 +78,12 @@ public class CombatButtonScript : MonoBehaviour, ISelectHandler, IDeselectHandle
     {
         Color tmp;
 
-        for (int i = 0; i < selectedEnemies.Length; i++)
+        if (globalButton.blinkCoroutine != null)
         {
-            selectedEnemies[i].GetComponent<SelectEnemy>().stopBlinking();
+            for (int i = 0; i < selectedEnemies.Length; i++)
+            {
+                selectedEnemies[i].GetComponent<SelectEnemy>().stopBlinking();
+            }
         }
 
         switch (transform.name)
@@ -123,7 +128,7 @@ public class CombatButtonScript : MonoBehaviour, ISelectHandler, IDeselectHandle
                 break;
 
             case "Selected Item Sub Menu 2 - 1":
-                pointer.gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector3(-531f, -48f, 0f);
+                pointer.gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector3(-564f, -48f, 0f);
 
                 for (int i = 0; i < selectedEnemies.Length; i++)
                 {
@@ -135,7 +140,7 @@ public class CombatButtonScript : MonoBehaviour, ISelectHandler, IDeselectHandle
                 break;
 
             case "Selected Item Sub Menu 2 - 2":
-                pointer.gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector3(-531f, -137f, 0f);
+                pointer.gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector3(-564f, -137f, 0f);
 
                 for (int i = 0; i < selectedEnemies.Length; i++)
                 {
@@ -149,7 +154,7 @@ public class CombatButtonScript : MonoBehaviour, ISelectHandler, IDeselectHandle
                 break;
 
             case "Selected Item Sub Menu 2 - 3":
-                pointer.gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector3(-531f, -226f, 0f);
+                pointer.gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector3(-564f, -226f, 0f);
 
                 for (int i = 0; i < selectedEnemies.Length; i++)
                 {
@@ -168,9 +173,9 @@ public class CombatButtonScript : MonoBehaviour, ISelectHandler, IDeselectHandle
 
         for (int i = 0; i < transform.childCount; i++)
         {
-            tmp = transform.GetChild(i).GetComponent<Text>().color;
+            tmp = transform.GetChild(i).GetComponent<TextMeshProUGUI>().color;
             tmp.a = 1f;
-            transform.GetChild(i).GetComponent<Text>().color = tmp;
+            transform.GetChild(i).GetComponent<TextMeshProUGUI>().color = tmp;
         }
 
 
@@ -189,9 +194,9 @@ public class CombatButtonScript : MonoBehaviour, ISelectHandler, IDeselectHandle
                 {
                     for (int i = 0; i < transform.childCount; i++)
                     {
-                        tmp = transform.GetChild(i).GetComponent<Text>().color;
+                        tmp = transform.GetChild(i).GetComponent<TextMeshProUGUI>().color;
                         tmp.a = 0.58f;
-                        transform.GetChild(i).GetComponent<Text>().color = tmp;
+                        transform.GetChild(i).GetComponent<TextMeshProUGUI>().color = tmp;
                     }
                 }
                 
@@ -203,9 +208,9 @@ public class CombatButtonScript : MonoBehaviour, ISelectHandler, IDeselectHandle
                 {
                     for (int i = 0; i < transform.childCount; i++)
                     {
-                        tmp = transform.GetChild(i).GetComponent<Text>().color;
+                        tmp = transform.GetChild(i).GetComponent<TextMeshProUGUI>().color;
                         tmp.a = 0.58f;
-                        transform.GetChild(i).GetComponent<Text>().color = tmp;
+                        transform.GetChild(i).GetComponent<TextMeshProUGUI>().color = tmp;
                     }
                 }
 
@@ -216,9 +221,9 @@ public class CombatButtonScript : MonoBehaviour, ISelectHandler, IDeselectHandle
                 {
                     for (int i = 0; i < transform.childCount; i++)
                     {
-                        tmp = transform.GetChild(i).GetComponent<Text>().color;
+                        tmp = transform.GetChild(i).GetComponent<TextMeshProUGUI>().color;
                         tmp.a = 0.58f;
-                        transform.GetChild(i).GetComponent<Text>().color = tmp;
+                        transform.GetChild(i).GetComponent<TextMeshProUGUI>().color = tmp;
                     }
                 }
 
@@ -229,9 +234,9 @@ public class CombatButtonScript : MonoBehaviour, ISelectHandler, IDeselectHandle
                 {
                     for (int i = 0; i < transform.childCount; i++)
                     {
-                        tmp = transform.GetChild(i).GetComponent<Text>().color;
+                        tmp = transform.GetChild(i).GetComponent<TextMeshProUGUI>().color;
                         tmp.a = 0.58f;
-                        transform.GetChild(i).GetComponent<Text>().color = tmp;
+                        transform.GetChild(i).GetComponent<TextMeshProUGUI>().color = tmp;
                     }
                 }
 
@@ -242,9 +247,9 @@ public class CombatButtonScript : MonoBehaviour, ISelectHandler, IDeselectHandle
                 {
                     for (int i = 0; i < transform.childCount; i++)
                     {
-                        tmp = transform.GetChild(i).GetComponent<Text>().color;
+                        tmp = transform.GetChild(i).GetComponent<TextMeshProUGUI>().color;
                         tmp.a = 0.58f;
-                        transform.GetChild(i).GetComponent<Text>().color = tmp;
+                        transform.GetChild(i).GetComponent<TextMeshProUGUI>().color = tmp;
                     }
                 }
                 break;
@@ -255,9 +260,9 @@ public class CombatButtonScript : MonoBehaviour, ISelectHandler, IDeselectHandle
                 {
                     for (int i = 0; i < transform.childCount; i++)
                     {
-                        tmp = transform.GetChild(i).GetComponent<Text>().color;
+                        tmp = transform.GetChild(i).GetComponent<TextMeshProUGUI>().color;
                         tmp.a = 0.58f;
-                        transform.GetChild(i).GetComponent<Text>().color = tmp;
+                        transform.GetChild(i).GetComponent<TextMeshProUGUI>().color = tmp;
                     }
                 }
 
@@ -269,9 +274,9 @@ public class CombatButtonScript : MonoBehaviour, ISelectHandler, IDeselectHandle
                 {
                     for (int i = 0; i < transform.childCount; i++)
                     {
-                        tmp = transform.GetChild(i).GetComponent<Text>().color;
+                        tmp = transform.GetChild(i).GetComponent<TextMeshProUGUI>().color;
                         tmp.a = 0.58f;
-                        transform.GetChild(i).GetComponent<Text>().color = tmp;
+                        transform.GetChild(i).GetComponent<TextMeshProUGUI>().color = tmp;
                     }
                 }
 
@@ -281,10 +286,11 @@ public class CombatButtonScript : MonoBehaviour, ISelectHandler, IDeselectHandle
 
                 for (int i = 0; i < transform.childCount; i++)
                 {
-                    tmp = transform.GetChild(i).GetComponent<Text>().color;
+                    tmp = transform.GetChild(i).GetComponent<TextMeshProUGUI>().color;
                     tmp.a = 0.58f;
-                    transform.GetChild(i).GetComponent<Text>().color = tmp;
+                    transform.GetChild(i).GetComponent<TextMeshProUGUI>().color = tmp;
                 }
+
 
                 break;
 
@@ -292,9 +298,9 @@ public class CombatButtonScript : MonoBehaviour, ISelectHandler, IDeselectHandle
 
                 for (int i = 0; i < transform.childCount; i++)
                 {
-                    tmp = transform.GetChild(i).GetComponent<Text>().color;
+                    tmp = transform.GetChild(i).GetComponent<TextMeshProUGUI>().color;
                     tmp.a = 0.58f;
-                    transform.GetChild(i).GetComponent<Text>().color = tmp;
+                    transform.GetChild(i).GetComponent<TextMeshProUGUI>().color = tmp;
                 }
 
                 break;
@@ -303,9 +309,9 @@ public class CombatButtonScript : MonoBehaviour, ISelectHandler, IDeselectHandle
 
                 for (int i = 0; i < transform.childCount; i++)
                 {
-                    tmp = transform.GetChild(i).GetComponent<Text>().color;
+                    tmp = transform.GetChild(i).GetComponent<TextMeshProUGUI>().color;
                     tmp.a = 0.58f;
-                    transform.GetChild(i).GetComponent<Text>().color = tmp;
+                    transform.GetChild(i).GetComponent<TextMeshProUGUI>().color = tmp;
                 }
 
                 break;
@@ -313,6 +319,10 @@ public class CombatButtonScript : MonoBehaviour, ISelectHandler, IDeselectHandle
     }
     public void clickButton()
     {
+        bool selected = false;
+        EnemyModel enemy = null;
+        Player player = globalButton.player.GetComponent<Player>();
+
         switch (transform.name)
         {
             case "Fight":
@@ -404,7 +414,16 @@ public class CombatButtonScript : MonoBehaviour, ISelectHandler, IDeselectHandle
                             if (lvl3Background[i].transform.GetChild(j).transform.name.Equals("Sub Menu 2"))
                             {
                                 globalButton.subMenu2Active = true;
-                                lvl3Background[i].transform.GetChild(j).GetChild(0).GetComponent<Button>().Select();
+
+                                for (int k = 0; k < lvl3Background[i].transform.GetChild(j).transform.childCount && !selected; k++)
+                                {
+                                    if (lvl3Background[i].transform.GetChild(j).GetChild(k).gameObject.activeSelf)
+                                    {
+                                        lvl3Background[i].transform.GetChild(j).GetChild(k).GetComponent<Button>().Select();
+                                        selected = true;
+
+                                    }
+                                }
                             }
                         }
 
@@ -415,6 +434,8 @@ public class CombatButtonScript : MonoBehaviour, ISelectHandler, IDeselectHandle
                 {
                     transform.parent.GetChild(i).gameObject.GetComponent<Button>().interactable = false;
                 }
+
+                globalButton.abilitySelected = 0;
 
                 
 
@@ -442,7 +463,16 @@ public class CombatButtonScript : MonoBehaviour, ISelectHandler, IDeselectHandle
                             if (lvl3Background[i].transform.GetChild(j).transform.name.Equals("Sub Menu 2"))
                             {
                                 globalButton.subMenu2Active = true;
-                                lvl3Background[i].transform.GetChild(j).GetChild(0).GetComponent<Button>().Select();
+
+                                for (int k = 0; k < lvl3Background[i].transform.GetChild(j).transform.childCount && !selected; k++)
+                                {
+                                    if (lvl3Background[i].transform.GetChild(j).GetChild(k).gameObject.activeSelf)
+                                    {
+                                        lvl3Background[i].transform.GetChild(j).GetChild(k).GetComponent<Button>().Select();
+                                        selected = true;
+
+                                    }
+                                }
                             }
                         }
                     }
@@ -453,7 +483,7 @@ public class CombatButtonScript : MonoBehaviour, ISelectHandler, IDeselectHandle
                     transform.parent.GetChild(i).gameObject.GetComponent<Button>().interactable = false;
                 }
 
-                
+                globalButton.abilitySelected = 1;
 
                 break;
 
@@ -479,7 +509,16 @@ public class CombatButtonScript : MonoBehaviour, ISelectHandler, IDeselectHandle
                             if (lvl3Background[i].transform.GetChild(j).transform.name.Equals("Sub Menu 2"))
                             {
                                 globalButton.subMenu2Active = true;
-                                lvl3Background[i].transform.GetChild(j).GetChild(0).GetComponent<Button>().Select();
+
+                                for (int k = 0; k < lvl3Background[i].transform.GetChild(j).transform.childCount && !selected; k++)
+                                {
+                                    if (lvl3Background[i].transform.GetChild(j).GetChild(k).gameObject.activeSelf)
+                                    {
+                                        lvl3Background[i].transform.GetChild(j).GetChild(k).GetComponent<Button>().Select();
+                                        selected = true;
+
+                                    }
+                                }
                             }
                         }
                     }
@@ -490,10 +529,107 @@ public class CombatButtonScript : MonoBehaviour, ISelectHandler, IDeselectHandle
                     transform.parent.GetChild(i).gameObject.GetComponent<Button>().interactable = false;
                 }
 
-                
+                globalButton.abilitySelected = 2;
 
                 break;
-    
+
+            case "Selected Item Sub Menu 2 - 1":
+
+                enemy = globalButton.getEnemyByNumber(1);
+
+                if (player.playerStats.currentMana >= player.playerStats.abilities[globalButton.abilitySelected].manaCost)
+                {
+                    player.playerStats.currentMana = player.playerStats.currentMana - player.playerStats.abilities[globalButton.abilitySelected].manaCost;
+
+                    if (enemy.enemyStats.currentHealth - ((player.playerStats.abilities[globalButton.abilitySelected].dmgMultiplier * player.playerStats.attack) - enemy.enemyStats.defense * 2) > 0)
+                    {
+                        enemy.enemyStats.currentHealth = enemy.enemyStats.currentHealth - ((player.playerStats.abilities[globalButton.abilitySelected].dmgMultiplier * player.playerStats.attack) - enemy.enemyStats.defense * 2);
+                    }
+
+                    else
+                    {
+                        enemy.enemyStats.currentHealth = 0;
+                        globalButton.goldReward = globalButton.goldReward + enemy.enemyStats.goldDrop;
+                        globalButton.itemReward.Add(enemy.itemDrop);
+                        enemy.gameObject.transform.parent.gameObject.SetActive(false);
+                        globalButton.disableEnemyUI(1);
+
+                        globalButton.closeSubMenu2();
+                        globalButton.closeSubMenu1();
+                        //Animaciones y toda la pesca
+                    }
+
+                    globalButton.startEnemyTurn();
+
+                }
+
+                //Cerrar todos los dialogos
+
+                break;
+
+            case "Selected Item Sub Menu 2 - 2":
+
+                enemy = globalButton.getEnemyByNumber(2);
+
+                if (player.playerStats.currentMana >= player.playerStats.abilities[globalButton.abilitySelected].manaCost)
+                {
+                    player.playerStats.currentMana = player.playerStats.currentMana - player.playerStats.abilities[globalButton.abilitySelected].manaCost;
+
+                    if (enemy.enemyStats.currentHealth - ((player.playerStats.abilities[globalButton.abilitySelected].dmgMultiplier * player.playerStats.attack) - enemy.enemyStats.defense * 2) > 0)
+                    {
+                        enemy.enemyStats.currentHealth = enemy.enemyStats.currentHealth - ((player.playerStats.abilities[globalButton.abilitySelected].dmgMultiplier * player.playerStats.attack) - enemy.enemyStats.defense * 2);
+                    }
+
+                    else
+                    {
+                        enemy.enemyStats.currentHealth = 0;
+                        globalButton.goldReward = globalButton.goldReward + enemy.enemyStats.goldDrop;
+                        globalButton.itemReward.Add(enemy.itemDrop);
+                        enemy.gameObject.transform.parent.gameObject.SetActive(false);
+                        globalButton.disableEnemyUI(2);
+
+                        globalButton.closeSubMenu2();
+                        globalButton.closeSubMenu1();
+                    }
+
+                    globalButton.startEnemyTurn();
+
+                }
+
+                break;
+
+            case "Selected Item Sub Menu 2 - 3":
+
+                enemy = globalButton.getEnemyByNumber(3);
+
+                if (player.playerStats.currentMana >= player.playerStats.abilities[globalButton.abilitySelected].manaCost)
+                {
+                    player.playerStats.currentMana = player.playerStats.currentMana - player.playerStats.abilities[globalButton.abilitySelected].manaCost;
+
+                    if (enemy.enemyStats.currentHealth - ((player.playerStats.abilities[globalButton.abilitySelected].dmgMultiplier * player.playerStats.attack) - enemy.enemyStats.defense * 2) > 0)
+                    {
+                        enemy.enemyStats.currentHealth = enemy.enemyStats.currentHealth - ((player.playerStats.abilities[globalButton.abilitySelected].dmgMultiplier * player.playerStats.attack) - enemy.enemyStats.defense * 2);
+                    }
+
+                    else
+                    {
+                        enemy.enemyStats.currentHealth = 0;
+                        globalButton.goldReward = globalButton.goldReward + enemy.enemyStats.goldDrop;
+                        globalButton.itemReward.Add(enemy.itemDrop);
+                        enemy.gameObject.transform.parent.gameObject.SetActive(false);
+                        globalButton.disableEnemyUI(3);
+
+                        globalButton.closeSubMenu2();
+                        globalButton.closeSubMenu1();
+
+                    }
+
+                    globalButton.startEnemyTurn();
+
+                }
+
+                break;
+
         }
     }
 }

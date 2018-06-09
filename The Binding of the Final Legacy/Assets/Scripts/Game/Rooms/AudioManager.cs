@@ -22,6 +22,7 @@ public class AudioManager : MonoBehaviour
     public void startMusic()
     {
         audioSource.PlayOneShot(management.backgroundMusic);
+        audioSource.loop = true;
         management.playingMusic = true;
     }
 

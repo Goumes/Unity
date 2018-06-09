@@ -23,6 +23,8 @@ public class Management : MonoBehaviour {
     private bool gameStarted;
     private GameDataManager gameDataManager;
     private GameObject pauseMenu;
+    private GameObject gameOver;
+    private GameObject player;
 
     // Use this for initialization
     void Start () {
@@ -37,14 +39,22 @@ public class Management : MonoBehaviour {
         dungeon = GameObject.FindGameObjectWithTag("Dungeon");
         gameDataManager = GameObject.FindGameObjectWithTag("GameData").GetComponent<GameDataManager>();
         pauseMenu = GameObject.FindGameObjectWithTag("PauseMenu");
+        gameOver = GameObject.FindGameObjectWithTag("GameOver");
+        player = GameObject.FindGameObjectWithTag("Player");
         Invoke("DisableCombat", 0.2f);
         Invoke("DisableShop", 0.2f);
         Invoke("DisablePause", 0.2f);
+        Invoke("DisableGameOver", 0.001f);
     }
 
     private void DisableCombat()
     {
         combat.SetActive(false);
+    }
+
+    private void DisableGameOver()
+    {
+        gameOver.SetActive(false);
     }
 
     private void DisableShop()
@@ -62,6 +72,11 @@ public class Management : MonoBehaviour {
         StartCoroutine(fadeEndCombat());
     }
 
+    public void WinCombat()
+    {
+        StartCoroutine(fadeWinCombat());
+    }
+
     public void EndShop()
     {
         StartCoroutine(fadeEndShop());
@@ -72,12 +87,19 @@ public class Management : MonoBehaviour {
         StartCoroutine(fadeBackToMenu());
     }
 
+    public void GameOver()
+    {
+        StartCoroutine(fadeGameOver());
+    }
+
     /// <summary>
     /// The screen fades in
     /// </summary>
     /// <returns></returns>
     public IEnumerator fadeIn()
     {
+        inCombat = false;
+
         for (float i = 1f; i >= 0f; i = i - 0.02f)
         {
             tmp.a = i;
@@ -177,6 +199,7 @@ public class Management : MonoBehaviour {
         }
 
         combat.SetActive(false);
+        inCombat = false;
         audioManager.stopMusic();
         backgroundMusic = Resources.Load<AudioClip>("Music/Normal Dungeon Music");
 
@@ -184,7 +207,50 @@ public class Management : MonoBehaviour {
 
         audioManager.startMusic();
 
+        for (float i = 1f; i >= 0f; i = i - 0.02f)
+        {
+            tmp.a = i;
+            fader.GetComponent<RawImage>().color = tmp;
+            yield return new WaitForSeconds(0.0001f);
+        }
+
+    }
+
+    public IEnumerator fadeWinCombat()
+    {
+        for (float i = 0f; i < 1f; i = i + 0.02f)
+        {
+            tmp.a = i;
+            fader.GetComponent<RawImage>().color = tmp; //Hay que hacerlo así porque no es una variable y no se puede cambiar directamente
+            yield return new WaitForSeconds(0.0001f);
+        }
+
+        combat.SetActive(false);
         inCombat = false;
+        audioManager.stopMusic();
+        backgroundMusic = Resources.Load<AudioClip>("Music/Normal Dungeon Music");
+
+        if (player.GetComponent<Player>().playerStats.currentHealth + (player.GetComponent<Player>().playerStats.totalHealth / 2) <= player.GetComponent<Player>().playerStats.totalHealth)
+        {
+            player.GetComponent<Player>().playerStats.currentHealth = player.GetComponent<Player>().playerStats.currentHealth + (player.GetComponent<Player>().playerStats.totalHealth / 2);
+        }
+        else
+        {
+            player.GetComponent<Player>().playerStats.currentHealth = player.GetComponent<Player>().playerStats.totalHealth;
+        }
+
+        if (player.GetComponent<Player>().playerStats.currentMana + (player.GetComponent<Player>().playerStats.totalMana / 2) <= player.GetComponent<Player>().playerStats.totalMana)
+        {
+            player.GetComponent<Player>().playerStats.currentMana = player.GetComponent<Player>().playerStats.currentMana + (player.GetComponent<Player>().playerStats.totalMana / 2);
+        }
+        else
+        {
+            player.GetComponent<Player>().playerStats.currentMana = player.GetComponent<Player>().playerStats.totalMana;
+        }
+
+        yield return new WaitForSeconds(0.3f);
+
+        audioManager.startMusic();
 
         for (float i = 1f; i >= 0f; i = i - 0.02f)
         {
@@ -204,6 +270,33 @@ public class Management : MonoBehaviour {
             fader.GetComponent<RawImage>().color = tmp; //Hay que hacerlo así porque no es una variable y no se puede cambiar directamente
             yield return new WaitForSeconds(0.0001f);
         }
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+    }
+
+    public IEnumerator fadeGameOver()
+    {
+        for (float i = 0f; i < 1f; i = i + 0.02f)
+        {
+            tmp.a = i;
+            fader.GetComponent<RawImage>().color = tmp; //Hay que hacerlo así porque no es una variable y no se puede cambiar directamente
+            yield return new WaitForSeconds(0.0001f);
+        }
+
+        gameOver.SetActive(true);
+
+        tmp = gameOver.transform.GetChild(0).GetComponent<Text>().color;
+
+        for (float i = 0f; i < 1f; i = i + 0.02f)
+        {
+            tmp.a = i;
+            gameOver.transform.GetChild(0).GetComponent<Text>().color = tmp; //Hay que hacerlo así porque no es una variable y no se puede cambiar directamente
+            yield return new WaitForSeconds(0.0001f);
+        }
+
+        gameDataManager.DeleteSave();
+
+        yield return new WaitForSeconds(2f);
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
@@ -232,7 +325,7 @@ public class Management : MonoBehaviour {
 
     private void checkForStart()
     {
-        if (dungeon.transform.childCount > 0 && !gameStarted)
+        if (!gameStarted && dungeon != null && dungeon.transform.childCount > 0)
         {
             gameStarted = true;
             backgroundMusic = Resources.Load<AudioClip>("Music/Normal Dungeon Music");

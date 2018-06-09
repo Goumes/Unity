@@ -6,10 +6,12 @@ using UnityEngine;
 public class SelectEnemy : MonoBehaviour
 {
     Color tmp;
+    GlobalButton globalButton;
     // Use this for initialization
     void Start ()
     {
         tmp = gameObject.GetComponent<SpriteRenderer>().color;
+        globalButton = GameObject.FindGameObjectWithTag("Global Button").GetComponent<GlobalButton>();
     }
 	
 	// Update is called once per frame
@@ -24,15 +26,15 @@ public class SelectEnemy : MonoBehaviour
 
     public void stopBlinking()
     {
-        CancelInvoke();
-        StopAllCoroutines();
+        CancelInvoke("selectEnemy");
+        StopCoroutine(globalButton.blinkCoroutine);
         tmp.a = 0f;
         gameObject.GetComponent<SpriteRenderer>().color = tmp;
     }
 
     private void selectEnemy()
     {
-        StartCoroutine("blink");
+        globalButton.blinkCoroutine = StartCoroutine("blink");
     }
 
     IEnumerator blink()

@@ -17,6 +17,7 @@ public class Player : MonoBehaviour {
     private Management management;
     public PlayerClass playerStats;
     private GameDataManager gameDataManager;
+    private Database database;
     void Awake()
     {
         animator = GetComponent<Animator>();
@@ -31,6 +32,7 @@ public class Player : MonoBehaviour {
         myRigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
         management = GameObject.FindGameObjectWithTag("Management").GetComponent<Management>();
         gameDataManager = GameObject.FindGameObjectWithTag("GameData").GetComponent<GameDataManager>();
+        database = GameObject.FindGameObjectWithTag("Item Pool").GetComponent<Database>();
 
         if (gameDataManager.hasSavedGame)
         {
@@ -41,6 +43,26 @@ public class Player : MonoBehaviour {
             playerStats = gameDataManager.createdPlayer;
         }
         
+    }
+
+    private void OnEnable()
+    {
+        Invoke("enableMethod", 0.01f);
+    }
+
+    private void enableMethod()
+    {
+        if (!gameDataManager.hasSavedGame)
+        {
+            for (int i = 0; i < database.abilityDatabase.abilities.Count; i++)
+            {
+                if (i < 3)
+                {
+                    playerStats.abilities.Add(database.abilityDatabase.abilities[i]);
+                }
+            }
+            
+        }
     }
 
     // Update is called once per frame
@@ -74,7 +96,17 @@ public class Player : MonoBehaviour {
         {
             if (!management.inPause)
             {
+                CalculateMovement(Vector2.zero);
+                isMoving = false;
+                SendAnimInfo();
+
                 management.openPause();
+
+                Debug.Log("Gold: " + playerStats.gold);
+                for (int i = 0; i < playerStats.inventory.Count; i++)
+                {
+                    Debug.Log("Item: " + playerStats.inventory[i].name);
+                }
             }
 
             else

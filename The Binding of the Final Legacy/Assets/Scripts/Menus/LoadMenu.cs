@@ -15,13 +15,23 @@ public class LoadMenu : MonoBehaviour
     void Start ()
     {
         fileNames = new List<string>();
-        info = new DirectoryInfo(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments) + "/The Binding of the Final Legacy/");
-        files = info.GetFiles().OrderBy(p => p.CreationTime).ToArray();
 
-        foreach (FileInfo file in files)
+        if (Directory.Exists(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments) + "/The Binding of the Final Legacy/"))
         {
-            fileNames.Add(file.Name.Substring(0, file.Name.Length - 4));
+            info = new DirectoryInfo(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments) + "/The Binding of the Final Legacy/");
+            files = info.GetFiles().OrderBy(p => p.CreationTime).ToArray();
+
+            foreach (FileInfo file in files)
+            {
+                fileNames.Add(file.Name.Substring(0, file.Name.Length - 4));
+            }
         }
+        else
+        {
+            files = new FileInfo[0];
+        }
+
+        
     }
 
     private void OnEnable()

@@ -19,6 +19,7 @@ public class LoadingScreenScript : MonoBehaviour
 
     private void OnDisable()
     {
+        CancelInvoke("animationStart");
         StopAllCoroutines();
     }
 

@@ -1,0 +1,25 @@
+TO DO:
+---------------
+Funcionalidades
+---------------
+
+1. Hacer el combate real. Tiempo estimado 1 día.
+Falta:
+-Los enemigos dropean oro aleatorio en base a los escrito en el json
+-Animaciones
+
+2. Implementar el inventario del jugador, vender en la tienda y inventario en combate. Tiempo estimado 1 día.
+
+3. Hacer el avance de niveles y el combate con el boss. Tiempo estimado 1 día.
+
+Hacer el cambio de nivel sencillo. Meter un par de propiedades en el gameDataManager que cuando avance de nivel, se guarde el numero de nivel en el que esté. A cada nivel extra se multiplican por X los atributos de los enemigos y se aumenta el tamaño de la mazmorra.
+
+4. Documentación y adecentación de código. Tiempo estimado 1-2 días.
+5. Aumentar los lugares de generación de elementos aleatorios por cada habitación y toquetear los rates. Tiempo estimado 1/2 día.
+
+
+----
+Bugs
+----
+1. Menus del combate no se cambia de color el texto al volver a algún sobmenu.
+2. Musica no loopea.

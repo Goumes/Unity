@@ -1,0 +1,68 @@
+{
+  "enemies": [
+	{
+	  "id": 0,
+	  "name": "Blob",
+	  "type": "monster",
+	  "totalHealth": 100.0,
+	  "currentHealth": 100.0,
+	  "totalMana": 150.0,
+	  "currentMana": 150.0,
+	  "defense": 2.5,
+	  "attack": 2.5,
+	  "goldDrop": 50.0,
+	  "abilities" : [
+			4, 5
+	  ],
+	  "spritePath": "DefaultPath"
+	},
+	{
+	  "id": 1,
+	  "name": "Skeleton",
+	  "type": "monster",
+	  "totalHealth": 50.0,
+	  "currentHealth": 50.0,
+	  "totalMana": 100.0,
+	  "currentMana": 100.0,
+	  "defense": 0.0,
+	  "attack": 5.0,
+	  "goldDrop": 50.0,
+	  "abilities" : [
+			4, 5
+	  ],
+	  "spritePath": "DefaultPath"
+	},
+	{
+	  "id": 2,
+	  "name": "Void Archer",
+	  "type": "monster",
+	  "totalHealth": 150.0,
+	  "currentHealth": 150.0,
+	  "totalMana": 100.0,
+	  "currentMana": 100.0,
+	  "defense": 2.0,
+	  "attack": 3.5,
+	  "goldDrop": 100.0,
+	  "abilities" : [
+			4, 5
+	  ],
+	  "spritePath": "DefaultPath"
+	},
+	{
+	  "id": 3,
+	  "name": "Blob King",
+	  "type": "boss",
+	  "totalHealth": 500.0,
+	  "currentHealth": 500.0,
+	  "totalMana": 100.0,
+	  "currentMana": 100.0,
+	  "defense": 10.0,
+	  "attack": 10.0,
+	  "goldDrop": 500.0,
+	  "abilities" : [
+			4, 5, 6
+	  ],
+	  "spritePath": "DefaultPath"
+	}
+ ]
+}

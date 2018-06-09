@@ -69,6 +69,12 @@ TagManager:
   - PauseAlert
   - PauseMenu
   - PausePointer
+  - EnemyCombat
+  - EnemyBars
+  - CombatEnemyInfo
+  - PlayerBars
+  - CombatPlayerInfo
+  - GameOver
   layers:
   - Default
   - TransparentFX

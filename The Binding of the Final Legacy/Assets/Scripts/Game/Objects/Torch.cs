@@ -73,6 +73,6 @@ public class Torch : MonoBehaviour {
 
         DateTime after = DateTime.Now;
         TimeSpan duration = after.Subtract(before);
-        Debug.Log("Duration in milliseconds: " + duration.Milliseconds);
+        //Debug.Log("Duration in milliseconds: " + duration.Milliseconds);
     }
 }

@@ -163,11 +163,14 @@ public class MinimapRoom : MonoBehaviour
                 {
                     if (gridScript.canGenerate)
                     {
-                        foreach (KeyValuePair<string, int> pair in roomArray.minimapRooms[i].GetComponentInChildren<MinimapRoom>().childPositions)
+                        if (roomArray.minimapRooms[i] != null)
                         {
-                            if (pair.Value == serialNumber && pair.Key.Equals("B"))
+                            foreach (KeyValuePair<string, int> pair in roomArray.minimapRooms[i].GetComponentInChildren<MinimapRoom>().childPositions)
                             {
-                                childPositions.Add("T", roomArray.minimapRooms[i].GetComponent<MinimapRoom>().serialNumber);
+                                if (pair.Value == serialNumber && pair.Key.Equals("B"))
+                                {
+                                    childPositions.Add("T", roomArray.minimapRooms[i].GetComponent<MinimapRoom>().serialNumber);
+                                }
                             }
                         }
                     }
@@ -185,11 +188,14 @@ public class MinimapRoom : MonoBehaviour
             {
                 for (int i = 0; i < roomArray.minimapRooms.Count; i++)
                 {
-                    foreach (KeyValuePair<string, int> pair in roomArray.minimapRooms[i].GetComponentInChildren<MinimapRoom>().childPositions)
+                    if (roomArray.minimapRooms[i] != null)
                     {
-                        if (pair.Value == serialNumber && pair.Key.Equals("R"))
+                        foreach (KeyValuePair<string, int> pair in roomArray.minimapRooms[i].GetComponentInChildren<MinimapRoom>().childPositions)
                         {
-                            childPositions.Add("L", roomArray.minimapRooms[i].GetComponent<MinimapRoom>().serialNumber);
+                            if (pair.Value == serialNumber && pair.Key.Equals("R"))
+                            {
+                                childPositions.Add("L", roomArray.minimapRooms[i].GetComponent<MinimapRoom>().serialNumber);
+                            }
                         }
                     }
                 }
@@ -206,11 +212,14 @@ public class MinimapRoom : MonoBehaviour
             {
                 for (int i = 0; i < roomArray.minimapRooms.Count; i++)
                 {
-                    foreach (KeyValuePair<string, int> pair in roomArray.minimapRooms[i].GetComponentInChildren<MinimapRoom>().childPositions)
+                    if (roomArray.minimapRooms[i] != null)
                     {
-                        if (pair.Value == serialNumber && pair.Key.Equals("L"))
+                        foreach (KeyValuePair<string, int> pair in roomArray.minimapRooms[i].GetComponentInChildren<MinimapRoom>().childPositions)
                         {
-                            childPositions.Add("R", roomArray.minimapRooms[i].GetComponent<MinimapRoom>().serialNumber);
+                            if (pair.Value == serialNumber && pair.Key.Equals("L"))
+                            {
+                                childPositions.Add("R", roomArray.minimapRooms[i].GetComponent<MinimapRoom>().serialNumber);
+                            }
                         }
                     }
                 }
@@ -227,13 +236,17 @@ public class MinimapRoom : MonoBehaviour
             {
                 for (int i = 0; i < roomArray.minimapRooms.Count; i++)
                 {
-                    foreach (KeyValuePair<string, int> pair in roomArray.minimapRooms[i].GetComponentInChildren<MinimapRoom>().childPositions)
+                    if (roomArray.minimapRooms[i] != null)
                     {
-                        if (pair.Value == serialNumber && pair.Key.Equals("T"))
+                        foreach (KeyValuePair<string, int> pair in roomArray.minimapRooms[i].GetComponentInChildren<MinimapRoom>().childPositions)
                         {
-                            childPositions.Add("B", roomArray.minimapRooms[i].GetComponent<MinimapRoom>().serialNumber);
+                            if (pair.Value == serialNumber && pair.Key.Equals("T"))
+                            {
+                                childPositions.Add("B", roomArray.minimapRooms[i].GetComponent<MinimapRoom>().serialNumber);
+                            }
                         }
                     }
+                    
                 }
 
             }

@@ -6,29 +6,41 @@ using UnityEngine;
 public class PlayerClass
 {
     public string name;
-    public float health;
+    public float totalHealth;
+    public float currentHealth;
+    public float totalMana;
+    public float currentMana;
     public float defense;
     public float attack;
     public float gold;
+    public List<Ability> abilities;
     public List<GenericItem> inventory;
 
     public PlayerClass()
     {
         name = "Default Name";
-        health = 100.0f;
-        defense = 20.0f;
-        attack = 40.0f;
+        totalHealth = 250.0f;
+        currentHealth = totalHealth;
+        totalMana = 100.0f;
+        currentMana = totalMana;
+        defense = 3.0f;
+        attack = 5.0f;
         gold = 99999.0f;
+        abilities = new List<Ability>();
         inventory = new List<GenericItem>();
     }
 
-    public PlayerClass(string name, float health, float defense, float attack, float gold, List<GenericItem> inventory)
+    public PlayerClass(string name, float totalHealth, float totalMana, float defense, float attack, float gold, List<Ability> abilities, List<GenericItem> inventory)
     {
         this.name = name;
-        this.health = health;
+        this.totalHealth = totalHealth;
+        currentHealth = totalHealth;
+        this.totalMana = totalMana;
+        currentMana = totalMana;
         this.defense = defense;
         this.attack = attack;
         this.gold = gold;
+        this.abilities = abilities;
         this.inventory = inventory;
     }
 }

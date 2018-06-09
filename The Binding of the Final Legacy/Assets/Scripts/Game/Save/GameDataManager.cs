@@ -14,7 +14,7 @@ public class GameDataManager : MonoBehaviour
     private GameObject itemPool;
     private GameObject minimapGrid;
     private GameObject roomArray;
-    private ItemDatabase itemDatabase;
+    private Database itemDatabase;
     private ShopGlobalButton shopGlobalButton;
     public bool hasSavedGame;
     private bool instantiated;
@@ -67,7 +67,7 @@ public class GameDataManager : MonoBehaviour
                 minimapGrid = GameObject.FindGameObjectWithTag("Grid");
                 roomArray = GameObject.FindGameObjectWithTag("Rooms");
                 shopGlobalButton = GameObject.FindGameObjectWithTag("Shop Global Button").GetComponent<ShopGlobalButton>();
-                itemDatabase = GameObject.FindGameObjectWithTag("Item Pool").GetComponent<ItemDatabase>();
+                itemDatabase = GameObject.FindGameObjectWithTag("Item Pool").GetComponent<Database>();
             }
             else if (menu)
             {
@@ -118,6 +118,15 @@ public class GameDataManager : MonoBehaviour
         Debug.Log("Saved Game: " + save.saveGameName);
 
         return saved;
+    }
+
+    public void DeleteSave()
+    {
+        if (File.Exists(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments) + "/The Binding of the Final Legacy/" + selectedSave + ".sav"))
+        {
+            File.Delete(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments) + "/The Binding of the Final Legacy/" + selectedSave + ".sav");
+            Debug.Log("Deleted Game: " + selectedSave);
+        }
     }
 
     private void saveMinimap(GameSave save)
@@ -205,7 +214,7 @@ public class GameDataManager : MonoBehaviour
     private void saveItems(GameSave save)
     {
         ItemsSave itemsSave = new ItemsSave();
-        itemsSave.database = itemDatabase.database;
+        itemsSave.database = itemDatabase.itemDatabase;
         itemsSave.shopPool = itemDatabase.shopPool;
         itemsSave.soldItems = shopGlobalButton.soldItems;
 

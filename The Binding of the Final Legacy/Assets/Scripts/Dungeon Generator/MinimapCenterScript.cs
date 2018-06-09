@@ -16,7 +16,7 @@ public class MinimapCenterScript : MonoBehaviour
     {
 		
 	}
-    private void OnTriggerEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision) //Esto estaba en collision2D
     {
         if (collision.transform.CompareTag("Center"))
         {

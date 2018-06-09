@@ -5,13 +5,13 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    private ItemDatabase itemDatabase;
+    private Database itemDatabase;
     private List<GenericItem> shopPool;
     public int itemNumber;
     public GenericItem currentItem;
 	// Use this for initialization
 	void Start () {
-        itemDatabase = GameObject.FindGameObjectWithTag("Item Pool").GetComponent<ItemDatabase>();
+        itemDatabase = GameObject.FindGameObjectWithTag("Item Pool").GetComponent<Database>();
         itemNumber = Convert.ToInt32(transform.name.Substring(5));
         Invoke("loadItem", 0.001f);
         
