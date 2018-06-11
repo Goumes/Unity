@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class ShopGlobalButton : MonoBehaviour
 {
     public bool itemSelectorActive;
-    public bool confirmActive;
     public GameObject currentButton;
     private GameObject mainMenu;
     private GameObject itemMenu;
@@ -86,12 +85,7 @@ public class ShopGlobalButton : MonoBehaviour
     {
         if (Input.GetButtonDown("Cancel"))
         {
-            if (confirmActive)
-            {
-
-            }
-
-            else if (itemSelectorActive)
+            if (itemSelectorActive)
             {
                 for (int i = 0; i < itemButtons.Count; i++)
                 {

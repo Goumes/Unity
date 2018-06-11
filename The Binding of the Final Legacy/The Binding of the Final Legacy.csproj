@@ -347,6 +347,8 @@
     <Compile Include="Assets\Scripts\Game\UI\LoadingScreenScript.cs" />
     <Compile Include="Assets\Scripts\Game\UI\MinimapCamera.cs" />
     <Compile Include="Assets\Scripts\Game\UI\MinimapUI.cs" />
+    <Compile Include="Assets\Scripts\Menus\InventoryButtonScript.cs" />
+    <Compile Include="Assets\Scripts\Menus\InventoryMenu.cs" />
     <Compile Include="Assets\Scripts\Menus\LoadMenu.cs" />
     <Compile Include="Assets\Scripts\Menus\LoadMenuButton.cs" />
     <Compile Include="Assets\Scripts\Menus\MainMenu.cs" />

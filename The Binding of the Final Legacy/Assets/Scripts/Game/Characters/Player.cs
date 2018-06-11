@@ -41,6 +41,20 @@ public class Player : MonoBehaviour {
         else
         {
             playerStats = gameDataManager.createdPlayer;
+
+            //Cosas de testeo
+            //playerStats.inventory.Add(new GenericItem(9, "ItemPrueba1", "weapon", "DescripcionPrueba1", 50.0f, 30.0f, 0, 5.0f, 4.5f, 100.0f, 0.0f, "Items/stunWhip"));
+            //playerStats.inventory.Add(new GenericItem(1, "ItemPrueba2", "armor", "DescripcionPrueba2", 40.0f, 20.0f, 0, 6.0f, 7.5f, 200.0f, 0.0f, "Items/heavyKevlarArmor"));
+            //playerStats.inventory.Add(new GenericItem(2, "ItemPrueba3", "potion", "DescripcionPrueba3", 30.0f, 15.0f, 0, 3.0f, 6.5f, 300.0f, 0.0f, "Items/potion"));
+            //playerStats.inventory.Add(new GenericItem(2, "ItemPrueba3", "potion", "DescripcionPrueba3", 30.0f, 15.0f, 0, 3.0f, 6.5f, 300.0f, 50.0f, "Items/mana potion"));
+            //playerStats.inventory.Add(new GenericItem(3, "ItemPrueba4", "weapon", "DescripcionPrueba4", 20.0f, 10.0f, 0, 2.0f, 4.5f, 50.0f, 0.0f, "Items/longSword"));
+            //playerStats.inventory.Add(new GenericItem(4, "ItemPrueba5", "potion", "DescripcionPrueba5", 10.0f, 5.0f, 12, 1.0f, 3.5f, 2000.0f, 0.0f, "Items/potion"));
+            //playerStats.inventory.Add(new GenericItem(5, "ItemPrueba6", "potion", "DescripcionPrueba6", 0.0f, 0.0f, 0, 0.0f, 0.0f, 300.0f, 0.0f, "Items/ration"));
+            //playerStats.weapon = new GenericItem(6, "armaEquipadaPrueba1", "weapon", "DescripcionPrueba7", 0.0f, 0.0f, 0, 100.0f, 0.0f, 700.0f, 0.0f, "Items/assaultRifle");
+            //playerStats.armor = new GenericItem(7, "armaduraEquipadaPrueba1", "armor", "DescripcionPrueba8", 0.0f, 0.0f, 0, 0.0f, 123.0f, 1200.0f, 0.0f, "Items/greatShield");
+
+            //playerStats.currentHealth = 50.0f;
+            //playerStats.currentMana = 70.0f;
         }
         
     }
@@ -71,7 +85,7 @@ public class Player : MonoBehaviour {
     {
         if (!management.inCombat && !management.inShop && !management.inTransition)
         {
-            if (!management.inPause)
+            if (!management.inPause && !management.inInventory)
             {
                 CheckInput();
 
@@ -79,6 +93,7 @@ public class Player : MonoBehaviour {
             }
            
             CheckForMenu();
+            CheckForInventory();
         }
 
         else
@@ -86,15 +101,13 @@ public class Player : MonoBehaviour {
             CalculateMovement(Vector2.zero);
             isMoving = false;
             SendAnimInfo();
-        }
-        
+        }  
     }
-
     private void CheckForMenu()
     {
         if (Input.GetButtonDown("Cancel"))
         {
-            if (!management.inPause)
+            if (!management.inPause && !management.inInventory)
             {
                 CalculateMovement(Vector2.zero);
                 isMoving = false;
@@ -102,18 +115,38 @@ public class Player : MonoBehaviour {
 
                 management.openPause();
 
-                Debug.Log("Gold: " + playerStats.gold);
-                for (int i = 0; i < playerStats.inventory.Count; i++)
-                {
-                    Debug.Log("Item: " + playerStats.inventory[i].name);
-                }
+                //Debug.Log("Gold: " + playerStats.gold);
+                //for (int i = 0; i < playerStats.inventory.Count; i++)
+                //{
+                //    Debug.Log("Item: " + playerStats.inventory[i].name);
+                //}
+            }
+
+            else if (management.inPause)
+            {
+                management.closePause();
+            }
+        }
+    }
+
+    private void CheckForInventory()
+    {
+        if (Input.GetButtonDown("Inventory"))
+        {
+            if (!management.inInventory && !management.inPause)
+            {
+                CalculateMovement(Vector2.zero);
+                isMoving = false;
+                SendAnimInfo();
+
+                management.openInventory();
             }
 
             else
             {
-                management.closePause();
+                management.closeInventory();
             }
-            
+
         }
     }
 

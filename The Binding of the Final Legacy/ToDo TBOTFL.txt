@@ -10,6 +10,10 @@ Falta:
 
 2. Implementar el inventario del jugador, vender en la tienda y inventario en combate. Tiempo estimado 1 día.
 
+OBRA DE ARTE. Falta implementarlo en la tienda y en el combate.
+
+
+
 3. Hacer el avance de niveles y el combate con el boss. Tiempo estimado 1 día.
 
 Hacer el cambio de nivel sencillo. Meter un par de propiedades en el gameDataManager que cuando avance de nivel, se guarde el numero de nivel en el que esté. A cada nivel extra se multiplican por X los atributos de los enemigos y se aumenta el tamaño de la mazmorra.

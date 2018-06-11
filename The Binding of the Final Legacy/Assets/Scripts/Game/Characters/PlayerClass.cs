@@ -15,6 +15,8 @@ public class PlayerClass
     public float gold;
     public List<Ability> abilities;
     public List<GenericItem> inventory;
+    public GenericItem weapon;
+    public GenericItem armor;
 
     public PlayerClass()
     {
@@ -28,9 +30,11 @@ public class PlayerClass
         gold = 99999.0f;
         abilities = new List<Ability>();
         inventory = new List<GenericItem>();
+        weapon = new GenericItem();
+        armor = new GenericItem();
     }
 
-    public PlayerClass(string name, float totalHealth, float totalMana, float defense, float attack, float gold, List<Ability> abilities, List<GenericItem> inventory)
+    public PlayerClass(string name, float totalHealth, float totalMana, float defense, float attack, float gold, List<Ability> abilities, List<GenericItem> inventory, GenericItem weapon, GenericItem armor)
     {
         this.name = name;
         this.totalHealth = totalHealth;
@@ -42,5 +46,7 @@ public class PlayerClass
         this.gold = gold;
         this.abilities = abilities;
         this.inventory = inventory;
+        this.weapon = weapon;
+        this.armor = armor;
     }
 }

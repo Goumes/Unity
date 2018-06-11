@@ -2,7 +2,7 @@
   "enemies": [
 	{
 	  "id": 0,
-	  "name": "Blob",
+	  "name": "BLOB",
 	  "type": "monster",
 	  "totalHealth": 100.0,
 	  "currentHealth": 100.0,
@@ -18,7 +18,7 @@
 	},
 	{
 	  "id": 1,
-	  "name": "Skeleton",
+	  "name": "SKELETON",
 	  "type": "monster",
 	  "totalHealth": 50.0,
 	  "currentHealth": 50.0,
@@ -34,7 +34,7 @@
 	},
 	{
 	  "id": 2,
-	  "name": "Void Archer",
+	  "name": "VOID ARCHER",
 	  "type": "monster",
 	  "totalHealth": 150.0,
 	  "currentHealth": 150.0,
@@ -50,7 +50,7 @@
 	},
 	{
 	  "id": 3,
-	  "name": "Blob King",
+	  "name": "KING BLOB",
 	  "type": "boss",
 	  "totalHealth": 500.0,
 	  "currentHealth": 500.0,

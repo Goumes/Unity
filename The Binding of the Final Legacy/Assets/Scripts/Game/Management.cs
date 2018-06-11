@@ -11,6 +11,7 @@ public class Management : MonoBehaviour {
     public bool inShop;
     public bool inTransition;
     public bool inPause;
+    public bool inInventory;
     private GameObject myEventSystem;
     public GameObject combat;
     public GameObject shop;
@@ -25,6 +26,7 @@ public class Management : MonoBehaviour {
     private GameObject pauseMenu;
     private GameObject gameOver;
     private GameObject player;
+    private GameObject inventoryMenu;
 
     // Use this for initialization
     void Start () {
@@ -41,9 +43,11 @@ public class Management : MonoBehaviour {
         pauseMenu = GameObject.FindGameObjectWithTag("PauseMenu");
         gameOver = GameObject.FindGameObjectWithTag("GameOver");
         player = GameObject.FindGameObjectWithTag("Player");
+        inventoryMenu = GameObject.FindGameObjectWithTag("Inventory");
         Invoke("DisableCombat", 0.2f);
         Invoke("DisableShop", 0.2f);
         Invoke("DisablePause", 0.2f);
+        Invoke("DisableInventory", 0.2f);
         Invoke("DisableGameOver", 0.001f);
     }
 
@@ -60,6 +64,11 @@ public class Management : MonoBehaviour {
     private void DisableShop()
     {
         shop.SetActive(false);
+    }
+
+    private void DisableInventory()
+    {
+        inventoryMenu.SetActive(false);
     }
 
     private void DisablePause()
@@ -343,5 +352,17 @@ public class Management : MonoBehaviour {
     {
         inPause = false;
         pauseMenu.SetActive(false);
+    }
+
+    public void openInventory()
+    {
+        inInventory = true;
+        inventoryMenu.SetActive(true);
+    }
+
+    public void closeInventory()
+    {
+        inInventory = false;
+        inventoryMenu.SetActive(false);
     }
 }

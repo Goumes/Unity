@@ -30,18 +30,18 @@ public class LoadingScreenScript : MonoBehaviour
 
     private IEnumerator loadingAnimation()
     {
-        text.text = "Loading";
+        text.text = "LOADING";
 
         yield return new WaitForSeconds(0.2f);
 
-        text.text = "Loading.";
+        text.text = "LOADING.";
 
         yield return new WaitForSeconds(0.2f);
 
-        text.text = "Loading..";
+        text.text = "LOADING..";
 
         yield return new WaitForSeconds(0.2f);
 
-        text.text = "Loading...";
+        text.text = "LOADING...";
     }
 }

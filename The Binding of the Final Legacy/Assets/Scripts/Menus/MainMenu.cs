@@ -7,7 +7,6 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
-    private Color tmp;
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;

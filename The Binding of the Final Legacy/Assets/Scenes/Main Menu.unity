@@ -783,7 +783,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 489}
+  m_AnchoredPosition: {x: 0, y: 469.99994}
   m_SizeDelta: {x: 315.2, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &70604735
@@ -2719,10 +2719,14 @@ MonoBehaviour:
   selectedSave: 
   createdPlayer:
     name: Default Name
-    health: 100
+    totalHealth: 250
+    currentHealth: 250
+    totalMana: 100
+    currentMana: 100
     defense: 20
     attack: 40
     gold: 100
+    abilities: []
     inventory: []
   hasSavedGame: 0
 --- !u!4 &196190071
@@ -13040,7 +13044,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 446}
+  m_AnchoredPosition: {x: 0, y: 443}
   m_SizeDelta: {x: 454.9, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1055466968
@@ -13062,7 +13066,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: New Game
+  m_text: NEW GAME
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f22893e12e0db314b8998321c2b9806d, type: 2}
   m_sharedMaterial: {fileID: 21209157976736260, guid: f22893e12e0db314b8998321c2b9806d,
@@ -16112,7 +16116,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: The Binding of the Final Legacy
+  m_Text: THE BINDING OF THE FINAL LEGACY
 --- !u!222 &1257497861
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -23392,7 +23396,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -3, y: 489}
+  m_AnchoredPosition: {x: -3, y: 470}
   m_SizeDelta: {x: 356.8, y: 113.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1790021520

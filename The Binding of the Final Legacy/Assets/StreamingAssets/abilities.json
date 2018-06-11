@@ -3,48 +3,48 @@
 	{
 	  "id": 0,
 	  "type": "player",
-	  "name": "Basic Attack",
+	  "name": "SLICE",
 	  "dmgMultiplier": 5,
 	  "manaCost": 0.0
 	},
 	{
 	  "id": 1,
-	  "name": "Windslash",
+	  "name": "WINDSLASH",
 	  "type": "player",
 	  "dmgMultiplier": 10,
 	  "manaCost": 10.0
 	},
 	{
 	  "id": 2,
-	  "name": "Final Justice",
+	  "name": "DEMOLISH",
 	  "type": "player",
 	  "dmgMultiplier": 20,
 	  "manaCost": 30.0
 	},
 	{
 	  "id": 3,
-	  "name": "God's Will",
+	  "name": "GOD'S WILL",
 	  "type": "player",
 	  "dmgMultiplier": 999,
 	  "manaCost": 0.0
 	},
 	{
 	  "id": 4,
-	  "name": "Basic Attack",
+	  "name": "BASIC ATTACK",
 	  "type": "enemy",
 	  "dmgMultiplier": 5,
 	  "manaCost": 0.0
 	},
 	{
 	  "id": 5,
-	  "name": "Strong Attack",
+	  "name": "STRONG ATTACK",
 	  "type": "enemy",
 	  "dmgMultiplier": 10,
 	  "manaCost": 10.0
 	},
 	{
 	  "id": 6,
-	  "name": "Final Attack",
+	  "name": "FINAL ATTACK",
 	  "type": "enemy",
 	  "dmgMultiplier": 15,
 	  "manaCost": 50.0
