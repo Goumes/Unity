@@ -5,14 +5,14 @@ using UnityEngine;
 public class RoomScript : MonoBehaviour
 {
     public int serialNumber;
+    public bool hasChest;
+    public bool hasShop;
+    public bool hasBoss;
     private List<GameObject> enemies;
     private Management management;
     private List<GameObject> misc;
     private List<GameObject> chests;
-    public bool hasChest;
-    public bool hasShop;
-    public bool hasBoss;
-    GameDataManager gameDataManager;
+    private GameDataManager gameDataManager;
 	// Use this for initialization
 	void Start ()
     {
@@ -47,15 +47,27 @@ public class RoomScript : MonoBehaviour
             }
         }
 
-        if (!gameDataManager.hasSavedGame)
+        if (!gameDataManager.hasSavedGame && !hasBoss)
         {
             generateEnemies(true);
             generateChests(true);
             generateMisc(true);
         }
-        else
+        else if (!gameDataManager.hasSavedGame && hasBoss)
+        {
+            generateBossEnemies();
+            generateChests(true);
+            generateMisc(true);
+        }
+        else if (gameDataManager.hasSavedGame && !hasBoss)
         {
             generateEnemies(false);
+            generateChests(false);
+            generateMisc(false);
+        }
+        else if ((gameDataManager.hasSavedGame && hasBoss))
+        {
+            generateBossEnemies();
             generateChests(false);
             generateMisc(false);
         }
@@ -68,6 +80,18 @@ public class RoomScript : MonoBehaviour
 		
 	}
 
+
+    private void generateBossEnemies()
+    {
+        Destroy(enemies[0].gameObject);
+        enemies[1].gameObject.GetComponent<Blob>().isBoss = true;
+        Destroy(enemies[2].gameObject);
+    }
+
+    /// <summary>
+    /// Generates or loads the enemies of the room
+    /// </summary>
+    /// <param name="created"></param>
     private void generateEnemies (bool created)
     {
        
@@ -75,7 +99,7 @@ public class RoomScript : MonoBehaviour
         {
             if (created)
             {
-                if (management.randomBoolean(0.3f) || hasBoss)
+                if (management.randomBoolean(0.40f))
                 {
                     Destroy(enemies[i].gameObject);
                 }
@@ -104,13 +128,17 @@ public class RoomScript : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// Generates or loads the chests of the room
+    /// </summary>
+    /// <param name="created"></param>
     private void generateChests(bool created)
     {
         for (int i = 0; i < chests.Count; i++)
         {
             if (created)
             {
-                if (management.randomBoolean(0.3f) || hasBoss)
+                if (management.randomBoolean(0.05f) || hasBoss)
                 {
                     Destroy(chests[i].gameObject);
                 }
@@ -137,13 +165,17 @@ public class RoomScript : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Generates or loads the miscelanea of the room
+    /// </summary>
+    /// <param name="created"></param>
     private void generateMisc(bool created)
     {
         for (int i = 0; i < misc.Count; i++)
         {
             if (created)
             {
-                if (management.randomBoolean(0.3f) || hasBoss)
+                if (management.randomBoolean(0.6f) || hasBoss)
                 {
                     Destroy(misc[i].gameObject);
                 }

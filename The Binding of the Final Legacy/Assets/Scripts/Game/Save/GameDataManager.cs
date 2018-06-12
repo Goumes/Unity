@@ -17,7 +17,8 @@ public class GameDataManager : MonoBehaviour
     private Database itemDatabase;
     private ShopGlobalButton shopGlobalButton;
     public bool hasSavedGame;
-    private bool instantiated;
+    public bool instantiated;
+    public int lvl;
     private bool menu;
 
     //Singleton
@@ -89,6 +90,10 @@ public class GameDataManager : MonoBehaviour
         }
 	}
 
+    /// <summary>
+    /// Saves the game
+    /// </summary>
+    /// <returns></returns>
     public bool SaveGame()
     {
         bool saved = false;
@@ -120,6 +125,9 @@ public class GameDataManager : MonoBehaviour
         return saved;
     }
 
+    /// <summary>
+    /// Deletes a saved game
+    /// </summary>
     public void DeleteSave()
     {
         if (File.Exists(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments) + "/The Binding of the Final Legacy/" + selectedSave + ".sav"))
@@ -129,6 +137,10 @@ public class GameDataManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Saves the minimap
+    /// </summary>
+    /// <param name="save"></param>
     private void saveMinimap(GameSave save)
     {
         List<MinimapRoomSave> minimapRooms = new List<MinimapRoomSave>();
@@ -156,6 +168,10 @@ public class GameDataManager : MonoBehaviour
         };
     }
 
+    /// <summary>
+    /// Saves the dungeon
+    /// </summary>
+    /// <param name="save"></param>
     private void saveDungeon(GameSave save)
     {
         List<RealRoomSave> realRooms = new List<RealRoomSave>();
@@ -200,6 +216,10 @@ public class GameDataManager : MonoBehaviour
         };
     }
 
+    /// <summary>
+    /// Saves the player
+    /// </summary>
+    /// <param name="save"></param>
     private void savePlayer(GameSave save)
     {
         PlayerSave playerSave = new PlayerSave();
@@ -211,6 +231,10 @@ public class GameDataManager : MonoBehaviour
         save.player = playerSave;
     }
 
+    /// <summary>
+    /// Saves the items
+    /// </summary>
+    /// <param name="save"></param>
     private void saveItems(GameSave save)
     {
         ItemsSave itemsSave = new ItemsSave();
@@ -222,6 +246,10 @@ public class GameDataManager : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Loads the game
+    /// </summary>
+    /// <returns></returns>
     public GameSave LoadGame()
     {
         GameSave loadedGame = null;
@@ -231,7 +259,7 @@ public class GameDataManager : MonoBehaviour
             FileStream file = File.Open(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments) + "/The Binding of the Final Legacy/" + selectedSave + ".sav", FileMode.Open);
             loadedGame = (GameSave)bf.Deserialize(file);
             file.Close();
-            Debug.Log("Loaded Game: " + loadedGame.saveGameName);
+            //Debug.Log("Loaded Game: " + loadedGame.saveGameName);
         }
 
         return loadedGame;

@@ -19,6 +19,9 @@ public class AudioManager : MonoBehaviour
 
 	}
 
+    /// <summary>
+    /// Plays the music
+    /// </summary>
     public void startMusic()
     {
         audioSource.PlayOneShot(management.backgroundMusic);
@@ -26,6 +29,9 @@ public class AudioManager : MonoBehaviour
         management.playingMusic = true;
     }
 
+    /// <summary>
+    /// stops the music
+    /// </summary>
     public void stopMusic()
     {
         audioSource.Stop();
@@ -33,6 +39,9 @@ public class AudioManager : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Pauses the music
+    /// </summary>
     public void pauseMusic()
     {
         audioSource.Pause();

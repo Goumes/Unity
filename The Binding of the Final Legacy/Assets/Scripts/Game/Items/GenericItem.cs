@@ -6,6 +6,7 @@ using UnityEngine;
 [System.Serializable]
 public class GenericItem
 {
+    //No lleva getters y setters porque el binnaryformatter de unity no los puede manejar
     public int id;//{ get; set; }
     public string name;// { get; set; }
     public string type;
@@ -51,6 +52,22 @@ public class GenericItem
         this.imageResourcePath = imageResourcePath;
     }
 
+    public GenericItem(GenericItem item)
+    {
+        id = item.id;
+        name = item.name;
+        type = item.type;
+        description = item.description;
+        price = item.price;
+        sellingPrice = item.sellingPrice;
+        duration = item.duration;
+        attackModifier = item.attackModifier;
+        defenseModifier = item.defenseModifier;
+        healthModifier = item.healthModifier;
+        manaModifier = item.manaModifier;
+        imageResourcePath = item.imageResourcePath;
+    }
+
     public override bool Equals(object obj)
     {
         var item = obj as GenericItem;
@@ -61,5 +78,23 @@ public class GenericItem
         }
 
         return id.Equals(item.id);
+    }
+
+    public override int GetHashCode()
+    {
+        var hashCode = -669923385;
+        hashCode = hashCode * -1521134295 + id.GetHashCode();
+        hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(name);
+        hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(type);
+        hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(description);
+        hashCode = hashCode * -1521134295 + price.GetHashCode();
+        hashCode = hashCode * -1521134295 + sellingPrice.GetHashCode();
+        hashCode = hashCode * -1521134295 + duration.GetHashCode();
+        hashCode = hashCode * -1521134295 + attackModifier.GetHashCode();
+        hashCode = hashCode * -1521134295 + defenseModifier.GetHashCode();
+        hashCode = hashCode * -1521134295 + healthModifier.GetHashCode();
+        hashCode = hashCode * -1521134295 + manaModifier.GetHashCode();
+        hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(imageResourcePath);
+        return hashCode;
     }
 }

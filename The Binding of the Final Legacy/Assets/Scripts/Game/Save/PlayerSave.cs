@@ -5,6 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class PlayerSave
 {
+    //No tiene getters ni setters por un problema con el binnaryformatter the unity, que no los puede tratar
     public float x;
     public float y;
     public PlayerClass playerDetails;

@@ -19,11 +19,25 @@ public class SelectEnemy : MonoBehaviour
 		
 	}
 
+    /// <summary>
+    /// Starts blinking when selected
+    /// </summary>
     public void startBlinking()
     {
         InvokeRepeating("selectEnemy", 0f, 1.5f);
     }
 
+    /// <summary>
+    /// Starts blinking when called
+    /// </summary>
+    public void startBlinkingWhite()
+    {
+        StartCoroutine(blinkWhite());
+    }
+
+    /// <summary>
+    /// Stops blinking
+    /// </summary>
     public void stopBlinking()
     {
         CancelInvoke("selectEnemy");
@@ -32,23 +46,30 @@ public class SelectEnemy : MonoBehaviour
         gameObject.GetComponent<SpriteRenderer>().color = tmp;
     }
 
+    /// <summary>
+    /// Starts blinking
+    /// </summary>
     private void selectEnemy()
     {
         globalButton.blinkCoroutine = StartCoroutine("blink");
     }
 
-    IEnumerator blink()
+    /// <summary>
+    /// Blinks red
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator blink()
     {
         DateTime before = DateTime.Now;
 
-        for (float i = 0f; i < 0.7f; i = i + 0.02f)
+        for (float i = 0f; i < 0.44f; i = i + 0.02f)
         {
             tmp.a = i;
             gameObject.GetComponent<SpriteRenderer>().color = tmp; //Hay que hacerlo así porque no es una variable y no se puede cambiar directamente
             yield return new WaitForSeconds(0.0001f);
         }
 
-        for (float i = 0.7f; i >= 0f; i = i - 0.02f)
+        for (float i = 0.44f; i >= 0f; i = i - 0.02f)
         {
             tmp.a = i;
             gameObject.GetComponent<SpriteRenderer>().color = tmp; //Hay que hacerlo así porque no es una variable y no se puede cambiar directamente
@@ -57,6 +78,33 @@ public class SelectEnemy : MonoBehaviour
 
         DateTime after = DateTime.Now;
         TimeSpan duration = after.Subtract(before);
-        Debug.Log("Duration in milliseconds for the blinking: " + duration.Milliseconds);
+        //Debug.Log("Duration in milliseconds for the blinking: " + duration.Milliseconds);
+    }
+
+    private IEnumerator blinkWhite()
+    {
+        DateTime before = DateTime.Now;
+
+        tmp = Color.white;
+
+        for (float i = 0f; i < 0.44f; i = i + 0.02f)
+        {
+            tmp.a = i;
+            gameObject.GetComponent<SpriteRenderer>().color = tmp; //Hay que hacerlo así porque no es una variable y no se puede cambiar directamente
+            yield return new WaitForSeconds(0.0001f);
+        }
+
+        for (float i = 0.44f; i >= 0f; i = i - 0.02f)
+        {
+            tmp.a = i;
+            gameObject.GetComponent<SpriteRenderer>().color = tmp; //Hay que hacerlo así porque no es una variable y no se puede cambiar directamente
+            yield return new WaitForSeconds(0.0001f);
+        }
+
+        tmp = Color.red;
+
+        DateTime after = DateTime.Now;
+        TimeSpan duration = after.Subtract(before);
+        //Debug.Log("Duration in milliseconds for the blinking: " + duration.Milliseconds);
     }
 }

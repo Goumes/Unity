@@ -23,11 +23,18 @@ public class LoadingScreenScript : MonoBehaviour
         StopAllCoroutines();
     }
 
+    /// <summary>
+    /// Starts the loading animation
+    /// </summary>
     private void animationStart()
     {
         StartCoroutine(loadingAnimation());
     }
 
+    /// <summary>
+    /// Changes the text of the loading screen several times
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator loadingAnimation()
     {
         text.text = "LOADING";

@@ -82,6 +82,8 @@ TagManager:
   - InventoryButtons
   - InventoryPointer
   - InventoryOptions
+  - CombatPlayer
+  - CombatPlayerHit
   layers:
   - Default
   - TransparentFX

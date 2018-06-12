@@ -5,6 +5,6 @@ using UnityEngine;
 [System.Serializable]
 public class MinimapSave
 {
-    //public int globalCounter;
+    //No tiene getters ni setters por un problema con el binnaryformatter the unity, que no los puede tratar
     public List<MinimapRoomSave> rooms;
 }

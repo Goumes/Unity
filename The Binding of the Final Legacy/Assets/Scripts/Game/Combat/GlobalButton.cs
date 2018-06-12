@@ -10,8 +10,25 @@ public class GlobalButton : MonoBehaviour
 {
     public bool subMenu1Active;
     public bool subMenu2Active;
-    private Management management;
+    public float goldReward;
+    public int abilitySelected;
+    public bool hasBoss;
     public GameObject player;
+    public GameObject currentButton;
+    public GameObject[] enemyModels;
+    public GameObject[] enemyBars;
+    public GameObject[] enemyInfo;
+    public GameObject[] playerBars;
+    public GameObject playerInfo;
+    public List<GenericItem> itemReward;
+    public Coroutine blinkCoroutine;
+    public GameObject subMenu1SelectedButton;
+
+    private bool ended;
+    private bool inAnimation;
+    private bool isDefending;
+    private bool nextLvl;
+    private Management management;
     private GameObject lvl1;
     private GameObject lvl2;
     private GameObject lvl3;
@@ -19,18 +36,10 @@ public class GlobalButton : MonoBehaviour
     private List<GameObject> lvl2Background;
     private List<GameObject> lvl3Background;
     private GameObject pointer;
-    public GameObject currentButton;
     private EventSystem myEventSystem;
-    public GameObject[] enemyModels;
-    public GameObject[] enemyBars;
-    public GameObject[] enemyInfo;
-    public GameObject[] playerBars;
-    public GameObject playerInfo;
-    public float goldReward;
-    public List<GenericItem> itemReward;
-    public int abilitySelected;
-    public Coroutine blinkCoroutine;
-    private bool ended;
+    private GameObject playerHitModel;
+    private GameObject playerModel;
+    private GameObject[] selectedEnemies;
 
     // Use this for initialization
     void Start () {
@@ -49,6 +58,9 @@ public class GlobalButton : MonoBehaviour
         playerBars = GameObject.FindGameObjectsWithTag("PlayerBars");
         playerInfo = GameObject.FindGameObjectWithTag("CombatPlayerInfo");
         myEventSystem = GameObject.Find("EventSystem").GetComponent<EventSystem>();
+        playerModel = GameObject.FindGameObjectWithTag("CombatPlayer");
+        playerHitModel = GameObject.FindGameObjectWithTag("CombatPlayerHit");
+        selectedEnemies = GameObject.FindGameObjectsWithTag("Enemy Selected");
 
 
         for (int i = 0; i < lvl1.transform.childCount; i++)
@@ -93,6 +105,9 @@ public class GlobalButton : MonoBehaviour
         Invoke("firstEnable", 0.01f);
     }
 
+    /// <summary>
+    /// Loads the combat with the active enemies
+    /// </summary>
     private void firstEnable()
     {
         int counter = 0;
@@ -101,14 +116,30 @@ public class GlobalButton : MonoBehaviour
         itemReward = new List<GenericItem>();
         ended = false;
 
-        for (int i = 0; i < enemyModels.Length && counter < 2; i++)
+        if (!hasBoss)
         {
-            if (management.randomBoolean(0.6f))
+            for (int i = 0; i < enemyModels.Length && counter < 2; i++)
             {
-                enemyModels[i].SetActive(false);
-                counter++;
+                if (management.randomBoolean(0.6f))
+                {
+                    enemyModels[i].SetActive(false);
+                    counter++;
+                }
             }
         }
+        else
+        {
+            for (int i = 0; i < enemyModels.Length && counter < 2; i++)
+            {
+                if (!enemyModels[i].transform.name.Equals("Enemy Combat In-Game 1"))
+                {
+                    enemyModels[i].SetActive(false);
+                    enemyModels[i].SetActive(false);
+                }
+            }
+           
+        }
+        
 
         for (int j = 0; j < lvl1Background[0].transform.childCount; j++)
         {
@@ -270,8 +301,16 @@ public class GlobalButton : MonoBehaviour
         {
             checkForEnd();
         }
+
+        //if (inAnimation)
+        //{
+        //    followEnemyBars();
+        //}
     }
 
+    /// <summary>
+    /// Closes the enemy select menu
+    /// </summary>
     public void closeSubMenu2()
     {
         for (int i = 0; i < lvl3Background.Count; i++)
@@ -293,7 +332,7 @@ public class GlobalButton : MonoBehaviour
                         {
                             lvl2Background[i].transform.GetChild(j).GetChild(k).gameObject.GetComponent<Button>().interactable = true;
 
-                            if (k == 0)
+                            if (lvl2Background[i].transform.GetChild(j).GetChild(k).transform.name.Equals(subMenu1SelectedButton.transform.name))
                             {
                                 lvl2Background[i].transform.GetChild(j).GetChild(k).GetComponent<Button>().Select();
                             }
@@ -306,6 +345,9 @@ public class GlobalButton : MonoBehaviour
         subMenu2Active = false;
     }
 
+    /// <summary>
+    /// Closes the ability select menu
+    /// </summary>
     public void closeSubMenu1()
     {
         for (int i = 0; i < lvl2Background.Count; i++)
@@ -340,6 +382,10 @@ public class GlobalButton : MonoBehaviour
         subMenu1Active = false;
     }
 
+    /// <summary>
+    /// Disables a specific enemy's UI
+    /// </summary>
+    /// <param name="number"></param>
     public void disableEnemyUI(int number)
     {
         for (int i = 0; i < lvl3Background.Count; i++)
@@ -380,6 +426,10 @@ public class GlobalButton : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Enables a specific's enemy UI
+    /// </summary>
+    /// <param name="number"></param>
     public void enableEnemyUI(int number)
     {
         for (int i = 0; i < lvl3Background.Count; i++)
@@ -424,6 +474,11 @@ public class GlobalButton : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Returns an enemy found by number
+    /// </summary>
+    /// <param name="number"></param>
+    /// <returns></returns>
     public EnemyModel getEnemyByNumber(int number)
     {
         EnemyModel resultado = null;
@@ -440,6 +495,9 @@ public class GlobalButton : MonoBehaviour
         return resultado;
     }
 
+    /// <summary>
+    /// Updates the UI
+    /// </summary>
     private void updateUI()
     {
         int number = 0;
@@ -551,19 +609,108 @@ public class GlobalButton : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Starts the enemy turn coroutine
+    /// </summary>
     public void startEnemyTurn()
     {
         StartCoroutine(enemyTurn());
     }
 
+    /// <summary>
+    /// Starts the player turn coroutine
+    /// </summary>
+    /// <param name="enemyNumber"></param>
+    public void startPlayerTurn(int enemyNumber)
+    {
+        StartCoroutine(playerTurn(enemyNumber));
+    }
+
+    /// <summary>
+    /// The player gains armor to defend this turn
+    /// </summary>
+    public void startDefendTurn()
+    {
+        isDefending = true;
+        startEnemyTurn();
+    }
+
+    /// <summary>
+    /// The player attacks
+    /// </summary>
+    /// <param name="enemyNumber"></param>
+    /// <returns></returns>
+    public IEnumerator playerTurn(int enemyNumber)
+    {
+        EnemyModel enemy = null;
+        enemy = getEnemyByNumber(enemyNumber);
+
+        if (player.GetComponent<Player>().playerStats.currentMana >= player.GetComponent<Player>().playerStats.abilities[abilitySelected].manaCost)
+        {
+            player.GetComponent<Player>().playerStats.currentMana = player.GetComponent<Player>().playerStats.currentMana - player.GetComponent<Player>().playerStats.abilities[abilitySelected].manaCost;
+
+            closeSubMenu2();
+            closeSubMenu1();
+            disableMenu();
+
+            StartCoroutine(playerAttackAnimation(enemyNumber));
+
+            yield return new WaitForSeconds(1.6f);
+
+            if (enemy.enemyStats.currentHealth - ((player.GetComponent<Player>().playerStats.abilities[abilitySelected].dmgMultiplier * player.GetComponent<Player>().playerStats.attack) - enemy.enemyStats.defense * 2) > 0)
+            {
+                if ((player.GetComponent<Player>().playerStats.abilities[abilitySelected].dmgMultiplier * player.GetComponent<Player>().playerStats.attack) - (enemy.enemyStats.defense * 2) > 0)
+                {
+                    enemy.enemyStats.currentHealth = enemy.enemyStats.currentHealth - ((player.GetComponent<Player>().playerStats.abilities[abilitySelected].dmgMultiplier * player.GetComponent<Player>().playerStats.attack) - enemy.enemyStats.defense * 2);
+                }
+               
+            }
+
+            else
+            {
+                enemy.enemyStats.currentHealth = 0;
+                goldReward = goldReward + UnityEngine.Random.Range(enemy.enemyStats.goldDrop / 0.5f, enemy.enemyStats.goldDrop * 1.5f);
+
+                if (enemy.itemDrop != null && !enemy.itemDrop.Equals(new GenericItem()))
+                {
+                    itemReward.Add(enemy.itemDrop);
+                }
+                
+                if (enemy.gameObject.GetComponent<EnemyModel>().isBoss)
+                {
+                    nextLvl = true;
+                }
+
+                enemy.gameObject.transform.parent.gameObject.SetActive(false);
+                disableEnemyUI(enemyNumber);
+
+
+                //Animaciones y toda la pesca
+            }
+
+            startEnemyTurn();
+
+        }
+
+    }
+
+    /// <summary>
+    /// The enemies attack
+    /// </summary>
+    /// <returns></returns>
     public IEnumerator enemyTurn ()
     {
         bool found = false;
         Ability selectedAbility;
 
-        closeSubMenu2();
-        closeSubMenu1();
+        //closeSubMenu2();
+        //closeSubMenu1();
         disableMenu();
+
+        if (isDefending)
+        {
+            player.GetComponent<Player>().playerStats.defense = player.GetComponent<Player>().playerStats.defense * 5f;
+        }
 
         for (int i = 0; i < enemyModels.Length; i++)
         {
@@ -580,23 +727,28 @@ public class GlobalButton : MonoBehaviour
                         if (enemyModels[i].transform.GetChild(0).GetComponent<EnemyModel>().enemyStats.currentMana >= selectedAbility.manaCost)
                         {
 
-                            yield return new WaitForSeconds(1f);
+
+                            //Aqui va la animación
+                            StartCoroutine(enemyAttackAnimation(enemyModels[i].transform.GetChild(0).gameObject));
+
+                            yield return new WaitForSeconds(1.6f);
 
                             enemyModels[i].transform.GetChild(0).GetComponent<EnemyModel>().enemyStats.currentMana = enemyModels[i].transform.GetChild(0).GetComponent<EnemyModel>().enemyStats.currentMana - selectedAbility.manaCost;
 
-                            if (player.GetComponent<Player>().playerStats.currentHealth - ((selectedAbility.dmgMultiplier * enemyModels[i].transform.GetChild(0).GetComponent<EnemyModel>().enemyStats.attack) - player.GetComponent<Player>().playerStats.defense * 2) > 0f)
+                            if (player.GetComponent<Player>().playerStats.currentHealth - ((selectedAbility.dmgMultiplier * enemyModels[i].transform.GetChild(0).GetComponent<EnemyModel>().enemyStats.attack) - (player.GetComponent<Player>().playerStats.defense * 2)) > 0f)
                             {
-                                player.GetComponent<Player>().playerStats.currentHealth = player.GetComponent<Player>().playerStats.currentHealth - ((selectedAbility.dmgMultiplier * enemyModels[i].transform.GetChild(0).GetComponent<EnemyModel>().enemyStats.attack) - player.GetComponent<Player>().playerStats.defense * 2);
+                                if ((selectedAbility.dmgMultiplier * enemyModels[i].transform.GetChild(0).GetComponent<EnemyModel>().enemyStats.attack) - (player.GetComponent<Player>().playerStats.defense * 2) > 0)
+                                {
+                                    player.GetComponent<Player>().playerStats.currentHealth = player.GetComponent<Player>().playerStats.currentHealth - ((selectedAbility.dmgMultiplier * enemyModels[i].transform.GetChild(0).GetComponent<EnemyModel>().enemyStats.attack) - (player.GetComponent<Player>().playerStats.defense * 2));
+                                }
+                                
                             }
 
                             else
                             {
                                 player.GetComponent<Player>().playerStats.currentHealth = 0f;
                                 management.GameOver();
-                                //Borrar partida y volver al menu principal
                             }
-
-                            //Aqui va la animación
 
                             found = true;
                         }
@@ -610,9 +762,211 @@ public class GlobalButton : MonoBehaviour
             }
         }
 
+        if (isDefending)
+        {
+            player.GetComponent<Player>().playerStats.defense = player.GetComponent<Player>().playerStats.defense / 5f;
+            isDefending = false;
+        }
+
+       
+
         enableMenu();
     }
 
+    /// <summary>
+    /// Plays the animation when the enemy attacks
+    /// </summary>
+    /// <param name="enemy"></param>
+    /// <returns></returns>
+    private IEnumerator enemyAttackAnimation(GameObject enemy)
+    {
+        Rigidbody2D myRigidbody = enemy.GetComponent<Rigidbody2D>();
+        inAnimation = true;
+        Vector3 prevPosition = new Vector3();
+
+
+        myRigidbody.gravityScale = 0;
+        myRigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
+
+        //Debug.Log("Enemy position: " + enemy.transform.position);
+
+        prevPosition = enemy.transform.position;
+
+
+        yield return new WaitForSeconds(0.4f);
+
+
+        myRigidbody.MovePosition(new Vector3(prevPosition.x - 15.0f, prevPosition.y, prevPosition.z) - transform.right * Time.deltaTime);
+
+
+        yield return new WaitForSeconds(0.1f);
+
+        myRigidbody.MovePosition(prevPosition + transform.right * Time.deltaTime);
+
+        yield return new WaitForSeconds(0.3f);
+
+        StartCoroutine(playerHit());
+
+
+        yield return new WaitForSeconds(0.65f);
+
+        inAnimation = false;
+
+    }
+
+    /// <summary>
+    /// Plays the animation when the player attacks
+    /// </summary>
+    /// <param name="enemyNumber"></param>
+    /// <returns></returns>
+    private IEnumerator playerAttackAnimation(int enemyNumber)
+    {
+        Rigidbody2D myRigidbody = playerModel.GetComponent<Rigidbody2D>();
+        inAnimation = true;
+        Vector3 prevPosition = new Vector3();
+
+
+        myRigidbody.gravityScale = 0;
+        myRigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
+
+        //Debug.Log("Enemy position: " + enemy.transform.position);
+
+        prevPosition = playerModel.transform.position;
+
+
+        yield return new WaitForSeconds(0.4f);
+
+
+        myRigidbody.MovePosition(new Vector3(prevPosition.x + 15.0f, prevPosition.y, prevPosition.z) - transform.right * Time.deltaTime);
+
+
+        yield return new WaitForSeconds(0.1f);
+
+        myRigidbody.MovePosition(prevPosition + transform.right * Time.deltaTime);
+
+        yield return new WaitForSeconds(0.3f);
+
+        StartCoroutine(enemyHit(enemyNumber));
+
+
+        yield return new WaitForSeconds(0.65f);
+
+        inAnimation = false;
+
+    }
+
+    /// <summary>
+    /// Coroutine that changes the character's sprite color to white multiple times
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator playerHit()
+    {
+        Color tmp = playerHitModel.GetComponent<SpriteRenderer>().color;
+
+        for (int i = 0; i < 3; i++)
+        {
+            tmp.a = 0f;
+            playerHitModel.GetComponent<SpriteRenderer>().color = tmp;
+            yield return new WaitForSeconds(0.1f);
+
+            tmp.a = 1f;
+            playerHitModel.GetComponent<SpriteRenderer>().color = tmp;
+            yield return new WaitForSeconds(0.1f);
+
+        }
+
+        for (float i = 1f; i >= 0f; i = i - 0.04f)
+        {
+            tmp = playerHitModel.GetComponent<SpriteRenderer>().color;
+            tmp.a = i;
+            playerHitModel.GetComponent<SpriteRenderer>().color = tmp;
+            yield return new WaitForSeconds(0.001f);
+        }
+
+
+        //0.6f + 0.05f;
+
+    }
+
+    /// <summary>
+    /// Coroutine that changes the character's sprite color to white multiple times
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator enemyHit(int enemyNumber)
+    {
+        Color tmp;
+
+        for (int i = 0; i < selectedEnemies.Length; i++)
+        {
+            if (selectedEnemies[i].transform.name.Equals("Blob Combat In-Game Selected " + enemyNumber))
+            {
+                tmp = Color.white;
+
+                for (int j = 0; j < 3; j++)
+                {
+                    tmp.a = 0f;
+                    selectedEnemies[i].GetComponent<SpriteRenderer>().color = tmp;
+                    yield return new WaitForSeconds(0.1f);
+
+                    tmp.a = 1f;
+                    selectedEnemies[i].GetComponent<SpriteRenderer>().color = tmp;
+                    yield return new WaitForSeconds(0.1f);
+
+                }
+
+                for (float j = 1f; j >= 0f; j = j - 0.04f)
+                {
+                    tmp = selectedEnemies[i].GetComponent<SpriteRenderer>().color;
+                    tmp.a = j;
+                    selectedEnemies[i].GetComponent<SpriteRenderer>().color = tmp;
+                    yield return new WaitForSeconds(0.001f);
+                }
+
+                tmp = Color.red;
+                tmp.a = 0f;
+                selectedEnemies[i].GetComponent<SpriteRenderer>().color = tmp;
+                selectedEnemies[i].GetComponent<SpriteRenderer>().sortingOrder = 2;
+            }
+        }
+
+        yield return new WaitForSeconds(0.1f);
+    }
+
+    //private void followEnemyBars()
+    //{
+    //    Vector2 newPosition = new Vector2();
+
+    //    for (int i = 0; i < enemyBars.Length; i++)
+    //    {
+    //        switch (enemyBars[i].transform.name)
+    //        {
+    //            case "Enemy 1":
+    //                newPosition = enemyBars[i].transform.GetComponent<RectTransform>().anchoredPosition;
+    //                Debug.Log("Enemy 1: " + enemyModels[i].transform.position.x);
+    //                newPosition.x = -(642.9f - enemyModels[i].transform.position.x);
+    //                enemyBars[i].transform.GetComponent<RectTransform>().anchoredPosition = newPosition;
+    //                break;
+
+    //            case "Enemy 2":
+    //                newPosition = enemyBars[i].transform.GetComponent<RectTransform>().anchoredPosition;
+    //                Debug.Log("Enemy 2: " + enemyModels[i].transform.position.x);
+    //                newPosition.x = -(663.9f - enemyModels[i].transform.position.x);
+    //                enemyBars[i].transform.GetComponent<RectTransform>().anchoredPosition = newPosition;
+    //                break;
+
+    //            case "Enemy 3":
+    //                newPosition = enemyBars[i].transform.GetComponent<RectTransform>().anchoredPosition;
+    //                Debug.Log("Enemy 2: " + enemyModels[i].transform.position.x);
+    //                newPosition.x = -(642.9f - enemyModels[i].transform.position.x);
+    //                enemyBars[i].transform.GetComponent<RectTransform>().anchoredPosition = newPosition;
+    //                break;
+    //        }
+    //    }
+    //}
+
+    /// <summary>
+    /// Disables the player input
+    /// </summary>
     private void disableMenu()
     {
         for (int j = 0; j < lvl1Background[0].transform.childCount; j++)
@@ -627,6 +981,9 @@ public class GlobalButton : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Enables the player input
+    /// </summary>
     private void enableMenu()
     {
         for (int j = 0; j < lvl1Background[0].transform.childCount; j++)
@@ -647,6 +1004,9 @@ public class GlobalButton : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Checks if the fight is over and wins the combat
+    /// </summary>
     private void checkForEnd()
     {
         bool exists = false;
@@ -670,7 +1030,15 @@ public class GlobalButton : MonoBehaviour
                 player.GetComponent<Player>().playerStats.inventory.Add(itemReward[i]);
             }
 
-            management.WinCombat();
+            if (!nextLvl)
+            {
+                management.WinCombat();
+            }
+            else
+            {
+                management.WinCombatAndAdvanceLevel();
+            }
+            
         }
     }
 

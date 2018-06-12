@@ -11,7 +11,7 @@ public class MinimapSpawnPoint : MonoBehaviour
     private MinimapRoom ownRoomScript;
     private MinimapRoom childRoomScript;
     private MinimapGridScript gridScript;
-    Tilemap roomTileMap;
+    private Tilemap roomTileMap;
     
     // Use this for initialization
     void Start ()

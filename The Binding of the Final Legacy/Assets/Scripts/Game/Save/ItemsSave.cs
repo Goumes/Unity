@@ -5,6 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class ItemsSave
 {
+    //No tiene getters ni setters por un problema con el binnaryformatter the unity, que no los puede tratar
     public ItemList database;
     public List<GenericItem> shopPool;
     public List<string> soldItems;

@@ -19,6 +19,9 @@ public class MinimapUI : MonoBehaviour
         checkInput();
 	}
 
+    /// <summary>
+    /// Checks the user input to see if it press tab
+    /// </summary>
     void checkInput()
     {
         if (Input.GetKeyDown(KeyCode.Tab))
@@ -33,6 +36,10 @@ public class MinimapUI : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Makes the minimap more visible
+    /// </summary>
+    /// <returns></returns>
     IEnumerator increaseAlpha()
     {
         for (float j = i; j <= 1f; j = j + 0.02f)
@@ -44,6 +51,10 @@ public class MinimapUI : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Makes the minimap less visible
+    /// </summary>
+    /// <returns></returns>
     IEnumerator decreaseAlpha()
     {
         for (float j = i; j >= 0.14f; j = j - 0.02f)

@@ -5,6 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class RealRoomSave
 {
+    //No tiene getters ni setters por un problema con el binnaryformatter the unity, que no los puede tratar
     public int serial;
     public bool hasChest;
     public bool hasBoss;

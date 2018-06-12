@@ -23,22 +23,18 @@ public class MinimapRoom : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
-        generate = false;
-        //Se seleccionan puertas aleatoriamente de entre las 4 que hay.
         tilemap = GetComponent<Tilemap>();
         roomArray = GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomArray>();
         roomArray.minimapRooms.Add(gameObject);
         gridScript = transform.parent.transform.parent.GetComponent<MinimapGridScript>();
-        //gridScript.globalCounter++;
-        //serialNumber = gridScript.globalCounter;
         transform.parent.transform.name = "Default Room " + serialNumber;
-        //childPositions = new List<ChildDictionary>();
+
         if (gridScript.canGenerate)
         {
             childPositions = new Dictionary<string, int>();
         }
         
-        Invoke("deleteSpawnPoints", 20f);
+        Invoke("deleteSpawnPoints", 10f);
 
         if (serialNumber == 1 && gridScript.canGenerate)
         {
@@ -51,19 +47,23 @@ public class MinimapRoom : MonoBehaviour
     {
         checkDoors();
 
-        if (gridScript.canGenerate)
+        if (gridScript.canGenerate && generate)
         {
-            //generate = true;
-            InvokeRepeating("generateDoors", 0.1f, Random.Range(0.1f, 0.4f));
+            //Se seleccionan puertas aleatoriamente de entre las 4 que hay.
+            Invoke("generateDoors", Random.Range(0.1f, 0.4f));
         }
 
         if (currentRoom && !created)
         {
+            //Se marca la habitación actual en el minimapa
             tilemap.SetTile(new Vector3Int(0, -3, 0), Resources.Load("Cuadrado") as Tile);
             created = true;
         }
+
         else if (!currentRoom && created)
         {
+            //Se marca la tienda en el mapa
+
             if (!hasShop)
             {
                 tilemap.SetTile(new Vector3Int(0, -3, 0), null);
@@ -78,7 +78,7 @@ public class MinimapRoom : MonoBehaviour
 	}
 
     /// <summary>
-    /// Method that randomly sets a few doors as true, while deleting the corresponding tiles.
+    /// Method that randomly sets a few doors as true.
     /// </summary>
     private void generateDoors()
     {
@@ -148,7 +148,7 @@ public class MinimapRoom : MonoBehaviour
     }
 
     /// <summary>
-    /// Method that checks if there's any new door opened and deletes the necessary tiles.
+    /// Method that checks if there's any new door opened and deletes the necessary tiles while also adds the data to the dictionary.
     /// </summary>
     private void checkDoors()
     {

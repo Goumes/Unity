@@ -2728,6 +2728,32 @@ MonoBehaviour:
     gold: 100
     abilities: []
     inventory: []
+    weapon:
+      id: 0
+      name: Default
+      type: Default
+      description: Nice description
+      price: 999.9
+      sellingPrice: 500
+      duration: 1
+      attackModifier: 10
+      defenseModifier: 10
+      healthModifier: 10
+      manaModifier: 10
+      imageResourcePath: Items/torch
+    armor:
+      id: 0
+      name: Default
+      type: Default
+      description: Nice description
+      price: 999.9
+      sellingPrice: 500
+      duration: 1
+      attackModifier: 10
+      defenseModifier: 10
+      healthModifier: 10
+      manaModifier: 10
+      imageResourcePath: Items/torch
   hasSavedGame: 0
 --- !u!4 &196190071
 Transform:

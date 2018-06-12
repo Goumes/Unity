@@ -858,8 +858,8 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.5, y: 0.40625}
-    newSize: {x: 0.5, y: 0.40625}
+    oldSize: {x: 0.5, y: 0.5}
+    newSize: {x: 0.5, y: 0.5}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -1052,8 +1052,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.5, y: 0.40625}
-    newSize: {x: 0.5, y: 0.40625}
+    oldSize: {x: 0.5, y: 0.5}
+    newSize: {x: 0.5, y: 0.5}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -1370,6 +1370,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae3244cb6e24bec4ea65235f9c8352d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  globalButton: {fileID: 0}
+  enemyModels:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  isBoss: 0
 --- !u!114 &114049982664058180
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1397,6 +1403,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bec74a4607c26fa40a3e150f5e6bd6e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemSprite: {fileID: 21300000, guid: 4cfbfb3e1e85d894c96e7b82e4c60981, type: 3}
 --- !u!114 &114115031578053714
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1419,6 +1426,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae3244cb6e24bec4ea65235f9c8352d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  globalButton: {fileID: 0}
+  enemyModels:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  isBoss: 0
 --- !u!114 &114513209780053740
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1483,6 +1496,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae3244cb6e24bec4ea65235f9c8352d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  globalButton: {fileID: 0}
+  enemyModels:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  isBoss: 0
 --- !u!212 &212176132744640162
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -1743,15 +1762,15 @@ SpriteRenderer:
   m_SortingLayerID: 1043193857
   m_SortingLayer: -2
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: eee0d2a057aa60840b3404b1c324d54f, type: 3}
+  m_Sprite: {fileID: 21300002, guid: eee0d2a057aa60840b3404b1c324d54f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.5, y: 0.40625}
+  m_Size: {x: 0.5, y: 0.5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
 --- !u!19719996 &2113883504712989080
 TilemapCollider2D:

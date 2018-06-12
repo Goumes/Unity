@@ -8,17 +8,18 @@ public class ShopGlobalButton : MonoBehaviour
 {
     public bool itemSelectorActive;
     public GameObject currentButton;
+    public GameObject[] allItems;
+    public GameObject[] allSoldTexts;
+    public GameObject[] allItemModels;
+    public List<string> soldItems;
+
+    private GameDataManager gameDataManager;
     private GameObject mainMenu;
     private GameObject itemMenu;
     private List<GameObject> mainButtons;
     private List<GameObject> itemButtons;
     private EventSystem myEventSystem;
     private Management management;
-    public GameObject[] allItems;
-    public GameObject[] allSoldTexts;
-    public GameObject[] allItemModels;
-    public List<string> soldItems;
-    private GameDataManager gameDataManager;
 
     // Use this for initialization
     void Start()
@@ -68,6 +69,9 @@ public class ShopGlobalButton : MonoBehaviour
         Invoke("firstEnable", 0.1f);
     }
 
+    /// <summary>
+    /// Selects the first button and disables the items'.
+    /// </summary>
     private void firstEnable()
     {
         StartCoroutine(management.fadeStartShop());

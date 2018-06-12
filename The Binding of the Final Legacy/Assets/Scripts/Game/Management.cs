@@ -12,21 +12,22 @@ public class Management : MonoBehaviour {
     public bool inTransition;
     public bool inPause;
     public bool inInventory;
-    private GameObject myEventSystem;
-    public GameObject combat;
-    public GameObject shop;
-    Color tmp;
-    private GameObject fader;
     public bool playingMusic;
     public AudioClip backgroundMusic;
+    public GameObject combat;
+    public GameObject shop;
+
+    private bool gameStarted;
     private AudioManager audioManager;
     private GameObject dungeon;
-    private bool gameStarted;
     private GameDataManager gameDataManager;
     private GameObject pauseMenu;
     private GameObject gameOver;
     private GameObject player;
     private GameObject inventoryMenu;
+    private GameObject myEventSystem;
+    private Color tmp;
+    private GameObject fader;
 
     // Use this for initialization
     void Start () {
@@ -51,51 +52,89 @@ public class Management : MonoBehaviour {
         Invoke("DisableGameOver", 0.001f);
     }
 
+    /// <summary>
+    /// Disables the combat UI
+    /// </summary>
     private void DisableCombat()
     {
         combat.SetActive(false);
     }
 
+    /// <summary>
+    /// Disables the Game Over UI
+    /// </summary>
     private void DisableGameOver()
     {
         gameOver.SetActive(false);
     }
 
+    /// <summary>
+    /// Disables the shop UI
+    /// </summary>
     private void DisableShop()
     {
         shop.SetActive(false);
     }
 
+    /// <summary>
+    /// Disables the inventory UI
+    /// </summary>
     private void DisableInventory()
     {
         inventoryMenu.SetActive(false);
     }
 
+    /// <summary>
+    /// Disables the pause UI
+    /// </summary>
     private void DisablePause()
     {
         pauseMenu.SetActive(false);
     }
 
+    /// <summary>
+    /// Ends the combat
+    /// </summary>
     public void EndCombat()
     {
         StartCoroutine(fadeEndCombat());
     }
 
+    /// <summary>
+    /// Wins the combat
+    /// </summary>
     public void WinCombat()
     {
         StartCoroutine(fadeWinCombat());
     }
 
+    /// <summary>
+    /// Wins the combat and goes to the next level
+    /// </summary>
+    public void WinCombatAndAdvanceLevel()
+    {
+        StartCoroutine(fadeWinCombatAndAdvanceNextLvl());
+    }
+
+    /// <summary>
+    /// Ends the shop
+    /// </summary>
     public void EndShop()
     {
         StartCoroutine(fadeEndShop());
     }
 
+    /// <summary>
+    /// Returns to the main menu
+    /// </summary>
     public void BackToMainMenu()
     {
         StartCoroutine(fadeBackToMenu());
     }
 
+    /// <summary>
+    /// Ends the game
+    /// </summary>
     public void GameOver()
     {
         StartCoroutine(fadeGameOver());
@@ -132,6 +171,10 @@ public class Management : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// The screen fades out, disables the shop ui and transitions back to the game
+    /// </summary>
+    /// <returns></returns>
     public IEnumerator fadeEndShop()
     {
         for (float i = 0f; i < 1f; i = i + 0.02f)
@@ -160,6 +203,10 @@ public class Management : MonoBehaviour {
 
     }
 
+    /// <summary>
+    /// The screen fades in and enables the shop ui
+    /// </summary>
+    /// <returns></returns>
     public IEnumerator fadeStartShop()
     {
 
@@ -179,6 +226,10 @@ public class Management : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// The screen fades in and enables the combat ui
+    /// </summary>
+    /// <returns></returns>
     public IEnumerator fadeStartCombat()
     {
 
@@ -198,6 +249,10 @@ public class Management : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// The screen fades out, disables the combat ui and transitions back to the game
+    /// </summary>
+    /// <returns></returns>
     public IEnumerator fadeEndCombat()
     {
         for (float i = 0f; i < 1f; i = i + 0.02f)
@@ -225,6 +280,10 @@ public class Management : MonoBehaviour {
 
     }
 
+    /// <summary>
+    /// The screen fades out, disables the combat ui and transitions back to the game. It also adds to the player every item, gold he has acquired in that combat and refills half its hp and mp
+    /// </summary>
+    /// <returns></returns>
     public IEnumerator fadeWinCombat()
     {
         for (float i = 0f; i < 1f; i = i + 0.02f)
@@ -270,6 +329,54 @@ public class Management : MonoBehaviour {
 
     }
 
+    /// <summary>
+    /// The screen fades out, disables the combat ui and transitions back to the game. It also adds to the player every item, gold he has acquired in that combat and refills half its hp and mp. Advances the lvl.
+    /// </summary>
+    /// <returns></returns>
+    public IEnumerator fadeWinCombatAndAdvanceNextLvl()
+    {
+        for (float i = 0f; i < 1f; i = i + 0.02f)
+        {
+            tmp.a = i;
+            fader.GetComponent<RawImage>().color = tmp; //Hay que hacerlo así porque no es una variable y no se puede cambiar directamente
+            yield return new WaitForSeconds(0.0001f);
+        }
+
+        combat.SetActive(false);
+        inCombat = false;
+        audioManager.stopMusic();
+        backgroundMusic = Resources.Load<AudioClip>("Music/Normal Dungeon Music");
+
+        if (player.GetComponent<Player>().playerStats.currentHealth + (player.GetComponent<Player>().playerStats.totalHealth / 2) <= player.GetComponent<Player>().playerStats.totalHealth)
+        {
+            player.GetComponent<Player>().playerStats.currentHealth = player.GetComponent<Player>().playerStats.currentHealth + (player.GetComponent<Player>().playerStats.totalHealth / 2);
+        }
+        else
+        {
+            player.GetComponent<Player>().playerStats.currentHealth = player.GetComponent<Player>().playerStats.totalHealth;
+        }
+
+        if (player.GetComponent<Player>().playerStats.currentMana + (player.GetComponent<Player>().playerStats.totalMana / 2) <= player.GetComponent<Player>().playerStats.totalMana)
+        {
+            player.GetComponent<Player>().playerStats.currentMana = player.GetComponent<Player>().playerStats.currentMana + (player.GetComponent<Player>().playerStats.totalMana / 2);
+        }
+        else
+        {
+            player.GetComponent<Player>().playerStats.currentMana = player.GetComponent<Player>().playerStats.totalMana;
+        }
+
+        //Aqui tocar lo del gameDataManager que haya que tocar
+        gameDataManager.hasSavedGame = false;
+        gameDataManager.instantiated = false;
+        gameDataManager.lvl++;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+    }
+
+    /// <summary>
+    /// The screen fades out, goes back to the main menu
+    /// </summary>
+    /// <returns></returns>
     public IEnumerator fadeBackToMenu()
     {
 
@@ -283,6 +390,10 @@ public class Management : MonoBehaviour {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
 
+    /// <summary>
+    /// The screen fades out, deletes the savegame and goes back to the main menu
+    /// </summary>
+    /// <returns></returns>
     public IEnumerator fadeGameOver()
     {
         for (float i = 0f; i < 1f; i = i + 0.02f)
@@ -310,6 +421,11 @@ public class Management : MonoBehaviour {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
 
+    /// <summary>
+    /// Method that generates a random boolean given a float
+    /// </summary>
+    /// <param name="chance"></param>
+    /// <returns></returns>
     public bool randomBoolean(float? chance)
     {
         bool resultado = false;
@@ -332,6 +448,9 @@ public class Management : MonoBehaviour {
         Invoke("checkForStart", 0.1f);
     }
 
+    /// <summary>
+    /// Method that checks if the dungeon is done generating
+    /// </summary>
     private void checkForStart()
     {
         if (!gameStarted && dungeon != null && dungeon.transform.childCount > 0)
@@ -342,24 +461,36 @@ public class Management : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Method that opens the pause menu
+    /// </summary>
     public void openPause()
     {
         inPause = true;
         pauseMenu.SetActive(true);
     }
 
+    /// <summary>
+    /// Method that closes the pause menu
+    /// </summary>
     public void closePause()
     {
         inPause = false;
         pauseMenu.SetActive(false);
     }
 
+    /// <summary>
+    /// Method that opens the inventory menu
+    /// </summary>
     public void openInventory()
     {
         inInventory = true;
         inventoryMenu.SetActive(true);
     }
 
+    /// <summary>
+    /// Method that closes the inventory menu
+    /// </summary>
     public void closeInventory()
     {
         inInventory = false;

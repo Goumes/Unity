@@ -317,10 +317,144 @@ public class CombatButtonScript : MonoBehaviour, ISelectHandler, IDeselectHandle
                 break;
         }
     }
+
+    private void OnDisable()
+    {
+        Color tmp;
+
+        switch (transform.name)
+        {
+            case "Fight":
+                if (!globalButton.subMenu1Active)
+                {
+                    for (int i = 0; i < transform.childCount; i++)
+                    {
+                        tmp = transform.GetChild(i).GetComponent<TextMeshProUGUI>().color;
+                        tmp.a = 0.58f;
+                        transform.GetChild(i).GetComponent<TextMeshProUGUI>().color = tmp;
+                    }
+                }
+
+
+                break;
+
+            case "Defend":
+                if (!globalButton.subMenu1Active)
+                {
+                    for (int i = 0; i < transform.childCount; i++)
+                    {
+                        tmp = transform.GetChild(i).GetComponent<TextMeshProUGUI>().color;
+                        tmp.a = 0.58f;
+                        transform.GetChild(i).GetComponent<TextMeshProUGUI>().color = tmp;
+                    }
+                }
+
+                break;
+
+            case "Inventory":
+                if (!globalButton.subMenu1Active)
+                {
+                    for (int i = 0; i < transform.childCount; i++)
+                    {
+                        tmp = transform.GetChild(i).GetComponent<TextMeshProUGUI>().color;
+                        tmp.a = 0.58f;
+                        transform.GetChild(i).GetComponent<TextMeshProUGUI>().color = tmp;
+                    }
+                }
+
+                break;
+
+            case "Run Away":
+                if (!globalButton.subMenu1Active)
+                {
+                    for (int i = 0; i < transform.childCount; i++)
+                    {
+                        tmp = transform.GetChild(i).GetComponent<TextMeshProUGUI>().color;
+                        tmp.a = 0.58f;
+                        transform.GetChild(i).GetComponent<TextMeshProUGUI>().color = tmp;
+                    }
+                }
+
+                break;
+
+            case "Selected Item Sub Menu 1 - 1":
+                if (!globalButton.subMenu2Active)
+                {
+                    for (int i = 0; i < transform.childCount; i++)
+                    {
+                        tmp = transform.GetChild(i).GetComponent<TextMeshProUGUI>().color;
+                        tmp.a = 0.58f;
+                        transform.GetChild(i).GetComponent<TextMeshProUGUI>().color = tmp;
+                    }
+                }
+                break;
+
+            case "Selected Item Sub Menu 1 - 2":
+
+                if (!globalButton.subMenu2Active)
+                {
+                    for (int i = 0; i < transform.childCount; i++)
+                    {
+                        tmp = transform.GetChild(i).GetComponent<TextMeshProUGUI>().color;
+                        tmp.a = 0.58f;
+                        transform.GetChild(i).GetComponent<TextMeshProUGUI>().color = tmp;
+                    }
+                }
+
+                break;
+
+            case "Selected Item Sub Menu 1 - 3":
+
+                if (!globalButton.subMenu2Active)
+                {
+                    for (int i = 0; i < transform.childCount; i++)
+                    {
+                        tmp = transform.GetChild(i).GetComponent<TextMeshProUGUI>().color;
+                        tmp.a = 0.58f;
+                        transform.GetChild(i).GetComponent<TextMeshProUGUI>().color = tmp;
+                    }
+                }
+
+                break;
+
+            case "Selected Item Sub Menu 2 - 1":
+
+                for (int i = 0; i < transform.childCount; i++)
+                {
+                    tmp = transform.GetChild(i).GetComponent<TextMeshProUGUI>().color;
+                    tmp.a = 0.58f;
+                    transform.GetChild(i).GetComponent<TextMeshProUGUI>().color = tmp;
+                }
+
+
+                break;
+
+            case "Selected Item Sub Menu 2 - 2":
+
+                for (int i = 0; i < transform.childCount; i++)
+                {
+                    tmp = transform.GetChild(i).GetComponent<TextMeshProUGUI>().color;
+                    tmp.a = 0.58f;
+                    transform.GetChild(i).GetComponent<TextMeshProUGUI>().color = tmp;
+                }
+
+                break;
+
+            case "Selected Item Sub Menu 2 - 3":
+
+                for (int i = 0; i < transform.childCount; i++)
+                {
+                    tmp = transform.GetChild(i).GetComponent<TextMeshProUGUI>().color;
+                    tmp.a = 0.58f;
+                    transform.GetChild(i).GetComponent<TextMeshProUGUI>().color = tmp;
+                }
+
+                break;
+        }
+    }
     public void clickButton()
     {
         bool selected = false;
-        EnemyModel enemy = null;
         Player player = globalButton.player.GetComponent<Player>();
 
         switch (transform.name)
@@ -364,6 +498,8 @@ public class CombatButtonScript : MonoBehaviour, ISelectHandler, IDeselectHandle
                 break;
 
             case "Defend":
+
+                globalButton.startDefendTurn();
 
                 break;
 
@@ -435,6 +571,8 @@ public class CombatButtonScript : MonoBehaviour, ISelectHandler, IDeselectHandle
                     transform.parent.GetChild(i).gameObject.GetComponent<Button>().interactable = false;
                 }
 
+                globalButton.subMenu1SelectedButton = gameObject;
+
                 globalButton.abilitySelected = 0;
 
                 
@@ -482,6 +620,7 @@ public class CombatButtonScript : MonoBehaviour, ISelectHandler, IDeselectHandle
                 {
                     transform.parent.GetChild(i).gameObject.GetComponent<Button>().interactable = false;
                 }
+                globalButton.subMenu1SelectedButton = gameObject;
 
                 globalButton.abilitySelected = 1;
 
@@ -529,104 +668,27 @@ public class CombatButtonScript : MonoBehaviour, ISelectHandler, IDeselectHandle
                     transform.parent.GetChild(i).gameObject.GetComponent<Button>().interactable = false;
                 }
 
+                globalButton.subMenu1SelectedButton = gameObject;
+
                 globalButton.abilitySelected = 2;
 
                 break;
 
             case "Selected Item Sub Menu 2 - 1":
 
-                enemy = globalButton.getEnemyByNumber(1);
-
-                if (player.playerStats.currentMana >= player.playerStats.abilities[globalButton.abilitySelected].manaCost)
-                {
-                    player.playerStats.currentMana = player.playerStats.currentMana - player.playerStats.abilities[globalButton.abilitySelected].manaCost;
-
-                    if (enemy.enemyStats.currentHealth - ((player.playerStats.abilities[globalButton.abilitySelected].dmgMultiplier * player.playerStats.attack) - enemy.enemyStats.defense * 2) > 0)
-                    {
-                        enemy.enemyStats.currentHealth = enemy.enemyStats.currentHealth - ((player.playerStats.abilities[globalButton.abilitySelected].dmgMultiplier * player.playerStats.attack) - enemy.enemyStats.defense * 2);
-                    }
-
-                    else
-                    {
-                        enemy.enemyStats.currentHealth = 0;
-                        globalButton.goldReward = globalButton.goldReward + enemy.enemyStats.goldDrop;
-                        globalButton.itemReward.Add(enemy.itemDrop);
-                        enemy.gameObject.transform.parent.gameObject.SetActive(false);
-                        globalButton.disableEnemyUI(1);
-
-                        globalButton.closeSubMenu2();
-                        globalButton.closeSubMenu1();
-                        //Animaciones y toda la pesca
-                    }
-
-                    globalButton.startEnemyTurn();
-
-                }
-
-                //Cerrar todos los dialogos
+                globalButton.startPlayerTurn(1);
 
                 break;
 
             case "Selected Item Sub Menu 2 - 2":
 
-                enemy = globalButton.getEnemyByNumber(2);
-
-                if (player.playerStats.currentMana >= player.playerStats.abilities[globalButton.abilitySelected].manaCost)
-                {
-                    player.playerStats.currentMana = player.playerStats.currentMana - player.playerStats.abilities[globalButton.abilitySelected].manaCost;
-
-                    if (enemy.enemyStats.currentHealth - ((player.playerStats.abilities[globalButton.abilitySelected].dmgMultiplier * player.playerStats.attack) - enemy.enemyStats.defense * 2) > 0)
-                    {
-                        enemy.enemyStats.currentHealth = enemy.enemyStats.currentHealth - ((player.playerStats.abilities[globalButton.abilitySelected].dmgMultiplier * player.playerStats.attack) - enemy.enemyStats.defense * 2);
-                    }
-
-                    else
-                    {
-                        enemy.enemyStats.currentHealth = 0;
-                        globalButton.goldReward = globalButton.goldReward + enemy.enemyStats.goldDrop;
-                        globalButton.itemReward.Add(enemy.itemDrop);
-                        enemy.gameObject.transform.parent.gameObject.SetActive(false);
-                        globalButton.disableEnemyUI(2);
-
-                        globalButton.closeSubMenu2();
-                        globalButton.closeSubMenu1();
-                    }
-
-                    globalButton.startEnemyTurn();
-
-                }
+                globalButton.startPlayerTurn(2);
 
                 break;
 
             case "Selected Item Sub Menu 2 - 3":
 
-                enemy = globalButton.getEnemyByNumber(3);
-
-                if (player.playerStats.currentMana >= player.playerStats.abilities[globalButton.abilitySelected].manaCost)
-                {
-                    player.playerStats.currentMana = player.playerStats.currentMana - player.playerStats.abilities[globalButton.abilitySelected].manaCost;
-
-                    if (enemy.enemyStats.currentHealth - ((player.playerStats.abilities[globalButton.abilitySelected].dmgMultiplier * player.playerStats.attack) - enemy.enemyStats.defense * 2) > 0)
-                    {
-                        enemy.enemyStats.currentHealth = enemy.enemyStats.currentHealth - ((player.playerStats.abilities[globalButton.abilitySelected].dmgMultiplier * player.playerStats.attack) - enemy.enemyStats.defense * 2);
-                    }
-
-                    else
-                    {
-                        enemy.enemyStats.currentHealth = 0;
-                        globalButton.goldReward = globalButton.goldReward + enemy.enemyStats.goldDrop;
-                        globalButton.itemReward.Add(enemy.itemDrop);
-                        enemy.gameObject.transform.parent.gameObject.SetActive(false);
-                        globalButton.disableEnemyUI(3);
-
-                        globalButton.closeSubMenu2();
-                        globalButton.closeSubMenu1();
-
-                    }
-
-                    globalButton.startEnemyTurn();
-
-                }
+                globalButton.startPlayerTurn(3);
 
                 break;
 

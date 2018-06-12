@@ -11,7 +11,10 @@ public class Blob : MonoBehaviour {
     private GameObject jugador;
     private GameObject fader;
     private GameObject management;
-    Color tmp;
+    private Color tmp;
+    public GlobalButton globalButton;
+    public GameObject[] enemyModels;
+    public bool isBoss;
 
     // Use this for initialization
     void Start () {
@@ -49,6 +52,10 @@ public class Blob : MonoBehaviour {
         //Cambiar el collider de las paredes, que las esquinas no estan en su respectivo objeto
     }
 
+    /// <summary>
+    /// Method that fades out and starts the combat
+    /// </summary>
+    /// <returns></returns>
     IEnumerator fadeOut()
     {
         for (float i = 0f; i < 1f; i = i + 0.02f)
@@ -58,7 +65,30 @@ public class Blob : MonoBehaviour {
             yield return new WaitForSeconds(0.0001f);
         }
 
+
         management.GetComponent<Management>().combat.SetActive(true);
+        Destroy(gameObject);
+    }
+
+    /// <summary>
+    /// Method that fades out and starts the boss combat
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator fadeOutBoss()
+    {
+        for (float i = 0f; i < 1f; i = i + 0.02f)
+        {
+            tmp.a = i;
+            fader.GetComponent<RawImage>().color = tmp; //Hay que hacerlo así porque no es una variable y no se puede cambiar directamente
+            yield return new WaitForSeconds(0.0001f);
+        }
+
+
+        management.GetComponent<Management>().combat.SetActive(true);
+        enemyModels = GameObject.FindGameObjectsWithTag("EnemyCombat");
+        globalButton = GameObject.FindGameObjectWithTag("Global Button").GetComponent<GlobalButton>();
+        enemyModels[0].transform.GetChild(0).GetComponent<EnemyModel>().isBoss = true;
+        globalButton.hasBoss = true;
         Destroy(gameObject);
     }
 
@@ -66,8 +96,20 @@ public class Blob : MonoBehaviour {
     {
         if (collision.transform.CompareTag("Player") && !management.GetComponent<Management>().inCombat)
         {
+            
+
             management.GetComponent<Management>().inCombat = true;
-            StartCoroutine(fadeOut());
+
+            if (isBoss)
+            {
+                StartCoroutine(fadeOutBoss());
+            }
+            else
+            {
+                StartCoroutine(fadeOut());
+            }
+
+            
         }
     }
 }

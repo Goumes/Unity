@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class ShopButtonScript : MonoBehaviour, ISelectHandler, IDeselectHandler
 {
+    public bool sold;
+
     private GameObject pointer;
     private Management management;
     private ShopGlobalButton globalButton;
@@ -19,7 +21,6 @@ public class ShopButtonScript : MonoBehaviour, ISelectHandler, IDeselectHandler
     private GameObject currentSoldText;
     private GameObject currentItemModel;
     private Player player;
-    public bool sold;
     
     // Use this for initialization
     void Start ()
@@ -76,8 +77,12 @@ public class ShopButtonScript : MonoBehaviour, ISelectHandler, IDeselectHandler
         Invoke("enableMethod", 0.01f);
     }
 
+    /// <summary>
+    /// Reloads all the previously instantiated items and sets as sold the previously sold items
+    /// </summary>
     private void enableMethod()
     {
+
 
         for (int i = 0; i < globalButton.soldItems.Count; i++)
         {
@@ -130,6 +135,9 @@ public class ShopButtonScript : MonoBehaviour, ISelectHandler, IDeselectHandler
         }
     }
 
+    /// <summary>
+    /// Updates the item description with the selected item
+    /// </summary>
     private void selectedItem()
     {
         Color tmp;
@@ -466,6 +474,11 @@ public class ShopButtonScript : MonoBehaviour, ISelectHandler, IDeselectHandler
         }
     }
 
+    /// <summary>
+    /// Makes the player's gold blink as it doesn't have enough.
+    /// </summary>
+    /// <param name="text"></param>
+    /// <returns></returns>
     private IEnumerator notEnoughGold(TextMeshProUGUI text)
     {
         Color tmp = new Color();

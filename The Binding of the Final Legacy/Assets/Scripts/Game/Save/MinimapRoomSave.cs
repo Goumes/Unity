@@ -6,6 +6,7 @@ using UnityEngine.Tilemaps;
 [System.Serializable]
 public class MinimapRoomSave
 {
+    //No tiene getters ni setters por un problema con el binnaryformatter the unity, que no los puede tratar
     public int serialNumber;
     public bool topDoor;
     public bool leftDoor;

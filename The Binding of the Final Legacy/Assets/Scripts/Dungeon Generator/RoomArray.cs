@@ -9,13 +9,14 @@ public class RoomArray : MonoBehaviour
     public List<GameObject> minimapRooms;
     public int minNumber = 5;
     public int maxNumber = 10;
-    private GameObject lastRoom;
+    public bool created;
     public float waitTime;
-    private bool spawnedBoss;
-    private Tilemap tilemap;
     public List<GameObject> realRooms;
     public int roomCounter;
-    public bool created;
+
+    private GameObject lastRoom;
+    private bool spawnedBoss;
+    private Tilemap tilemap;
     private GameObject fader;
     private Color tmp;
     private GameObject loadingScreen;
@@ -28,22 +29,50 @@ public class RoomArray : MonoBehaviour
     private GameDataManager gameDataManager;
     // Use this for initialization
     void Start () {
-        roomCounter = 0;
-        created = false;
+
         fader = GameObject.FindGameObjectWithTag("Fade");
         tmp = fader.GetComponent<RawImage>().color;
         tmp.a = 1f;
         fader.GetComponent<RawImage>().color = tmp;
+
         loadingScreen = GameObject.FindGameObjectWithTag("LoadingScreen");
         player = GameObject.FindGameObjectWithTag("Player");
         minimap = GameObject.FindGameObjectWithTag("Minimap");
         dungeon = GameObject.FindGameObjectWithTag("Dungeon");
-        minimap.SetActive(false);
         management = GameObject.FindGameObjectWithTag("Management").GetComponent<Management>();
         grid = GameObject.FindGameObjectWithTag("Grid");
-        shopNumber = -1;
         gameDataManager = GameObject.FindGameObjectWithTag("GameData").GetComponent<GameDataManager>();
-        //player.SetActive(false);
+        minimap.SetActive(false);
+        shopNumber = -1;
+
+        switch (gameDataManager.lvl)
+        {
+            case 1:
+                minNumber = 5;
+                maxNumber = 10;
+                break;
+
+            case 2:
+                minNumber = 10;
+                maxNumber = 15;
+                break;
+
+            case 3:
+                minNumber = 15;
+                maxNumber = 20;
+                break;
+
+            case 4:
+                minNumber = 20;
+                maxNumber = 25;
+                break;
+
+            case 5:
+                minNumber = 25;
+                maxNumber = 30;
+                break;
+        }
+
         InvokeRepeating("checkEnd", 0f, 1f);
     }
 	
@@ -51,34 +80,11 @@ public class RoomArray : MonoBehaviour
 	void Update ()
     {
         Invoke("checkArrayLength", 1f);
-
-        //if (waitTime <= 0)
-        //{
-        //    for (int i = 0; i < minimapRooms.Count && !spawnedBoss; i++)
-        //    {
-        //        if (i == minimapRooms.Count - 1)
-        //        {
-        //            tilemap = minimapRooms[i].GetComponent<Tilemap>();
-        //            //Cambiar esto por una habitación de boss real
-        //            tilemap.SetTile(new Vector3Int(0, -3, 0), Resources.Load("Cuadrado") as Tile);
-        //            tilemap.SetTile(new Vector3Int(1, -3, 0), Resources.Load("Cuadrado") as Tile);
-        //            tilemap.SetTile(new Vector3Int(0, -2, 0), Resources.Load("Cuadrado") as Tile);
-        //            tilemap.SetTile(new Vector3Int(1, -2, 0), Resources.Load("Cuadrado") as Tile);
-        //            spawnedBoss = true;
-
-        //            //Aqui se empieza a crear el array con las mazmorras de verdad
-        //            createDungeon();
-        //        }
-        //    }
-        //}
-        //else
-        //{
-        //    waitTime -= Time.deltaTime;
-        //}
-
-
     }
 
+    /// <summary>
+    /// Method that checks if the end of the dungeon in the generation has been reached
+    /// </summary>
     private void checkEnd()
     {
         if (!spawnedBoss)
@@ -90,6 +96,10 @@ public class RoomArray : MonoBehaviour
        
     }
 
+    /// <summary>
+    /// Coroutine that waits a second to check if there is any new rooms generated. If not, it proceeds to mark the last room as the boss room.
+    /// </summary>
+    /// <returns></returns>
     IEnumerator waitRoutine()
     {
         var initLenght = 0;
@@ -119,6 +129,9 @@ public class RoomArray : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Method that constantly checks if the generation of the dungeon structure is over. If so, it generates de real dungeon.
+    /// </summary>
     private void checkAndGenerateEverything()
     {
         GameSave save = null;
@@ -164,6 +177,9 @@ public class RoomArray : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Method that marks the shop in the map if there's one.
+    /// </summary>
     private void markShopInMap()
     {
         for (int i = 0; i < minimapRooms.Count; i++)
@@ -177,6 +193,9 @@ public class RoomArray : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Method that makes the camera follow the player for bigger rooms. Unused since there are no big rooms yet.
+    /// </summary>
     private void adjustCamera()
     {
         float smallestX = 9999f;
@@ -215,6 +234,9 @@ public class RoomArray : MonoBehaviour
         Debug.Log("Biggest X: " + biggestX + ", Smallest X: " + smallestX + ", Biggest Y: " + biggestY + ", Smallest Y: " + smallestY);
     }
 
+    /// <summary>
+    /// Method that has a chance to create a shop in one room of the dungeon
+    /// </summary>
     private void createShop()
     {
         bool created = false;
@@ -229,6 +251,9 @@ public class RoomArray : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Method that generates the real dungeon
+    /// </summary>
     private void createDungeon()
     {
         Debug.Log("Tienda: "+ shopNumber);
@@ -243,15 +268,11 @@ public class RoomArray : MonoBehaviour
                 if (shopNumber == i)
                 {
                     room = (GameObject)Instantiate(Resources.Load("Rooms/B/Shop Room B"));
-                    room.GetComponent<RoomScript>().serialNumber = minimapRooms[i].GetComponent<MinimapRoom>().serialNumber;
                     room.GetComponent<RoomScript>().hasShop = true;
-                    realRooms.Add(room);
                 }
                 else
                 {
                     room = (GameObject)Instantiate(Resources.Load("Rooms/B/Default Room B"));
-                    room.GetComponent<RoomScript>().serialNumber = minimapRooms[i].GetComponent<MinimapRoom>().serialNumber;
-                    realRooms.Add(room);
                 }
             }
 
@@ -260,15 +281,11 @@ public class RoomArray : MonoBehaviour
                 if (shopNumber == i)
                 {
                     room = (GameObject)Instantiate(Resources.Load("Rooms/BL/Shop Room BL"));
-                    room.GetComponent<RoomScript>().serialNumber = minimapRooms[i].GetComponent<MinimapRoom>().serialNumber;
                     room.GetComponent<RoomScript>().hasShop = true;
-                    realRooms.Add(room);
                 }
                 else
                 { 
                     room = (GameObject)Instantiate(Resources.Load("Rooms/BL/Default Room BL"));
-                    room.GetComponent<RoomScript>().serialNumber = minimapRooms[i].GetComponent<MinimapRoom>().serialNumber;
-                    realRooms.Add(room);
                 }
             }
 
@@ -277,16 +294,12 @@ public class RoomArray : MonoBehaviour
                 if (shopNumber == i)
                 {
                     room = (GameObject)Instantiate(Resources.Load("Rooms/BLR/Shop Room BLR"));
-                    room.GetComponent<RoomScript>().serialNumber = minimapRooms[i].GetComponent<MinimapRoom>().serialNumber;
                     room.GetComponent<RoomScript>().hasShop = true;
-                    realRooms.Add(room);
                 }
 
                 else
                 {
                     room = (GameObject)Instantiate(Resources.Load("Rooms/BLR/Default Room BLR"));
-                    room.GetComponent<RoomScript>().serialNumber = minimapRooms[i].GetComponent<MinimapRoom>().serialNumber;
-                    realRooms.Add(room);
                 }
             }
 
@@ -295,15 +308,11 @@ public class RoomArray : MonoBehaviour
                 if (shopNumber == i)
                 {
                     room = (GameObject)Instantiate(Resources.Load("Rooms/BR/Shop Room BR"));
-                    room.GetComponent<RoomScript>().serialNumber = minimapRooms[i].GetComponent<MinimapRoom>().serialNumber;
                     room.GetComponent<RoomScript>().hasShop = true;
-                    realRooms.Add(room);
                 }
                 else
                 {
                     room = (GameObject)Instantiate(Resources.Load("Rooms/BR/Default Room BR"));
-                    room.GetComponent<RoomScript>().serialNumber = minimapRooms[i].GetComponent<MinimapRoom>().serialNumber;
-                    realRooms.Add(room);
                 }
             }
 
@@ -312,15 +321,11 @@ public class RoomArray : MonoBehaviour
                 if (shopNumber == i)
                 {
                     room = (GameObject)Instantiate(Resources.Load("Rooms/L/Shop Room L"));
-                    room.GetComponent<RoomScript>().serialNumber = minimapRooms[i].GetComponent<MinimapRoom>().serialNumber;
                     room.GetComponent<RoomScript>().hasShop = true;
-                    realRooms.Add(room);
                 }
                 else
                 {
                     room = (GameObject)Instantiate(Resources.Load("Rooms/L/Default Room L"));
-                    room.GetComponent<RoomScript>().serialNumber = minimapRooms[i].GetComponent<MinimapRoom>().serialNumber;
-                    realRooms.Add(room);
                 }
             }
 
@@ -329,15 +334,11 @@ public class RoomArray : MonoBehaviour
                 if (shopNumber == i)
                 {
                     room = (GameObject)Instantiate(Resources.Load("Rooms/LR/Shop Room LR"));
-                    room.GetComponent<RoomScript>().serialNumber = minimapRooms[i].GetComponent<MinimapRoom>().serialNumber;
                     room.GetComponent<RoomScript>().hasShop = true;
-                    realRooms.Add(room);
                 }
                 else
                 {
                     room = (GameObject)Instantiate(Resources.Load("Rooms/LR/Default Room LR"));
-                    room.GetComponent<RoomScript>().serialNumber = minimapRooms[i].GetComponent<MinimapRoom>().serialNumber;
-                    realRooms.Add(room);
                 }
             }
 
@@ -346,15 +347,11 @@ public class RoomArray : MonoBehaviour
                 if (shopNumber == i)
                 {
                     room = (GameObject)Instantiate(Resources.Load("Rooms/R/Shop Room R"));
-                    room.GetComponent<RoomScript>().serialNumber = minimapRooms[i].GetComponent<MinimapRoom>().serialNumber;
                     room.GetComponent<RoomScript>().hasShop = true;
-                    realRooms.Add(room);
                 }
                 else
                 {
                     room = (GameObject)Instantiate(Resources.Load("Rooms/R/Default Room R"));
-                    room.GetComponent<RoomScript>().serialNumber = minimapRooms[i].GetComponent<MinimapRoom>().serialNumber;
-                    realRooms.Add(room);
                 }
             }
 
@@ -363,15 +360,11 @@ public class RoomArray : MonoBehaviour
                 if (shopNumber == i)
                 {
                     room = (GameObject)Instantiate(Resources.Load("Rooms/T/Shop Room T"));
-                    room.GetComponent<RoomScript>().serialNumber = minimapRooms[i].GetComponent<MinimapRoom>().serialNumber;
                     room.GetComponent<RoomScript>().hasShop = true;
-                    realRooms.Add(room);
                 }
                 else
                 {
                     room = (GameObject)Instantiate(Resources.Load("Rooms/T/Default Room T"));
-                    room.GetComponent<RoomScript>().serialNumber = minimapRooms[i].GetComponent<MinimapRoom>().serialNumber;
-                    realRooms.Add(room);
                 }
             }
 
@@ -380,15 +373,11 @@ public class RoomArray : MonoBehaviour
                 if (shopNumber == i)
                 {
                     room = (GameObject)Instantiate(Resources.Load("Rooms/TB/Shop Room TB"));
-                    room.GetComponent<RoomScript>().serialNumber = minimapRooms[i].GetComponent<MinimapRoom>().serialNumber;
                     room.GetComponent<RoomScript>().hasShop = true;
-                    realRooms.Add(room);
                 }
                 else
                 {
                     room = (GameObject)Instantiate(Resources.Load("Rooms/TB/Default Room TB"));
-                    room.GetComponent<RoomScript>().serialNumber = minimapRooms[i].GetComponent<MinimapRoom>().serialNumber;
-                    realRooms.Add(room);
                 }
             }
 
@@ -397,15 +386,11 @@ public class RoomArray : MonoBehaviour
                 if (shopNumber == i)
                 {
                     room = (GameObject)Instantiate(Resources.Load("Rooms/TBL/Shop Room TBL"));
-                    room.GetComponent<RoomScript>().serialNumber = minimapRooms[i].GetComponent<MinimapRoom>().serialNumber;
                     room.GetComponent<RoomScript>().hasShop = true;
-                    realRooms.Add(room);
                 }
                 else
                 {
                     room = (GameObject)Instantiate(Resources.Load("Rooms/TBL/Default Room TBL"));
-                    room.GetComponent<RoomScript>().serialNumber = minimapRooms[i].GetComponent<MinimapRoom>().serialNumber;
-                    realRooms.Add(room);
                 }
             }
 
@@ -414,15 +399,11 @@ public class RoomArray : MonoBehaviour
                 if (shopNumber == i)
                 {
                     room = (GameObject)Instantiate(Resources.Load("Rooms/TBLR/Shop Room TBLR"));
-                    room.GetComponent<RoomScript>().serialNumber = minimapRooms[i].GetComponent<MinimapRoom>().serialNumber;
                     room.GetComponent<RoomScript>().hasShop = true;
-                    realRooms.Add(room);
                 }
                 else
                 {
                     room = (GameObject)Instantiate(Resources.Load("Rooms/TBLR/Default Room TBLR"));
-                    room.GetComponent<RoomScript>().serialNumber = minimapRooms[i].GetComponent<MinimapRoom>().serialNumber;
-                    realRooms.Add(room);
                 }
             }
 
@@ -431,15 +412,11 @@ public class RoomArray : MonoBehaviour
                 if (shopNumber == i)
                 {
                     room = (GameObject)Instantiate(Resources.Load("Rooms/TBR/Shop Room TBR"));
-                    room.GetComponent<RoomScript>().serialNumber = minimapRooms[i].GetComponent<MinimapRoom>().serialNumber;
                     room.GetComponent<RoomScript>().hasShop = true;
-                    realRooms.Add(room);
                 }
                 else
                 {
                     room = (GameObject)Instantiate(Resources.Load("Rooms/TBR/Default Room TBR"));
-                    room.GetComponent<RoomScript>().serialNumber = minimapRooms[i].GetComponent<MinimapRoom>().serialNumber;
-                    realRooms.Add(room);
                 }
             }
 
@@ -448,15 +425,11 @@ public class RoomArray : MonoBehaviour
                 if (shopNumber == i)
                 {
                     room = (GameObject)Instantiate(Resources.Load("Rooms/TL/Shop Room TL"));
-                    room.GetComponent<RoomScript>().serialNumber = minimapRooms[i].GetComponent<MinimapRoom>().serialNumber;
                     room.GetComponent<RoomScript>().hasShop = true;
-                    realRooms.Add(room);
                 }
                 else
                 {
                     room = (GameObject)Instantiate(Resources.Load("Rooms/TL/Default Room TL"));
-                    room.GetComponent<RoomScript>().serialNumber = minimapRooms[i].GetComponent<MinimapRoom>().serialNumber;
-                    realRooms.Add(room);
                 }
             }
 
@@ -465,15 +438,11 @@ public class RoomArray : MonoBehaviour
                 if (shopNumber == i)
                 {
                     room = (GameObject)Instantiate(Resources.Load("Rooms/TLR/Shop Room TLR"));
-                    room.GetComponent<RoomScript>().serialNumber = minimapRooms[i].GetComponent<MinimapRoom>().serialNumber;
                     room.GetComponent<RoomScript>().hasShop = true;
-                    realRooms.Add(room);
                 }
                 else
                 {
                     room = (GameObject)Instantiate(Resources.Load("Rooms/TLR/Default Room TLR"));
-                    room.GetComponent<RoomScript>().serialNumber = minimapRooms[i].GetComponent<MinimapRoom>().serialNumber;
-                    realRooms.Add(room);
                 }
             }
 
@@ -482,19 +451,18 @@ public class RoomArray : MonoBehaviour
                 if (shopNumber == i)
                 {
                     room = (GameObject)Instantiate(Resources.Load("Rooms/TR/Shop Room TR"));
-                    room.GetComponent<RoomScript>().serialNumber = minimapRooms[i].GetComponent<MinimapRoom>().serialNumber;
                     room.GetComponent<RoomScript>().hasShop = true;
-                    realRooms.Add(room);
                 }
                 else
                 {
                     room = (GameObject)Instantiate(Resources.Load("Rooms/TR/Default Room TR"));
-                    room.GetComponent<RoomScript>().serialNumber = minimapRooms[i].GetComponent<MinimapRoom>().serialNumber;
-                    realRooms.Add(room);
                 }
             }
 
             StartCoroutine(SetEnabledRooms(room, i));
+
+            room.GetComponent<RoomScript>().serialNumber = minimapRooms[i].GetComponent<MinimapRoom>().serialNumber;
+            realRooms.Add(room);
 
 
             if (i == minimapRooms.Count - 1)
@@ -506,6 +474,12 @@ public class RoomArray : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Coroutine that disables every room and enables the current one
+    /// </summary>
+    /// <param name="room"></param>
+    /// <param name="i"></param>
+    /// <returns></returns>
     IEnumerator SetEnabledRooms(GameObject room, int i)
     {
 

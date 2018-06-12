@@ -9,6 +9,7 @@ public class Database : MonoBehaviour
     public EnemyList enemyDatabase;
     public AbilityList abilityDatabase;
     public List<GenericItem> shopPool;
+
     private Management management;
     private GameDataManager gameDataManager;
     //private GenericItem item;

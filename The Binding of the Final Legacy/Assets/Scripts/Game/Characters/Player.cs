@@ -5,6 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour {
 
     public float speed = 2;
+    public PlayerClass playerStats;
 
     [SerializeField]
     private Vector2 deltaForce;
@@ -15,9 +16,9 @@ public class Player : MonoBehaviour {
     private BoxCollider2D boxCollider;
     private bool isMoving;
     private Management management;
-    public PlayerClass playerStats;
     private GameDataManager gameDataManager;
     private Database database;
+
     void Awake()
     {
         animator = GetComponent<Animator>();
@@ -41,6 +42,10 @@ public class Player : MonoBehaviour {
         else
         {
             playerStats = gameDataManager.createdPlayer;
+            playerStats.level = gameDataManager.lvl;
+            //playerStats.attack = 1f;
+            //playerStats.currentHealth = 75.0f;
+            //playerStats.defense = 5.0f;
 
             //Cosas de testeo
             //playerStats.inventory.Add(new GenericItem(9, "ItemPrueba1", "weapon", "DescripcionPrueba1", 50.0f, 30.0f, 0, 5.0f, 4.5f, 100.0f, 0.0f, "Items/stunWhip"));
@@ -56,7 +61,6 @@ public class Player : MonoBehaviour {
             //playerStats.currentHealth = 50.0f;
             //playerStats.currentMana = 70.0f;
         }
-        
     }
 
     private void OnEnable()
@@ -64,6 +68,9 @@ public class Player : MonoBehaviour {
         Invoke("enableMethod", 0.01f);
     }
 
+    /// <summary>
+    /// Method that adds the basic abilities to the player if there is not saved game
+    /// </summary>
     private void enableMethod()
     {
         if (!gameDataManager.hasSavedGame)
@@ -103,6 +110,9 @@ public class Player : MonoBehaviour {
             SendAnimInfo();
         }  
     }
+    /// <summary>
+    /// Method that checks if the cancel button is beign pressed to handle the pause menu
+    /// </summary>
     private void CheckForMenu()
     {
         if (Input.GetButtonDown("Cancel"))
@@ -129,6 +139,9 @@ public class Player : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Method that checks if the Inventory button is pressed to handle the inventory menu
+    /// </summary>
     private void CheckForInventory()
     {
         if (Input.GetButtonDown("Inventory"))
@@ -141,12 +154,6 @@ public class Player : MonoBehaviour {
 
                 management.openInventory();
             }
-
-            else
-            {
-                management.closeInventory();
-            }
-
         }
     }
 
@@ -164,11 +171,6 @@ public class Player : MonoBehaviour {
         {
             isMoving = true;
 
-            //if (!boxCollider.IsTouchingLayers(Physics2D.AllLayers)) //Si no esta tocando alguna capa
-            //{
-            //    lastDirection = rigidbody.velocity; //Esto se hace así porque el motor de físicas de Unity, pone a 0 la velocidad cuando se encuentra con un objeto, entonces no me vale para el last position.
-            //    Corrección. Tras saber como funciona Unity puedo decir sin ningún miedo que el tio de este tutorial no tenía ni idea. Este if es una absurdez. La linea de abajo es la buena.
-            //}
             lastDirection = new Vector2(horizontal, vertical);
             if (horizontal != 0 && vertical != 0)
             {

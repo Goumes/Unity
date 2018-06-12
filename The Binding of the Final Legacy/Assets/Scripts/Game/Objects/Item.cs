@@ -23,6 +23,9 @@ public class Item : MonoBehaviour
         //Debug.Log(itemNumber + " + " + currentItem.name);
 	}
 
+    /// <summary>
+    /// /Loads the item from the shop pool
+    /// </summary>
     private void loadItem()
     {
         shopPool = itemDatabase.shopPool;

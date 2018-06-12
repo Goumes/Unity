@@ -21,6 +21,9 @@ public class MinimapGridScript : MonoBehaviour {
 		
 	}
 
+    /// <summary>
+    /// Method that checks if there is any saved games. If it finds one, it loads it.
+    /// </summary>
     void checkSavedGame()
     {
         if (!gameDataManager.hasSavedGame)
@@ -38,6 +41,10 @@ public class MinimapGridScript : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Method that loads the minimap.
+    /// </summary>
+    /// <param name="save"></param>
     private void loadMinimap(GameSave save)
     {
         for (int i = 0; i < save.minimapGrid.rooms.Count; i++)
