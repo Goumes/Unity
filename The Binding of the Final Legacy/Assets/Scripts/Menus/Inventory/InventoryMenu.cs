@@ -165,6 +165,11 @@ public class InventoryMenu : MonoBehaviour
 
     }
 
+    private void OnDisable()
+    {
+        inventoryButtons.transform.GetChild(1).transform.GetChild(7).GetComponent<Button>().Select(); //Reiniciar el focus, que sino da problemas al volver a abrir el inventario y está seleccionado el primer item
+    }
+
     /// <summary>
     /// Method that updates the inventory data
     /// </summary>

@@ -28,6 +28,7 @@ public class Management : MonoBehaviour {
     private GameObject myEventSystem;
     private Color tmp;
     private GameObject fader;
+    private GameObject nextLevel;
 
     // Use this for initialization
     void Start () {
@@ -46,10 +47,12 @@ public class Management : MonoBehaviour {
         player = GameObject.FindGameObjectWithTag("Player");
         inventoryMenu = GameObject.FindGameObjectWithTag("Inventory");
         Invoke("DisableCombat", 0.2f);
+        nextLevel = GameObject.FindGameObjectWithTag("NextLevel");
         Invoke("DisableShop", 0.2f);
         Invoke("DisablePause", 0.2f);
         Invoke("DisableInventory", 0.2f);
         Invoke("DisableGameOver", 0.001f);
+        Invoke("DisableNextLevel", 0.001f);
     }
 
     /// <summary>
@@ -66,6 +69,11 @@ public class Management : MonoBehaviour {
     private void DisableGameOver()
     {
         gameOver.SetActive(false);
+    }
+
+    private void DisableNextLevel()
+    {
+        nextLevel.SetActive(false);
     }
 
     /// <summary>
@@ -335,6 +343,8 @@ public class Management : MonoBehaviour {
     /// <returns></returns>
     public IEnumerator fadeWinCombatAndAdvanceNextLvl()
     {
+        Color tmp2 = new Color();
+
         for (float i = 0f; i < 1f; i = i + 0.02f)
         {
             tmp.a = i;
@@ -365,7 +375,32 @@ public class Management : MonoBehaviour {
             player.GetComponent<Player>().playerStats.currentMana = player.GetComponent<Player>().playerStats.totalMana;
         }
 
-        //Aqui tocar lo del gameDataManager que haya que tocar
+
+        nextLevel.SetActive(true);
+
+        tmp2 = nextLevel.transform.GetChild(0).GetComponent<Text>().color;
+
+
+        for (float i = 0f; i < 1f; i = i + 0.02f)
+        {
+            tmp2.a = i;
+            nextLevel.transform.GetChild(0).GetComponent<Text>().color = tmp2; //Hay que hacerlo así porque no es una variable y no se puede cambiar directamente
+            yield return new WaitForSeconds(0.0001f);
+        }
+
+
+        yield return new WaitForSeconds(2f);
+
+        for (float i = 1f; i >= 0f; i = i - 0.02f)
+        {
+            tmp2.a = i;
+            nextLevel.transform.GetChild(0).GetComponent<Text>().color = tmp2; //Hay que hacerlo así porque no es una variable y no se puede cambiar directamente
+            yield return new WaitForSeconds(0.0001f);
+        }
+
+        yield return new WaitForSeconds(0.5f);
+
+
         gameDataManager.hasSavedGame = false;
         gameDataManager.instantiated = false;
         gameDataManager.lvl++;
@@ -396,8 +431,10 @@ public class Management : MonoBehaviour {
     /// <returns></returns>
     public IEnumerator fadeGameOver()
     {
+        Color tmp2 = new Color();
         for (float i = 0f; i < 1f; i = i + 0.02f)
         {
+            tmp = fader.GetComponent<RawImage>().color;
             tmp.a = i;
             fader.GetComponent<RawImage>().color = tmp; //Hay que hacerlo así porque no es una variable y no se puede cambiar directamente
             yield return new WaitForSeconds(0.0001f);
@@ -405,18 +442,30 @@ public class Management : MonoBehaviour {
 
         gameOver.SetActive(true);
 
-        tmp = gameOver.transform.GetChild(0).GetComponent<Text>().color;
+        audioManager.stopMusic();
+        backgroundMusic = Resources.Load<AudioClip>("Music/Normal Dungeon Music");
+
+        tmp2 = gameOver.transform.GetChild(0).GetComponent<Text>().color;
 
         for (float i = 0f; i < 1f; i = i + 0.02f)
         {
-            tmp.a = i;
-            gameOver.transform.GetChild(0).GetComponent<Text>().color = tmp; //Hay que hacerlo así porque no es una variable y no se puede cambiar directamente
+            tmp2.a = i;
+            gameOver.transform.GetChild(0).GetComponent<Text>().color = tmp2; //Hay que hacerlo así porque no es una variable y no se puede cambiar directamente
             yield return new WaitForSeconds(0.0001f);
         }
 
         gameDataManager.DeleteSave();
 
         yield return new WaitForSeconds(2f);
+
+        for (float i = 1f; i >= 0f; i = i - 0.02f)
+        {
+            tmp2.a = i;
+            gameOver.transform.GetChild(0).GetComponent<Text>().color = tmp2; //Hay que hacerlo así porque no es una variable y no se puede cambiar directamente
+            yield return new WaitForSeconds(0.0001f);
+        }
+
+        yield return new WaitForSeconds(1f);
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }

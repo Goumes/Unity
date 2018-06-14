@@ -65,7 +65,7 @@ public class ShopButtonScript : MonoBehaviour, ISelectHandler, IDeselectHandler
                 {
                     if (itemDescriptions[i].transform.GetChild(j).transform.name.Equals("Player's Gold"))
                     {
-                        itemDescriptions[i].transform.GetChild(j).GetComponent<TextMeshProUGUI>().SetText(player.playerStats.gold.ToString());
+                        itemDescriptions[i].transform.GetChild(j).GetComponent<TextMeshProUGUI>().SetText(Mathf.Round(player.playerStats.gold).ToString());
                     }
                 }
             }

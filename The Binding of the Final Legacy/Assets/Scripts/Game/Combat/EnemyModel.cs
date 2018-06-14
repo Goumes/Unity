@@ -73,7 +73,7 @@ public class EnemyModel : MonoBehaviour
         {
             hasDrop = true;
         }
-        
+
 
         if (hasDrop)
         {
@@ -91,6 +91,10 @@ public class EnemyModel : MonoBehaviour
                     i = 0;
                 }
             }
+        }
+        else
+        {
+            itemDrop = null;
         }
 
         switch (gameDataManager.lvl)

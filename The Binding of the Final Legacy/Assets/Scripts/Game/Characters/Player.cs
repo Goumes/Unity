@@ -43,9 +43,9 @@ public class Player : MonoBehaviour {
         {
             playerStats = gameDataManager.createdPlayer;
             playerStats.level = gameDataManager.lvl;
-            //playerStats.attack = 1f;
-            //playerStats.currentHealth = 75.0f;
-            //playerStats.defense = 5.0f;
+            //playerStats.attack = 100f;
+            //playerStats.currentHealth = 100.0f;
+            //playerStats.defense = 15.0f;
 
             //Cosas de testeo
             //playerStats.inventory.Add(new GenericItem(9, "ItemPrueba1", "weapon", "DescripcionPrueba1", 50.0f, 30.0f, 0, 5.0f, 4.5f, 100.0f, 0.0f, "Items/stunWhip"));

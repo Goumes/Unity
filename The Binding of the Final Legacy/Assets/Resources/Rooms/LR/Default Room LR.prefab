@@ -220,7 +220,7 @@ GameObject:
   - component: {fileID: 61412161780898646}
   m_Layer: 0
   m_Name: Chest 1
-  m_TagString: Vase
+  m_TagString: Chest
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

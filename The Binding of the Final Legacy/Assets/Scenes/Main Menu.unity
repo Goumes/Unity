@@ -2754,7 +2754,10 @@ MonoBehaviour:
       healthModifier: 10
       manaModifier: 10
       imageResourcePath: Items/torch
+    level: 0
   hasSavedGame: 0
+  instantiated: 0
+  lvl: 0
 --- !u!4 &196190071
 Transform:
   m_ObjectHideFlags: 0

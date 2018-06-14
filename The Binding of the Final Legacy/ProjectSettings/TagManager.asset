@@ -84,6 +84,7 @@ TagManager:
   - InventoryOptions
   - CombatPlayer
   - CombatPlayerHit
+  - NextLevel
   layers:
   - Default
   - TransparentFX

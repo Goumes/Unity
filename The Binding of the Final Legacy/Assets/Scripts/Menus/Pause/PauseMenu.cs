@@ -64,6 +64,17 @@ public class PauseMenu : MonoBehaviour
         alert.SetActive(false);
     }
 
+    private void OnDisable()
+    {
+        for (int i = 0; i < buttons.Count; i++)
+        {
+            if (buttons[i].transform.name.Equals("Options Button"))
+            {
+                buttons[i].GetComponent<Button>().Select();
+            }
+        }
+    }
+
     /// <summary>
     /// Method that blocks the player input
     /// </summary>

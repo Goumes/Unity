@@ -147,7 +147,21 @@ public class GlobalButton : MonoBehaviour
             {
                 for (int k = 0; k < lvl1Background[0].transform.GetChild(j).childCount; k++)
                 {
-                    lvl1Background[0].transform.GetChild(j).GetChild(k).gameObject.GetComponent<Button>().interactable = true;
+                    if (lvl1Background[0].transform.GetChild(j).transform.GetChild(k).transform.name.Equals("Run Away"))
+                    {
+                        if (hasBoss)
+                        {
+                            lvl1Background[0].transform.GetChild(j).GetChild(k).gameObject.GetComponent<Button>().interactable = false;
+                        }
+                        else
+                        {
+                            lvl1Background[0].transform.GetChild(j).GetChild(k).gameObject.GetComponent<Button>().interactable = true;
+                        }
+                    }
+                    else
+                    {
+                        lvl1Background[0].transform.GetChild(j).GetChild(k).gameObject.GetComponent<Button>().interactable = true;
+                    }
 
                     if (k == 0)
                     {
@@ -367,7 +381,21 @@ public class GlobalButton : MonoBehaviour
                     {
                         for (int k = 0; k < lvl1Background[0].transform.GetChild(j).childCount; k++)
                         {
-                            lvl1Background[0].transform.GetChild(j).GetChild(k).gameObject.GetComponent<Button>().interactable = true;
+                            if (lvl1Background[0].transform.GetChild(j).transform.GetChild(k).transform.name.Equals("Run Away"))
+                            {
+                                if (hasBoss)
+                                {
+                                    lvl1Background[0].transform.GetChild(j).GetChild(k).gameObject.GetComponent<Button>().interactable = false;
+                                }
+                                else
+                                {
+                                    lvl1Background[0].transform.GetChild(j).GetChild(k).gameObject.GetComponent<Button>().interactable = true;
+                                }
+                            }
+                            else
+                            {
+                                lvl1Background[0].transform.GetChild(j).GetChild(k).gameObject.GetComponent<Button>().interactable = true;
+                            }
 
                             if (k == 0)
                             {
@@ -663,7 +691,7 @@ public class GlobalButton : MonoBehaviour
                 {
                     enemy.enemyStats.currentHealth = enemy.enemyStats.currentHealth - ((player.GetComponent<Player>().playerStats.abilities[abilitySelected].dmgMultiplier * player.GetComponent<Player>().playerStats.attack) - enemy.enemyStats.defense * 2);
                 }
-               
+
             }
 
             else
@@ -675,7 +703,7 @@ public class GlobalButton : MonoBehaviour
                 {
                     itemReward.Add(enemy.itemDrop);
                 }
-                
+
                 if (enemy.gameObject.GetComponent<EnemyModel>().isBoss)
                 {
                     nextLvl = true;
@@ -690,6 +718,11 @@ public class GlobalButton : MonoBehaviour
 
             startEnemyTurn();
 
+        }
+        else
+        {
+            StopCoroutine(outOfMana());
+            StartCoroutine(outOfMana());
         }
 
     }
@@ -884,8 +917,6 @@ public class GlobalButton : MonoBehaviour
         }
 
 
-        //0.6f + 0.05f;
-
     }
 
     /// <summary>
@@ -930,6 +961,34 @@ public class GlobalButton : MonoBehaviour
         }
 
         yield return new WaitForSeconds(0.1f);
+    }
+
+    private IEnumerator outOfMana()
+    {
+        Color tmp;
+
+        for (int i = 0; i < playerInfo.transform.childCount; i++)
+        {
+            if (playerInfo.transform.GetChild(i).transform.name.Equals("Player MP Current Value"))
+            {
+                tmp = playerInfo.transform.GetChild(i).GetComponent<TextMeshProUGUI>().color;
+                
+                for (int j = 0; j < 4; j++)
+                {
+                    tmp = Color.red;
+                    playerInfo.transform.GetChild(i).GetComponent<TextMeshProUGUI>().color = tmp;
+
+                    yield return new WaitForSeconds(0.1f);
+
+                    tmp = Color.white;
+                    playerInfo.transform.GetChild(i).GetComponent<TextMeshProUGUI>().color = tmp;
+
+                    yield return new WaitForSeconds(0.1f);
+                }
+
+                playerInfo.transform.GetChild(i).GetComponent<TextMeshProUGUI>().color = Color.white;
+            }
+        }
     }
 
     //private void followEnemyBars()
@@ -992,7 +1051,21 @@ public class GlobalButton : MonoBehaviour
             {
                 for (int k = 0; k < lvl1Background[0].transform.GetChild(j).childCount; k++)
                 {
-                    lvl1Background[0].transform.GetChild(j).GetChild(k).gameObject.GetComponent<Button>().interactable = true;
+                    if (lvl1Background[0].transform.GetChild(j).transform.GetChild(k).transform.name.Equals("Run Away"))
+                    {
+                        if (hasBoss)
+                        {
+                            lvl1Background[0].transform.GetChild(j).GetChild(k).gameObject.GetComponent<Button>().interactable = false;
+                        }
+                        else
+                        {
+                            lvl1Background[0].transform.GetChild(j).GetChild(k).gameObject.GetComponent<Button>().interactable = true;
+                        }
+                    }
+                    else
+                    {
+                        lvl1Background[0].transform.GetChild(j).GetChild(k).gameObject.GetComponent<Button>().interactable = true;
+                    }
 
                     if (k == 0)
                     {
