@@ -15,6 +15,8 @@ Controles del juego:
 A tener en cuenta:
  - Al ser un juego independiente sin firmar por ninguna empresa muchos antivirus lo reconocen como virus y bloquea el acceso para guardar y cargar la partida. Si al guardar partida no aparece ningún mensaje de alerta confirmandolo o aparece uno diciendo que ha habido un error, hay que configurar el antivirus para añadir el juego como excepción.
 
+ - IMPORTANTE. El contenido de la carpeta "Ejecutable" no se puede cambiar. Si se cambia el nombre de la carpeta que contiene todos los archivos (The Binding of the Final Legacy Prototype) no arrancará.
+
  - Se tiene que jugar en Windows y la ruta de guardado es /user/Mis Documentos/The Binding of the Final Legacy.
 
  - Las funcionalidades que te puedes encontrar jugando y que no funcionan son: 
