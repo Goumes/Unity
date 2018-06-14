@@ -1,0 +1,53 @@
+{
+  "abilities": [
+	{
+	  "id": 0,
+	  "type": "player",
+	  "name": "SLICE",
+	  "dmgMultiplier": 5,
+	  "manaCost": 0.0
+	},
+	{
+	  "id": 1,
+	  "name": "WINDSLASH",
+	  "type": "player",
+	  "dmgMultiplier": 10,
+	  "manaCost": 10.0
+	},
+	{
+	  "id": 2,
+	  "name": "DEMOLISH",
+	  "type": "player",
+	  "dmgMultiplier": 20,
+	  "manaCost": 30.0
+	},
+	{
+	  "id": 3,
+	  "name": "GOD'S WILL",
+	  "type": "player",
+	  "dmgMultiplier": 999,
+	  "manaCost": 0.0
+	},
+	{
+	  "id": 4,
+	  "name": "BASIC ATTACK",
+	  "type": "enemy",
+	  "dmgMultiplier": 5,
+	  "manaCost": 0.0
+	},
+	{
+	  "id": 5,
+	  "name": "STRONG ATTACK",
+	  "type": "enemy",
+	  "dmgMultiplier": 10,
+	  "manaCost": 10.0
+	},
+	{
+	  "id": 6,
+	  "name": "FINAL ATTACK",
+	  "type": "enemy",
+	  "dmgMultiplier": 15,
+	  "manaCost": 50.0
+	}
+ ]
+}

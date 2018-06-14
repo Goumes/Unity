@@ -1,0 +1,23 @@
+Documentación:
+ - Todo lo que he hecho yo en el proyecto se encuentra en la carpeta Assets.
+ - Debido a la naturaleza del juego, algunos elementos del análisis han sido omitidos puesto que no existen. Principalmente algunos diagramas del programa.
+ - Aunque en unity no se trabaja con el concepto de clases tradicional, sino con miniscripts que se añaden a GameObjects (base de programación en Unity), he hecho un diagrama de clases de la mayoría de scripts que componen el programa. He omitido muchas relaciones porque la gran mayoría de scripts están relacionados entre sí de un modo u otro, o algunos incluso se ejecutan de forma independiente a todo lo demás, pero he dejado las principales.
+ - Para poder ver el proyecto, es necesario tener Unity instalado en su versión 2018.1.0
+ - No se ha dividido en subcarpetas de FrontEnd, BackEnd, etc. porque está todo fusionado ya que no hay una jerarquía de capas en este Framework. Aún así he dividido la carpeta de Assets/Scripts (Donde está todo el código hecho por mi) en varias subcarpetas que engloban cada módulo del juego para una lectura más sencilla.
+
+Controles del juego:
+ - Movimiento: Flechas o Joystick de un mando.
+ - Aceptar: Intro o botón X(Sony)/A(Microsoft) de un mando.
+ - Botón de inventario: I o Select en un mando.
+ - Cancelar y menu pausa: Escape o botón O(Sony)/B(Microsoft) de un mando.
+ - Aumentar visibilidad mapa: Tabulador (pulsado).
+
+A tener en cuenta:
+ - Al ser un juego independiente sin firmar por ninguna empresa muchos antivirus lo reconocen como virus y bloquea el acceso para guardar y cargar la partida. Si al guardar partida no aparece ningún mensaje de alerta confirmandolo o aparece uno diciendo que ha habido un error, hay que configurar el antivirus para añadir el juego como excepción.
+
+ - Se tiene que jugar en Windows y la ruta de guardado es /user/Mis Documentos/The Binding of the Final Legacy.
+
+ - Las funcionalidades que te puedes encontrar jugando y que no funcionan son: 
+   1. Vender en la tienda
+   2. Abrir el inventario en mitad de un combate
+   3. Menú de opciones.

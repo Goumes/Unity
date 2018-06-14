@@ -1,0 +1,133 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Rooms
+  - Grid
+  - Room
+  - SpawnPoint
+  - Center
+  - Teleporter
+  - RootRoom
+  - Fade
+  - LoadingScreen
+  - Minimap
+  - Pointer
+  - Submenu
+  - Level 2
+  - Level 3
+  - Global Button
+  - Management
+  - Combat Button
+  - Level 1
+  - Main Menu
+  - Enemy Selected
+  - UI Animations
+  - Combat
+  - Dungeon
+  - In-Game Enemy
+  - Chest
+  - Vase
+  - Shop Item
+  - Shop
+  - ShopPointer
+  - Shop Global Button
+  - Shop Item Buttons
+  - Shop Main Buttons
+  - Shop Items
+  - Item Pool
+  - GameData
+  - AttackSlices
+  - DefenseSlices
+  - HealthSlices
+  - WealthSlices
+  - NewGameAlert
+  - InputName
+  - PointsLeft
+  - NewGameStartButton
+  - LoadMenuAttributes
+  - LoadMenuName
+  - LoadMenuSave
+  - LoadMenuSelected
+  - EmptySave
+  - NotEmptySave
+  - MenuBlob
+  - MainMenuButton
+  - LoadMenuButton
+  - MenuGlobalButton
+  - NewGameSelected
+  - NewGameButton
+  - NewGameAlertButton
+  - OptionsMenuElement
+  - OptionsSelected
+  - ShopItemDescription
+  - ShopItemSold
+  - ShopItemModel
+  - PauseMenuButton
+  - PauseAlert
+  - PauseMenu
+  - PausePointer
+  - EnemyCombat
+  - EnemyBars
+  - CombatEnemyInfo
+  - PlayerBars
+  - CombatPlayerInfo
+  - GameOver
+  - InventoryItems
+  - InventoryItemsBackground
+  - InventoryTexts
+  - Inventory
+  - InventoryButtons
+  - InventoryPointer
+  - InventoryOptions
+  - CombatPlayer
+  - CombatPlayerHit
+  - NextLevel
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Background
+    uniqueID: 1069390899
+    locked: 0
+  - name: Character
+    uniqueID: 1043193857
+    locked: 0
+  - name: Foreground
+    uniqueID: 562406931
+    locked: 0
+  - name: Default
+    uniqueID: 0
+    locked: 0
