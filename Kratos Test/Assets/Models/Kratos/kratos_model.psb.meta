@@ -3116,13 +3116,6 @@ ScriptedImporter:
     spriteID: 36be2eb8ae667e1408f9b00b8f0a921f
     layerID: 106
     mosaicPosition: {x: 4, y: 4}
-  - name: head
-    spriteName: head
-    isGroup: 0
-    parentIndex: -1
-    spriteID: a11525a90ff22fa4d8fb45e7c3fc6350
-    layerID: 70
-    mosaicPosition: {x: 4, y: 56}
   - name: l_arm
     spriteName: l_arm
     isGroup: 0
@@ -3137,6 +3130,13 @@ ScriptedImporter:
     spriteID: 0fe22c1ee1a719a4b9926fba456d1d1a
     layerID: 102
     mosaicPosition: {x: 54, y: 4}
+  - name: head
+    spriteName: head
+    isGroup: 0
+    parentIndex: -1
+    spriteID: a11525a90ff22fa4d8fb45e7c3fc6350
+    layerID: 70
+    mosaicPosition: {x: 4, y: 56}
   - name: skirt
     spriteName: skirt
     isGroup: 0

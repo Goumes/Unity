@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class KratosController : MonoBehaviour
 {
     [SerializeField] private float m_JumpForce = 400f;                          // Amount of force added when the player jumps.
+    [SerializeField] private float jumpDelay = 0.126f;                           //Time before the character jumps so it has time to play the animations
     [Range(0, .3f)] [SerializeField] private float m_MovementSmoothing = .05f;  // How much to smooth out the movement
     [SerializeField] private bool m_AirControl = false;                         // Whether or not a player can steer while jumping;
     [SerializeField] private LayerMask m_WhatIsGround;                          // A mask determining what is ground to the character
@@ -49,7 +50,11 @@ public class KratosController : MonoBehaviour
             {
                 m_Grounded = true;
                 if (!wasGrounded)
+                {
+                    m_Animator.SetBool("isFalling", false);
+                    m_Animator.SetBool("isJumping", false);
                     OnLandEvent.Invoke();
+                }
             }
         }
     }
@@ -95,7 +100,7 @@ public class KratosController : MonoBehaviour
         {
             // Add a vertical force to the player.
             m_Grounded = false;
-            m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
+            StartCoroutine(JumpFunction());
         }
     }
 
@@ -109,6 +114,14 @@ public class KratosController : MonoBehaviour
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
         transform.localScale = theScale;
+    }
+
+    private IEnumerator JumpFunction()
+    {
+        m_Animator.SetBool("isJumping", true);
+        yield return new WaitForSeconds(jumpDelay);
+        m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
+        m_Animator.SetBool("isFalling", true);
     }
 
 }
